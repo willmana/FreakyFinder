@@ -1,16 +1,12 @@
-import React from 'react'
+import React from "react";
+import LandingPage from "./pages/LandingPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit and save to reload.
-        </p>
-          Learn React
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <div>
+            <LandingPage />
+        </div>
+    );
+};
 
 export default App;

@@ -5,6 +5,8 @@
 |Initialized the repository and added time sheet for the project. | 1 hour|9.9.2021|
 |Initialized frontend development, configuration and installation of tools I will use in project. | 1 hour| 9.9.2021|
 |Started to plan UI, made sketches (will be added later) and created basic landing page for application. | 2 hours| 9.9.2021|
+|Infused redux into application| 1 hour | 10.9.2021|
+|Started to use redux-saga, created store with basic logger middleware and few test case redux states/sagas | 4 hours | 10.9.2021 |
+|Initialized application with messageformat and created a base for possible localization | 1 hour | 10.9.2021 |
 
-
-#### Total time spent: 4 hour
+#### Total time spent: 10 hour

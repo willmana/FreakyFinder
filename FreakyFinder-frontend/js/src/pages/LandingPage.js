@@ -1,10 +1,12 @@
-import React from "react";
-import LoginForm from "../containers/LoginForm";
+import React from 'react';
+import LoginForm from '../containers/LoginForm';
+import { useMessageGetter } from '@messageformat/react';
 
 const Homepage = (params) => {
+    const msg = useMessageGetter('Landingpage');
     return (
         <div>
-            <header>Freaky Finder</header>
+            <header>{msg('header')}</header>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
                 quis auctor nisl. Sed suscipit nisi non ultricies tincidunt.

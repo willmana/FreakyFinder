@@ -1,18 +1,23 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { reducerTester } from '../redux/app';
+import { useDispatch, useSelector } from 'react-redux';
+import { consoleLogTestMessage, getTestMessage } from '../redux/app';
+import { setTestMessage } from './../redux/app';
 
 const LoginForm = (params) => {
     const dispatch = useDispatch();
+    const username = useSelector(getTestMessage);
+    const onChangeUserName = (event) => {
+        dispatch(setTestMessage(event.target.value));
+    };
     const onClickLogin = () => {
-        dispatch(reducerTester('hi all'));
+        dispatch(consoleLogTestMessage());
     };
 
     return (
         <div>
             <form>
                 <label>username</label>
-                <input></input>
+                <input onChange={onChangeUserName} value={username}></input>
             </form>
             <form>
                 <label>password</label>

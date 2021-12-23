@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FreakyFinder from './FreakyFinder';
 import LandingPage from './pages/LandingPage';
-import { getUserLoggedIn } from './redux/app';
+import { getUser, setUser } from './redux/app';
 
 const App = () => {
-    const isUserLoggedin = useSelector(getUserLoggedIn);
+    const user = useSelector(getUser);
+    const dispatch = useDispatch();
 
-    return <div>{isUserLoggedin ? <FreakyFinder /> : <LandingPage />}</div>;
+    useEffect(() => {
+        const currentUser = window.localStorage.getItem('currentUser');
+        if (currentUser) {
+            const userJSON = JSON.parse(currentUser);
+            dispatch(setUser(userJSON));
+        }
+    }, [dispatch]);
+
+    return <div>{user ? <FreakyFinder /> : <LandingPage />}</div>;
 };
 
 export default App;

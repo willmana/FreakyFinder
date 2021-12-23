@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUserLoggedIn } from '../redux/app';
+import { requestUserLogin } from '../redux/app';
 
 const LoginForm = (params) => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const LoginForm = (params) => {
         setPassword(event.target.value);
     };
     const onClickLogin = () => {
-        dispatch(setUserLoggedIn());
+        dispatch(requestUserLogin());
     };
 
     return (

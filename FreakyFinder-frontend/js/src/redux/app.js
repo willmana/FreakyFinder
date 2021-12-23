@@ -28,7 +28,7 @@ const initialState = {
     user: null
 };
 
-export const appReducer = (state = initialState, action = {}) => {
+export const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_TEST_MESSAGE:
             return { ...state, testMessage: action.testMessage };

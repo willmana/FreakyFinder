@@ -1,27 +1,30 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { consoleLogTestMessage, getTestMessage } from '../redux/app';
-import { setTestMessage } from './../redux/app';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUserLoggedIn } from '../redux/app';
 
 const LoginForm = (params) => {
     const dispatch = useDispatch();
-    const username = useSelector(getTestMessage);
-    const onChangeUserName = (event) => {
-        dispatch(setTestMessage(event.target.value));
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const onChangeUsername = (event) => {
+        setUsername(event.target.value);
+    };
+    const onChangePassword = (event) => {
+        setPassword(event.target.value);
     };
     const onClickLogin = () => {
-        dispatch(consoleLogTestMessage());
+        dispatch(setUserLoggedIn());
     };
 
     return (
         <div>
             <form>
                 <label>username</label>
-                <input onChange={onChangeUserName} value={username}></input>
+                <input onChange={onChangeUsername} value={username}></input>
             </form>
             <form>
                 <label>password</label>
-                <input></input>
+                <input onChange={onChangePassword} value={password}></input>
             </form>
             <button onClick={() => onClickLogin()}>Log in</button>
         </div>

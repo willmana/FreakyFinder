@@ -1,0 +1,19 @@
+@import './styles/main.scss';
+
+.mainpagecontainer {
+    display: flex;
+    flex-direction: row;
+    padding-top: $space-xl;
+}
+
+.leftbar {
+    width: $container-width-sidebar;
+}
+
+.middlebar {
+    width: 60%;
+}
+
+.rightbar {
+    width: 0;
+}

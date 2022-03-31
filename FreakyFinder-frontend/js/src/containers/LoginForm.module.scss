@@ -1,0 +1,11 @@
+@import './../styles/main.scss';
+
+.formcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.margin {
+    margin: $space-xs;
+}

@@ -1,12 +1,16 @@
 import React from 'react';
-import Navbar from './containers/Navbar';
+import Feed from './containers/Feed';
+import styles from './FreakyFinder.module.scss';
 
 const FreakyFinder = () => {
     return (
-        <>
-            <Navbar />
-            <div>son of a bitch you're in</div>
-        </>
+        <div className={styles.mainpagecontainer}>
+            <div className={styles.leftbar}></div>
+            <div className={styles.middlebar}>
+                <Feed />
+            </div>
+            <div className={styles.rightbar}></div>
+        </div>
     );
 };
 

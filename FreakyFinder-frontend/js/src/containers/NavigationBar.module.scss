@@ -1,0 +1,13 @@
+@import './../styles/main.scss';
+
+.navbarcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $space-s;
+    background-color: aqua;
+}
+
+.margin {
+    margin: $space-xs;
+}

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import FreakyFinder from './FreakyFinder';
 import LandingPage from './pages/LandingPage';
 import { getUser, setUser } from './redux/app';
+import styles from './App.module.scss';
+import NavigationBar from './containers/NavigationBar';
 
 const App = () => {
     const user = useSelector(getUser);
@@ -16,7 +18,12 @@ const App = () => {
         }
     }, [dispatch]);
 
-    return <div>{user ? <FreakyFinder /> : <LandingPage />}</div>;
+    return (
+        <div className={styles.app}>
+            <NavigationBar />
+            {user ? <FreakyFinder /> : <LandingPage />}
+        </div>
+    );
 };
 
 export default App;

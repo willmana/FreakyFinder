@@ -1,0 +1,20 @@
+@import './../styles/main.scss';
+
+.formcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25rem;
+}
+
+.inputrow {
+    display: flex;
+    flex-direction: row;
+    margin: $space-s 0;
+    justify-content: space-between;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}

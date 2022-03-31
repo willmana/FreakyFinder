@@ -1,0 +1,13 @@
+@import './../styles/main.scss';
+
+.cardcontainer {
+    display: flex;
+    flex-direction: row;
+    padding: $space-xl 10%;
+    justify-content: center;
+}
+
+.textcontainer {
+    width: 37.5rem;
+    padding: $space-l;
+}

@@ -9,5 +9,6 @@
 | Started to use redux-saga, created store with basic logger middleware and few test case redux states/sagas |  4 hours   | 10.9.2021  |
 | Initialized application with messageformat and created a base for possible localization                    |   1 hour   | 10.9.2021  |
 | Added login and logout functionality with redux support                                                    |  2 hours   | 23.12.2021 |
+| Formatted the page into containers, added basic styling for components and started content rendering       |  4 hours   | 31.3.2022  |
 
-#### Total time spent: 12 hour
+#### Total time spent: 16 hour

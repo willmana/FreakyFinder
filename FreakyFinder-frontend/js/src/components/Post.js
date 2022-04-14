@@ -5,6 +5,8 @@ export const Post = ({ postProps }) => {
         <div>
             <h4>{postProps.author}</h4>
             <p>{postProps.content}</p>
+            <div></div>
+            <div></div>
         </div>
     );
 };

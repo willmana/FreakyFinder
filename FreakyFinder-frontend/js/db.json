@@ -1,0 +1,59 @@
+{
+    "posts": [
+        {
+            "id": "",
+            "userId": "",
+            "decription": "",
+            "likes": []
+        }
+    ],
+    "comments": [
+        {
+            "id": "",
+            "postId": "",
+            "userId": "",
+            "content": ""
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "first_name": "Kaikkien",
+            "last_name": "Suosikki",
+            "username": "suosikki",
+            "password": "suosikki",
+            "gender": 1,
+            "date_of_birth": "1990-05-24T00:00:01.000Z",
+            "country": "Finland",
+            "city": "Espoo",
+            "following": [3],
+            "followers": [2, 3]
+        },
+        {
+            "id": 2,
+            "first_name": "Kaikkien",
+            "last_name": "Inhokki",
+            "username": "inhokki",
+            "password": "inhokki",
+            "gender": 1,
+            "date_of_birth": "2000-05-24T00:00:01.000Z",
+            "country": "Finland",
+            "city": "Kouvola",
+            "following": [1, 3],
+            "followers": []
+        },
+        {
+            "id": 3,
+            "first_name": "Niilo",
+            "last_name": "Neutraali",
+            "username": "neutraali",
+            "password": "neutraali",
+            "gender": 1,
+            "date_of_birth": "1995-05-24T00:00:01.000Z",
+            "country": "Finland",
+            "city": "Helsinki",
+            "following": [1],
+            "followers": [1, 2]
+        }
+    ]
+}

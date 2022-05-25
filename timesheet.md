@@ -10,6 +10,8 @@
 | Initialized application with messageformat and created a base for possible localization                    |   1 hour   | 10.9.2021  |
 | Added login and logout functionality with redux support                                                    |  2 hours   | 23.12.2021 |
 | Formatted the page into containers, added basic styling for components and started content rendering       |  4 hours   | 31.3.2022  |
-| Formatted the page into containers, added basic styling for components and started content rendering       |  2 hours   | 24.5.2022  |
+| Added mock json-server to help with development and basic axios calls to call data from mock server        |  2 hours   | 24.5.2022  |
+| Created a "proper" registering form and started to add texts/translations to messageformat                 |  2 hours   | 25.5.2022  |
+| Tried out bunch of different ways to make axios work with redux-saga, had difficulties with asynchronous calls and went back to calling api's from components |  1.5 hours | 25.5.2022  |
 
-#### Total time spent: 18 hour
+#### Total time spent: 21.5 hour

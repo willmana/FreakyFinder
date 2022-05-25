@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { requestUserLogin } from '../redux/app';
+import loginApi from '../api/login';
+import userApi from '../api/user';
+import { requestUserLogin, setUser } from '../redux/app';
 import styles from './LoginForm.module.scss';
 
 const LoginForm = (params) => {
@@ -13,8 +15,12 @@ const LoginForm = (params) => {
     const onChangePassword = (event) => {
         setPassword(event.target.value);
     };
-    const onClickLogin = () => {
-        dispatch(requestUserLogin());
+    const onClickLogin = async () => {
+        try {
+            const userId = await loginApi.login({ username, password });
+            const user = await userApi.getUser(userId);
+            dispatch(setUser(user));
+        } catch (e) {}
     };
 
     return (

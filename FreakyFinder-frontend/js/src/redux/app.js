@@ -1,5 +1,6 @@
 import { put, all, takeEvery } from 'redux-saga/effects';
 import userApi from './../api/user';
+import loginApi from './../api/login';
 
 const SET_TEST_MESSAGE = 'freakyFinder/SET_TEST_MESSAGE';
 const CONSOLE_LOG_TEST_MESSAGE = 'freakyFinder/CONSOLE_LOG_TEST_MESSAGE';
@@ -19,9 +20,6 @@ export const setUser = (user) => ({
 export const consoleLogTestMessage = () => ({
     type: CONSOLE_LOG_TEST_MESSAGE
 });
-export const requestUserLogin = () => ({
-    type: REQUEST_USER_LOGIN
-});
 
 const initialState = {
     testMessage: 'testmessage',
@@ -39,12 +37,6 @@ export const appReducer = (state = initialState, action) => {
     }
 };
 
-function* sagaRequestLogin() {
-    const user = userApi.getUser(1);
-    window.localStorage.setItem('currentUser', JSON.stringify(user));
-    yield put(setUser(user));
-}
-
 export const getTestMessage = (state) => {
     return state.app.testMessage;
 };
@@ -52,8 +44,6 @@ export const getUser = (state) => {
     return state.app.user;
 };
 
-export function* appSaga() {
-    yield all([takeEvery(REQUEST_USER_LOGIN, sagaRequestLogin)]);
-}
+export function* appSaga() {}
 
 export default appReducer;

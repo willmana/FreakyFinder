@@ -1,5 +1,5 @@
 import { put, all, takeEvery } from 'redux-saga/effects';
-import * as Mock from '../db.json';
+import userApi from './../api/user';
 
 const SET_TEST_MESSAGE = 'freakyFinder/SET_TEST_MESSAGE';
 const CONSOLE_LOG_TEST_MESSAGE = 'freakyFinder/CONSOLE_LOG_TEST_MESSAGE';
@@ -40,7 +40,7 @@ export const appReducer = (state = initialState, action) => {
 };
 
 function* sagaRequestLogin() {
-    const user = Mock.users[1];
+    const user = userApi.getUser(1);
     window.localStorage.setItem('currentUser', JSON.stringify(user));
     yield put(setUser(user));
 }

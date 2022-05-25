@@ -15,7 +15,9 @@ const NavigationBar = () => {
 
     return (
         <div className={styles.navbarcontainer}>
-            <header className={styles.margin}>{msg('header')}</header>
+            <header className={styles.margin}>
+                {msg('header', { parameter: 'Test' })}
+            </header>
             {user ? (
                 <button className={styles.margin} onClick={onClickLogout}>
                     Kirjaudu ulos

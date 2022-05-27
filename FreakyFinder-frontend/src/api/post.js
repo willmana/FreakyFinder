@@ -13,7 +13,6 @@ const getAll = async () => {
 };
 
 const createPost = async (newPost) => {
-    console.log(newPost);
     const res = await axios.post(baseUrl, newPost);
     return res.data;
 };

@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import postApi from '../api/post';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPosts, setPosts } from '../redux/app';
 
 const Feed = () => {
-    const [posts, setPosts] = useState([]);
+    const dispatch = useDispatch();
+    const posts = useSelector(getPosts);
 
     useEffect(() => {
         async function getPosts() {
             const postResponse = await postApi.getAll();
-            postResponse.sort((a, b) => b.date - a.date);
-            setPosts(postResponse);
+            postResponse.sort((a, b) => a.date - b.date);
+            dispatch(setPosts(postResponse));
         }
         getPosts();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
             <PostForm />
             {posts.map((post) => (
-                <Post postProps={post} />
+                <Post key={post.id} postProps={post} />
             ))}
         </div>
     );

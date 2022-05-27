@@ -4,9 +4,8 @@ const Post = ({ postProps }) => {
     return (
         <div>
             <h4>{postProps.author}</h4>
-            <p>{postProps.content}</p>
-            <div></div>
-            <div></div>
+            <small>{postProps.date}</small>
+            <p>{postProps.description}</p>
         </div>
     );
 };

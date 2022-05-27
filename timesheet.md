@@ -13,5 +13,8 @@
 | Added mock json-server to help with development and basic axios calls to call data from mock server        |  2 hours   | 24.5.2022  |
 | Created a "proper" registering form and started to add texts/translations to messageformat                 |  2 hours   | 25.5.2022  |
 | Tried out bunch of different ways to make axios work with redux-saga, had difficulties with asynchronous calls and went back to calling api's from components |  1.5 hours | 25.5.2022  |
+|Store user to localStorage upon login, add functionality too create posts                                   |   1 hour   | 27.5.2021  |
+|Add comments and form for comments. Refactor architecture of the frontend application                       |   1 hour   | 27.5.2021  |
+|Initialize backend and push to Heroku. Now running in freakyfinder.herokuapp.com. Faced some difficulties with the whole application being under same repository (first time to attempt that |   1 hour   | 27.5.2021  |
 
-#### Total time spent: 21.5 hour
+#### Total time spent: 24.5 hour

@@ -2,19 +2,24 @@ import React, { useState } from 'react';
 import styles from './RegisterForm.module.scss';
 import { useMessageGetter } from '@messageformat/react';
 
-export const RegisterForm = () => {
+const RegisterForm = () => {
     const [step, setStep] = useState('1');
     const msg = useMessageGetter('RegisterForm');
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [dateOfBirth, setDateOfBirth] = useState();
+    const [gender, setGender] = useState();
+    const [country, setCountry] = useState();
+    const [city, setCity] = useState();
+    const [username, setUsername] = useState();
+    const [password1, setPassword1] = useState();
+    const [password2, setPassword2] = useState();
 
-    const onClickContinue = () => {
-        setStep('2');
+    const onButtonClick = (step) => {
+        setStep(step);
     };
-    const onClickReturn = () => {
-        setStep('1');
-    };
-    const onClickSubmit = () => {
-        setStep('3');
-    };
+
+    console.log(step);
     return (
         <div>
             <p></p>
@@ -35,7 +40,7 @@ export const RegisterForm = () => {
                         <label>{msg('city')}</label>
                         <input></input>
                     </form>
-                    <button onClick={onClickContinue}>
+                    <button onClick={() => onButtonClick('2')}>
                         {msg('continueButton')}
                     </button>
                 </div>
@@ -50,8 +55,10 @@ export const RegisterForm = () => {
                         <label>{msg('password2')}</label>
                         <input></input>
                     </form>
-                    <button onClick={onClickReturn}>{msg('backButton')}</button>
-                    <button onClick={onClickSubmit}>
+                    <button onClick={() => onButtonClick('1')}>
+                        {msg('backButton')}
+                    </button>
+                    <button onClick={() => onButtonClick('3')}>
                         {msg('submitButton')}
                     </button>
                 </div>

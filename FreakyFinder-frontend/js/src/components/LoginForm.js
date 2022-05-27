@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import loginApi from '../api/login';
 import userApi from '../api/user';
-import { requestUserLogin, setUser } from '../redux/app';
+import { setUser } from '../redux/app';
 import styles from './LoginForm.module.scss';
 
 const LoginForm = (params) => {
@@ -19,6 +19,7 @@ const LoginForm = (params) => {
         try {
             const userId = await loginApi.login({ username, password });
             const user = await userApi.getUser(userId);
+            window.localStorage.setItem('currentUser', JSON.stringify(user));
             dispatch(setUser(user));
         } catch (e) {}
     };

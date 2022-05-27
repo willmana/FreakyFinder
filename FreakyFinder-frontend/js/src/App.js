@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import FreakyFinder from './FreakyFinder';
+import FreakyFinder from './pages/FreakyFinder';
 import LandingPage from './pages/LandingPage';
 import { getUser, setUser } from './redux/app';
 import styles from './App.module.scss';

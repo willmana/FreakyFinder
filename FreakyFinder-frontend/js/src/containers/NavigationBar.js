@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, setUser } from '../redux/app';
-import LoginForm from './LoginForm';
+import LoginForm from '../components/LoginForm';
 import { useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
 

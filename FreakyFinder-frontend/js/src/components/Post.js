@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Post = ({ postProps }) => {
+const Post = ({ postProps }) => {
     return (
         <div>
             <h4>{postProps.author}</h4>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Feed from './containers/Feed';
+import Feed from '../containers/Feed';
 import styles from './FreakyFinder.module.scss';
 
 const FreakyFinder = () => {

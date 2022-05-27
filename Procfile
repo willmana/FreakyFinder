@@ -1,1 +1,1 @@
-web: cd FreakyFinder-backend && npm start
+web: npm start

@@ -16,5 +16,6 @@
 |Store user to localStorage upon login, add functionality too create posts                                   |   1 hour   | 27.5.2021  |
 |Add comments and form for comments. Refactor architecture of the frontend application                       |   1 hour   | 27.5.2021  |
 |Initialize backend and push to Heroku. Now running in freakyfinder.herokuapp.com. Faced some difficulties with the whole application being under same repository (first time to attempt that |   1 hour   | 27.5.2021  |
+|Add connection to MongoDB, create basic models to backend and try creation of production build              |   1 hour   | 31.5.2021  |
 
-#### Total time spent: 24.5 hour
+#### Total time spent: 25.5 hour

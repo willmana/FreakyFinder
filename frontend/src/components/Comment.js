@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Commment = ({ commentProps }) => {
+const Comment = ({ commentProps }) => {
     return (
         <div>
             <h5>{commentProps.author}</h5>
@@ -10,4 +10,4 @@ const Commment = ({ commentProps }) => {
     );
 };
 
-export default Commment;
+export default Comment;

@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    first_name: {},
-    last_name: {},
-    username: {},
-    password: {},
-    gender: {},
-    date_of_birth: {},
-    country: {},
-    city: {},
-    following: {},
-    followers: {},
-    isAdmin: {}
+    first_name: { type: String },
+    last_name: { type: String },
+    username: { type: String },
+    passwordHash: { type: String },
+    gender: { type: Number, enum: [1, 2, 3] },
+    date_of_birth: { type: Date },
+    country: { type: String },
+    city: { type: String },
+    following: { type: Array, default: [] },
+    followers: { type: Array, default: [] },
+    isAdmin: { type: Boolean, default: false }
 });
 
 userSchema.set('toJSON', {
@@ -19,6 +19,7 @@ userSchema.set('toJSON', {
         returnedObject.id = returnedObject._id.toString();
         delete returnedObject._id;
         delete returnedObject.__v;
+        delete returnedObject.passwordHash;
     }
 });
 

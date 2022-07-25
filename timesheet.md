@@ -20,5 +20,6 @@
 | Refactor backend structure to better format, add register/login functionality to backend with JWT based authentication                                                                       | 3.5 hours  | 24.7.2022  |
 | Add functionality to update and delete user when authenticated                                                                                                                               |   1 hour   | 24.7.2022  |
 | Testing existing backend functionalities, building request collection in Postman and increasing error handling in api calls                                                                  |   1 hour   | 25.7.2022  |
+| Add functionality to create and get comments and posts, link db objects together with id's, further collection building in Postman and testing/debugging                                     | 2.5 hours  | 25.7.2022  |
 
-#### Total time spent: 31 hours
+#### Total time spent: 33.5 hours

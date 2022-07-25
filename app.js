@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const authRouter = require('./routers/auth');
 const userRouter = require('./routers/users');
+const postRouter = require('./routers/posts');
+const commentRouter = require('./routers/comments');
 const middleware = require('./serverutils/middleware');
 const config = require('./serverutils/config');
 const logger = require('./serverutils/logger');
@@ -29,11 +31,10 @@ app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
 //Routerit
-app.get('/', (request, response) => {
-    response.send('<h1>Hello there</h1>');
-});
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
+app.use('/api/comments', commentRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

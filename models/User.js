@@ -10,6 +10,13 @@ const userSchema = new mongoose.Schema(
         date_of_birth: { type: Date, required: true },
         country: { type: String, required: true },
         city: { type: String, required: true },
+        posts: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Post',
+                required: false
+            }
+        ],
         following: { type: Array, default: [], required: false },
         followers: { type: Array, default: [], required: false },
         isAdmin: { type: Boolean, default: false, required: false }

@@ -3,10 +3,11 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('../serverutils/config');
 const bcrypt = require('bcrypt');
+const logger = require('../serverutils/logger');
 
 // Get all users
 userRouter.get('/', async (request, response) => {
-    const users = await User.find({});
+    const users = await User.find({}).populate('posts', { description: 1 });
     response.json(users.map((u) => u.toJSON()));
 });
 
@@ -27,7 +28,12 @@ userRouter.put('/:id', async (request, response) => {
         if (!request.token)
             return response.status(401).json({ message: 'Token missing' });
         try {
-            jwt.verify(request.token, config.SECRET);
+            const token = jwt.verify(request.token, config.SECRET);
+            if (!token || token.id !== body.id) {
+                return response
+                    .status(401)
+                    .json({ message: "Token doesn't belong to this user" });
+            }
         } catch (error) {
             return response.status(401).json({ message: 'Token invalid' });
         }

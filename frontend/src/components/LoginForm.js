@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import loginApi from '../api/login';
+import authApi from '../api/auth';
 import userApi from '../api/user';
 import { setUser } from '../redux/app';
 import styles from './LoginForm.module.scss';
@@ -17,7 +17,7 @@ const LoginForm = (params) => {
     };
     const onClickLogin = async () => {
         try {
-            const userId = await loginApi.login({ username, password });
+            const userId = await authApi.login({ username, password });
             const user = await userApi.getUser(userId);
             window.localStorage.setItem('currentUser', JSON.stringify(user));
             dispatch(setUser(user));

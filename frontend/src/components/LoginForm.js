@@ -17,8 +17,8 @@ const LoginForm = (params) => {
     };
     const onClickLogin = async () => {
         try {
-            const userId = await authApi.login({ username, password });
-            const user = await userApi.getUser(userId);
+            const user = await authApi.login({ username, password });
+            await userApi.getUser(username);
             window.localStorage.setItem('currentUser', JSON.stringify(user));
             dispatch(setUser(user));
         } catch (e) {}
@@ -26,14 +26,10 @@ const LoginForm = (params) => {
 
     return (
         <div className={styles.formcontainer}>
-            <form className={styles.margin}>
-                <label>username: </label>
-                <input onChange={onChangeUsername} value={username}></input>
-            </form>
-            <form className={styles.margin}>
-                <label>password: </label>
-                <input onChange={onChangePassword} value={password}></input>
-            </form>
+            <label>username: </label>
+            <input onChange={onChangeUsername} value={username}></input>
+            <label>password: </label>
+            <input onChange={onChangePassword} value={password}></input>
             <button className={styles.margin} onClick={() => onClickLogin()}>
                 Log in
             </button>

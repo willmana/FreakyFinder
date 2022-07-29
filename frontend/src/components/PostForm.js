@@ -16,14 +16,12 @@ const PostForm = () => {
     const onClickSubmitPost = async (e) => {
         e.preventDefault();
         const postObject = {
-            id: Math.floor(Math.random() * 1000),
-            userId: user.id,
-            author: user.username,
+            userId: user.user.id,
             description: postData,
-            likes: [],
             date: new Date()
         };
-        await postApi.createPost(postObject);
+        console.log(postObject);
+        await postApi.createPost(postObject, user.token);
         setPostData('');
         const res = await postApi.getAll();
         dispatch(setPosts(res));
@@ -31,14 +29,12 @@ const PostForm = () => {
 
     return (
         <div>
-            <form>
-                <input
-                    value={postData}
-                    placeholder="kirjoita jotain"
-                    onChange={onInputChange}
-                ></input>
-                <button onClick={onClickSubmitPost}>Julkaise</button>
-            </form>
+            <input
+                value={postData}
+                placeholder="kirjoita jotain"
+                onChange={onInputChange}
+            ></input>
+            <button onClick={onClickSubmitPost}>Julkaise</button>
         </div>
     );
 };

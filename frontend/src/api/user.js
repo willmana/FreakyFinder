@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let baseUrl;
 if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://localhost:3001/users';
+    baseUrl = 'http://localhost:3001/api/users';
 } else if (process.env.NODE_ENV === 'production') {
     baseUrl = '/api/users';
 }
@@ -17,8 +17,8 @@ const createUser = async (newUser) => {
     return res.data;
 };
 
-const getUser = async (userId) => {
-    const res = await axios.get(`${baseUrl}/${userId}`);
+const getUser = async (username) => {
+    const res = await axios.get(`${baseUrl}/${username}`);
     return res.data;
 };
 

@@ -3,8 +3,7 @@ import React from 'react';
 const Comment = ({ commentProps }) => {
     return (
         <div>
-            <h5>{commentProps.author}</h5>
-            <small>{commentProps.date}</small>
+            <h5>{commentProps.id}</h5>
             <p>{commentProps.content}</p>
         </div>
     );

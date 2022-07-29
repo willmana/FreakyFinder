@@ -13,11 +13,8 @@ const register = async (body) => {
     return res.data;
 };
 
-const login = async (credentials) => {
-    if (process.env.NODE_ENV === 'development') {
-        return '1';
-    }
-    const res = await axios.post(baseUrl, credentials).then((returndata) => {});
+const login = async (body) => {
+    const res = await axios.post(`${baseUrl}/login`, body);
     return res.data;
 };
 

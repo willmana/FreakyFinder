@@ -32,6 +32,8 @@ postRouter.post('/', async (request, response) => {
             return response.status(401).json({ message: 'Token missing' });
         try {
             const verifiedToken = jwt.verify(request.token, config.SECRET);
+            console.log(verifiedToken);
+            console.log(body);
             if (!verifiedToken || verifiedToken.id !== body.userId) {
                 return response
                     .status(401)

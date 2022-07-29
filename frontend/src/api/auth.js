@@ -4,7 +4,7 @@ let baseUrl;
 if (process.env.NODE_ENV === 'development') {
     baseUrl = 'http://localhost:3001/api/auth';
 } else if (process.env.NODE_ENV === 'production') {
-    baseUrl = window.location.host + '/api/auth';
+    baseUrl = '/api/auth';
 }
 
 const register = async (body) => {

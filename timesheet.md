@@ -23,5 +23,7 @@
 | Add functionality to create and get comments and posts, link db objects together with id's, further collection building in Postman and testing/debugging                                      | 2.5 hours  | 25.7.2022  |
 | Push backend changes to heroku and test that everything works there                                                                                                                           | 30 minutes | 29.7.2022  |
 | Integrate register, login and post creation functionality to frontend                                                                                                                         |  2 hours   | 29.7.2022  |
+| Add functionality for following an user                                                                                                                                                       | 30 minutes |  8.8.2022  |
+| Scrap old jwt implementation in the backend and utilize express-jwt                                                                                                                           |   1 hour   |  8.8.2022  |
 
-#### Total time spent: 36 hours
+#### Total time spent: 37.5 hours

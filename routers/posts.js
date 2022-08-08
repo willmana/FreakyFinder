@@ -1,6 +1,6 @@
 const postRouter = require('express').Router();
 const Post = require('../models/Post');
-const jwt = require('jsonwebtoken');
+const { expressjwt: jwt } = require('express-jwt');
 const config = require('../serverutils/config');
 const User = require('../models/User');
 
@@ -25,35 +25,26 @@ postRouter.get('/user', async (request, response) => {
 });
 
 // Create new post
-postRouter.post('/', async (request, response) => {
-    try {
-        const body = request.body;
-        if (!request.token)
-            return response.status(401).json({ message: 'Token missing' });
+postRouter.post(
+    '/',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
         try {
-            const verifiedToken = jwt.verify(request.token, config.SECRET);
-            console.log(verifiedToken);
-            console.log(body);
-            if (!verifiedToken || verifiedToken.id !== body.userId) {
-                return response
-                    .status(401)
-                    .json({ message: "Token doesn't belong to this user" });
-            }
+            const body = request.body;
+
+            const user = await User.findById(body.userId);
+            const post = new Post({
+                user: body.userId,
+                description: body.description
+            });
+            const savedPost = await post.save();
+            user.posts = user.posts.concat(savedPost._id);
+            await user.save();
+            return response.status(201).json(savedPost);
         } catch (error) {
-            return response.status(401).json({ message: 'Token invalid' });
+            response.status(400).json({ error: error.message });
         }
-        const user = await User.findById(body.userId);
-        const post = new Post({
-            user: body.userId,
-            description: body.description
-        });
-        const savedPost = await post.save();
-        user.posts = user.posts.concat(savedPost._id);
-        await user.save();
-        return response.status(201).json(savedPost);
-    } catch (error) {
-        response.status(400).json({ error: error.message });
     }
-});
+);
 
 module.exports = postRouter;

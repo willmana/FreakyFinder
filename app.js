@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const { expressjwt: jwt } = require('express-jwt');
 const authRouter = require('./routers/auth');
 const userRouter = require('./routers/users');
 const postRouter = require('./routers/posts');
@@ -28,7 +29,22 @@ app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
 app.use(middleware.requestLogger);
-app.use(middleware.tokenExtractor);
+app.use(
+    jwt({
+        secret: config.SECRET,
+        algorithms: ['HS256'],
+        credentialsRequired: false,
+        getToken: function getTokenFromHeader(request) {
+            if (
+                request.headers.authorization &&
+                request.headers.authorization.split(' ')[0] === 'Bearer'
+            ) {
+                return request.headers.authorization.split(' ')[1];
+            }
+            return null;
+        }
+    })
+);
 
 //Routerit
 app.use('/api/auth', authRouter);

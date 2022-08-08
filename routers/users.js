@@ -1,9 +1,9 @@
 const userRouter = require('express').Router();
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
 const config = require('../serverutils/config');
 const bcrypt = require('bcrypt');
 const logger = require('../serverutils/logger');
+var { expressjwt: jwt } = require('express-jwt');
 
 // Get all users
 userRouter.get('/', async (request, response) => {
@@ -18,67 +18,93 @@ userRouter.get('/:username', async (request, response) => {
 });
 
 // Update user
-userRouter.put('/:id', async (request, response) => {
-    try {
-        const body = request.body;
-        if (request.params.id !== body.id)
-            return response
-                .status(403)
-                .json({ message: "Can't update other accounts" });
-        if (!request.token)
-            return response.status(401).json({ message: 'Token missing' });
+userRouter.put(
+    '/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
         try {
-            const token = jwt.verify(request.token, config.SECRET);
-            if (!token || token.id !== body.id) {
+            const body = request.body;
+            if (request.params.id !== body.id)
                 return response
-                    .status(401)
-                    .json({ message: "Token doesn't belong to this user" });
-            }
+                    .status(403)
+                    .json({ message: "Can't update other accounts" });
+
+            const user = await User.findByIdAndUpdate(body.id, body, {
+                new: true
+            });
+            return response.status(200).json(user);
         } catch (error) {
-            return response.status(401).json({ message: 'Token invalid' });
+            response.status(400).json({ error: error.message });
         }
-        const user = await User.findByIdAndUpdate(body.id, body, { new: true });
-        return response.status(200).json(user);
-    } catch (error) {
-        response.status(400).json({ error: error.message });
     }
-});
+);
 
 // Delete user
-userRouter.delete('/:id', async (request, response) => {
-    try {
-        const body = request.body;
-        if (request.params.id !== body.id)
-            return response
-                .status(403)
-                .json({ message: "Can't delete other accounts" });
-
-        if (!request.token)
-            return response.status(401).json({ message: 'Token missing' });
+userRouter.delete(
+    '/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
         try {
-            jwt.verify(request.token, config.SECRET);
-        } catch (error) {
-            return response.status(401).json({ message: 'Token invalid' });
-        }
-        if (!body.username || !body.password)
-            return response
-                .status(400)
-                .json({ message: 'Missing username or password' });
-        const userForVerification = await User.findOne({
-            username: body.username
-        });
-        const verified = await bcrypt.compare(
-            body.password,
-            userForVerification.passwordHash
-        );
-        if (!verified)
-            return response.status(400).json({ message: 'Wrong credentials' });
+            const body = request.body;
+            if (request.params.id !== body.id)
+                return response
+                    .status(403)
+                    .json({ message: "Can't delete other accounts" });
+            if (!body.username || !body.password)
+                return response
+                    .status(400)
+                    .json({ message: 'Missing username or password' });
+            const userForVerification = await User.findOne({
+                username: body.username
+            });
+            const verified = await bcrypt.compare(
+                body.password,
+                userForVerification.passwordHash
+            );
+            if (!verified)
+                return response
+                    .status(400)
+                    .json({ message: 'Wrong credentials' });
 
-        const user = await User.findByIdAndRemove(body.id);
-        return response.status(200).json(user);
-    } catch (error) {
-        response.status(400).json({ error: error.message });
+            const user = await User.findByIdAndRemove(body.id);
+            return response.status(200).json(user);
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
     }
-});
+);
+
+// Follow user
+userRouter.put(
+    '/:id/follow',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const body = request.body;
+            if (request.params.id === body.userId) {
+                return response
+                    .status(403)
+                    .json({ message: "Can't follow yourself" });
+            }
+            const followedUser = await User.findById(request.params.id);
+            if (followedUser.followers.includes(body.userId)) {
+                return response.status(403).json({
+                    message: 'You already follow this user'
+                });
+            }
+            await User.findByIdAndUpdate(request.params.id, {
+                $push: { followers: body.userId }
+            });
+            await User.findByIdAndUpdate(body.userId, {
+                $push: { following: request.params.id }
+            });
+            return response.status(200).json({
+                message: `${body.username} now follows ${followedUser.username}`
+            });
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
+    }
+);
 
 module.exports = userRouter;

@@ -1,6 +1,6 @@
 const commentRouter = require('express').Router();
 const Comment = require('../models/Comment');
-const jwt = require('jsonwebtoken');
+const { expressjwt: jwt } = require('express-jwt');
 const config = require('../serverutils/config');
 const Post = require('../models/Post');
 
@@ -11,34 +11,27 @@ commentRouter.get('/:id', async (request, response) => {
 });
 
 // Create new post
-commentRouter.post('/', async (request, response) => {
-    try {
-        const body = request.body;
-        if (!request.token)
-            return response.status(401).json({ message: 'Token missing' });
+commentRouter.post(
+    '/',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
         try {
-            const verifiedToken = jwt.verify(request.token, config.SECRET);
-            if (!verifiedToken || verifiedToken.id !== body.userId) {
-                return response
-                    .status(401)
-                    .json({ message: "Token doesn't belong to this user" });
-            }
+            const body = request.body;
+
+            const post = await Post.findById(body.postId);
+            const comment = new Comment({
+                user: body.userId,
+                post: body.postId,
+                content: body.content
+            });
+            const savedComment = await comment.save();
+            post.comments = post.comments.concat(savedComment._id);
+            await post.save();
+            return response.status(201).json(savedComment);
         } catch (error) {
-            return response.status(401).json({ message: 'Token invalid' });
+            response.status(400).json({ error: error.message });
         }
-        const post = await Post.findById(body.postId);
-        const comment = new Comment({
-            user: body.userId,
-            post: body.postId,
-            content: body.content
-        });
-        const savedComment = await comment.save();
-        post.comments = post.comments.concat(savedComment._id);
-        await post.save();
-        return response.status(201).json(savedComment);
-    } catch (error) {
-        response.status(400).json({ error: error.message });
     }
-});
+);
 
 module.exports = commentRouter;

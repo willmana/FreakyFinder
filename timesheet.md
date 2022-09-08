@@ -25,5 +25,9 @@
 | Integrate register, login and post creation functionality to frontend                                                                                                                         |  2 hours   | 29.7.2022  |
 | Add functionality for following an user                                                                                                                                                       | 30 minutes |  8.8.2022  |
 | Scrap old jwt implementation in the backend and utilize express-jwt                                                                                                                           |   1 hour   |  8.8.2022  |
+| Enforce express-jwt in every call except register and login. Add JWT token to all api calls from frontend side.                                                                               |   1 hour   |  8.9.2022  |
+| Add get call to fetch posts that are created by who user follows. Small css tweaks and try out material-ui icons.                                                                             |   1 hour   |  8.9.2022  |
+| Create provider wrapper where we initialize store, locale and in future also history/router. Add possibility to change language of static text in application.                                | 30 minutes |  8.9.2022  |
+| Create left sidebar component where we maintain navigation links. Current navigation ideas: user profile, main feed, friends list, messages, friend search and settings.                      |   1 hour   |  8.9.2022  |
 
-#### Total time spent: 37.5 hours
+#### Total time spent: 41 hours

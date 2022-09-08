@@ -5,10 +5,14 @@ const config = require('../serverutils/config');
 const Post = require('../models/Post');
 
 // Get all comments from specific post
-commentRouter.get('/:id', async (request, response) => {
-    const comments = await Comment.find({ post: request.params.id });
-    response.json(comments.map((c) => c.toJSON()));
-});
+commentRouter.get(
+    '/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        const comments = await Comment.find({ post: request.params.id });
+        response.json(comments.map((c) => c.toJSON()));
+    }
+);
 
 // Create new post
 commentRouter.post(

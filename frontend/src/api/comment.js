@@ -7,23 +7,31 @@ if (process.env.NODE_ENV === 'development') {
     baseUrl = '/api/comments';
 }
 
+const tokenBearer = 'Bearer ';
+let token =
+    JSON.parse(window.localStorage.getItem('currentUser')).token || null;
+
 const getAll = async () => {
-    const res = await axios.get(baseUrl);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(baseUrl, config);
     return res.data;
 };
 
 const createComment = async (newComment) => {
-    const res = await axios.post(baseUrl, newComment);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.post(baseUrl, newComment, config);
     return res.data;
 };
 
 const getComment = async (commentId) => {
-    const res = await axios.get(`${baseUrl}/${commentId}`);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/${commentId}`, config);
     return res.data;
 };
 
 const updateComment = async (commentId, newComment) => {
-    const res = await axios.put(`${baseUrl}/${commentId}`, newComment);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.put(`${baseUrl}/${commentId}`, newComment, config);
     return res.data;
 };
 

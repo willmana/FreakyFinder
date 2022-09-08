@@ -33,7 +33,6 @@ app.use(
     jwt({
         secret: config.SECRET,
         algorithms: ['HS256'],
-        credentialsRequired: false,
         getToken: function getTokenFromHeader(request) {
             if (
                 request.headers.authorization &&
@@ -43,7 +42,7 @@ app.use(
             }
             return null;
         }
-    })
+    }).unless({ path: ['/api/auth/login', '/api/auth/register'] })
 );
 
 //Routerit

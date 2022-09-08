@@ -6,16 +6,24 @@ const logger = require('../serverutils/logger');
 var { expressjwt: jwt } = require('express-jwt');
 
 // Get all users
-userRouter.get('/', async (request, response) => {
-    const users = await User.find({}).populate('posts', { description: 1 });
-    response.json(users.map((u) => u.toJSON()));
-});
+userRouter.get(
+    '/',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        const users = await User.find({}).populate('posts', { description: 1 });
+        response.json(users.map((u) => u.toJSON()));
+    }
+);
 
 // Get user
-userRouter.get('/:username', async (request, response) => {
-    const user = await User.findOne({ username: request.params.username });
-    response.json(user);
-});
+userRouter.get(
+    '/:username',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        const user = await User.findOne({ username: request.params.username });
+        response.json(user);
+    }
+);
 
 // Update user
 userRouter.put(

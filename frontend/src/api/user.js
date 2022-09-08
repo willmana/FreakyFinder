@@ -7,8 +7,13 @@ if (process.env.NODE_ENV === 'development') {
     baseUrl = '/api/users';
 }
 
+const tokenBearer = 'Bearer ';
+let token =
+    JSON.parse(window.localStorage.getItem('currentUser')).token || null;
+
 const getAll = async () => {
-    const res = await axios.get(baseUrl);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(baseUrl, config);
     return res.data;
 };
 
@@ -18,12 +23,14 @@ const createUser = async (newUser) => {
 };
 
 const getUser = async (username) => {
-    const res = await axios.get(`${baseUrl}/${username}`);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/${username}`, config);
     return res.data;
 };
 
 const updateUser = async (userId, newUser) => {
-    const res = await axios.put(`${baseUrl}/${userId}`, newUser);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.put(`${baseUrl}/${userId}`, newUser, config);
     return res.data;
 };
 

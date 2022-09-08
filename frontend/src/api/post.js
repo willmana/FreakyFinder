@@ -7,25 +7,30 @@ if (process.env.NODE_ENV === 'development') {
     baseUrl = '/api/posts';
 }
 const tokenBearer = 'Bearer ';
+let token =
+    JSON.parse(window.localStorage.getItem('currentUser')).token || null;
 
 const getAll = async () => {
-    const res = await axios.get(baseUrl);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(baseUrl, config);
     return res.data;
 };
 
-const createPost = async (newPost, token) => {
+const createPost = async (newPost) => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.post(baseUrl, newPost, config);
     return res.data;
 };
 
 const getPost = async (postId) => {
-    const res = await axios.get(`${baseUrl}/${postId}`);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/${postId}`, config);
     return res.data;
 };
 
 const updatePost = async (postId, newPost) => {
-    const res = await axios.put(`${baseUrl}/${postId}`, newPost);
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.put(`${baseUrl}/${postId}`, newPost, config);
     return res.data;
 };
 

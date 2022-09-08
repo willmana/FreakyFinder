@@ -18,8 +18,8 @@ const LoginForm = (params) => {
     const onClickLogin = async () => {
         try {
             const user = await authApi.login({ username, password });
-            await userApi.getUser(username);
             window.localStorage.setItem('currentUser', JSON.stringify(user));
+            await userApi.getUser(username);
             dispatch(setUser(user));
         } catch (e) {}
     };

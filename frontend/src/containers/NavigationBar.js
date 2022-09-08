@@ -3,6 +3,7 @@ import { getUser, setUser } from '../redux/app';
 import LoginForm from '../components/LoginForm';
 import { useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
+import SearchIcon from '@mui/icons-material/Search';
 
 const NavigationBar = () => {
     const msg = useMessageGetter('NavigationBar');
@@ -18,6 +19,12 @@ const NavigationBar = () => {
             <header className={styles.margin}>
                 {msg('header', { parameter: 'Test' })}
             </header>
+            <div>
+                <input placeholder={msg('search.placeHolder')} />
+                <button>
+                    <SearchIcon />
+                </button>
+            </div>
             {user ? (
                 <button className={styles.margin} onClick={onClickLogout}>
                     Kirjaudu ulos

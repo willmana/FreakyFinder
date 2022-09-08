@@ -1,0 +1,15 @@
+@import './../styles/main.scss';
+
+.buttoncontainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: $space-s;
+    justify-content: left;
+    align-items: center;
+    gap: $space-xs;
+}

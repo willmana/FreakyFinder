@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: row;
     padding-top: $space-xl;
+    gap: $space-s;
 }
 
 .leftbar {
@@ -12,6 +13,7 @@
 
 .middlebar {
     width: 60%;
+    padding: 0 $space-m;
 }
 
 .rightbar {

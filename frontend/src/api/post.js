@@ -7,9 +7,11 @@ if (process.env.NODE_ENV === 'development') {
     baseUrl = '/api/posts';
 }
 const tokenBearer = 'Bearer ';
-let token =
-    JSON.parse(window.localStorage.getItem('currentUser')).token || null;
-
+let user = JSON.parse(window.localStorage.getItem('currentUser')) || null;
+let token;
+if (user !== null && user.token !== null) {
+    token = user.token;
+}
 const getAll = async () => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(baseUrl, config);

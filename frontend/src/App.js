@@ -6,7 +6,7 @@ import { getUser, setUser } from './redux/app';
 import styles from './App.module.scss';
 import NavigationBar from './containers/NavigationBar';
 
-const App = () => {
+const App = ({ onChangeLocale }) => {
     const user = useSelector(getUser);
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const App = () => {
 
     return (
         <div className={styles.app}>
-            <NavigationBar />
+            <NavigationBar onChangeLocale={onChangeLocale} />
             {user ? <FreakyFinder /> : <LandingPage />}
         </div>
     );

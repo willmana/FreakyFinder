@@ -5,7 +5,7 @@ import { useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
 import SearchIcon from '@mui/icons-material/Search';
 
-const NavigationBar = () => {
+const NavigationBar = ({ onChangeLocale }) => {
     const msg = useMessageGetter('NavigationBar');
     const user = useSelector(getUser);
     const dispatch = useDispatch();
@@ -23,6 +23,14 @@ const NavigationBar = () => {
                 <input placeholder={msg('search.placeHolder')} />
                 <button>
                     <SearchIcon />
+                </button>
+            </div>
+            <div>
+                <button onClick={() => onChangeLocale('fi')}>
+                    {msg('localeFi')}
+                </button>
+                <button onClick={() => onChangeLocale('en')}>
+                    {msg('localeEn')}
                 </button>
             </div>
             {user ? (

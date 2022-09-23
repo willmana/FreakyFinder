@@ -8,14 +8,16 @@
 }
 
 .leftbar {
+    display: flex;
     width: $container-width-sidebar;
 }
 
 .middlebar {
-    width: 60%;
-    padding: 0 $space-m;
+    display: flex;
+    width: 100%;
 }
 
 .rightbar {
-    width: 0;
+    display: flex;
+    width: $container-width-sidebar;
 }

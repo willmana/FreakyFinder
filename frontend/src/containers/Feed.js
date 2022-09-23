@@ -4,6 +4,7 @@ import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts, setPosts } from '../redux/app';
+import styles from './Feed.module.scss';
 
 const Feed = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Feed = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className={styles.maincontainer}>
             <PostForm />
             {posts.map((post) => (
                 <Post key={post.id} postProps={post} />

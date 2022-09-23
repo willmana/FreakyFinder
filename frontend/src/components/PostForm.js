@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPosts, getUser, setPosts } from '../redux/app';
 import postApi from './../api/post';
+import styles from './PostForm.module.scss';
 
 const PostForm = () => {
     const [postData, setPostData] = useState();
@@ -28,13 +29,21 @@ const PostForm = () => {
     };
 
     return (
-        <div>
-            <input
+        <div className={styles.maincontainer}>
+            <textarea
+                className={styles.inputfield}
                 value={postData}
                 placeholder="kirjoita jotain"
                 onChange={onInputChange}
-            ></input>
-            <button onClick={onClickSubmitPost}>Julkaise</button>
+            ></textarea>
+            <div className={styles.buttoncontainer}>
+                <button
+                    onClick={onClickSubmitPost}
+                    className={styles.submitbutton}
+                >
+                    Julkaise
+                </button>
+            </div>
         </div>
     );
 };

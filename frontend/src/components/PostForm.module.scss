@@ -1,0 +1,30 @@
+@import '../styles/main.scss';
+
+.maincontainer {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputfield {
+    display: flex;
+    width: 96%;
+    height: 6rem;
+    resize: none;
+    word-break: normal;
+    padding: $space-xxs;
+}
+
+.buttoncontainer {
+    width: 96%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $space-s;
+}
+
+.submitbutton {
+    width: 8rem;
+    height: 2rem;
+}

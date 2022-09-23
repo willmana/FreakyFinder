@@ -7,7 +7,12 @@ const postSchema = new mongoose.Schema(
             ref: 'User',
             required: true
         },
-        description: { type: String, maxlength: 500, required: false },
+        description: {
+            type: String,
+            minlength: 1,
+            maxlength: 500,
+            required: true
+        },
         likes: { type: Array, default: [], required: false },
         comments: [
             {

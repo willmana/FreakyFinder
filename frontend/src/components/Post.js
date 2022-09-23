@@ -12,7 +12,7 @@ const Post = ({ postProps }) => {
             <small>{postProps.date}</small>
             <p>{postProps.description}</p>
             {comments.map((p) => (
-                <Comment commentProps={p} />
+                <Comment key={p.id} commentProps={p} />
             ))}
         </div>
     );

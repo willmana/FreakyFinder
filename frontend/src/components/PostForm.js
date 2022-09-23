@@ -11,7 +11,6 @@ const PostForm = () => {
     const dispatch = useDispatch();
 
     const onInputChange = (event) => {
-        console.log(event.target.value);
         setPostData(event.target.value);
     };
     const onClickSubmitPost = async (e) => {

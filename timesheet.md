@@ -29,5 +29,7 @@
 | Add get call to fetch posts that are created by who user follows. Small css tweaks and try out material-ui icons.                                                                             |   1 hour   |  8.9.2022  |
 | Create provider wrapper where we initialize store, locale and in future also history/router. Add possibility to change language of static text in application.                                | 30 minutes |  8.9.2022  |
 | Create left sidebar component where we maintain navigation links. Current navigation ideas: user profile, main feed, friends list, messages, friend search and settings.                      |   1 hour   |  8.9.2022  |
+| Tried out and played around with 'display: grid' box styling for the application, decided to stick with flexbox for now.                                                                      | 30 minutes | 23.9.2022  |
+| Add styling to post form and further develop post component itself                                                                                                                            |  1.5 hour  | 23.9.2022  |
 
-#### Total time spent: 41 hours
+#### Total time spent: 43 hours

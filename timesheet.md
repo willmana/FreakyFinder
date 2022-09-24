@@ -31,5 +31,6 @@
 | Create left sidebar component where we maintain navigation links. Current navigation ideas: user profile, main feed, friends list, messages, friend search and settings.                      |   1 hour   |  8.9.2022  |
 | Tried out and played around with 'display: grid' box styling for the application, decided to stick with flexbox for now.                                                                      | 30 minutes | 23.9.2022  |
 | Add styling to post form and further develop post component itself                                                                                                                            |  1.5 hour  | 23.9.2022  |
+| Intagrate functionality to add comments and render comments under specific posts                                                                                                              |   1 hour   | 24.9.2022  |
 
-#### Total time spent: 43 hours
+#### Total time spent: 44 hours

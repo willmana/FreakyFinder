@@ -5,7 +5,7 @@ import postApi from './../api/post';
 import styles from './PostForm.module.scss';
 
 const PostForm = () => {
-    const [postData, setPostData] = useState();
+    const [postData, setPostData] = useState('');
     const user = useSelector(getUser);
     const posts = useSelector(getPosts);
     const dispatch = useDispatch();
@@ -20,8 +20,7 @@ const PostForm = () => {
             description: postData,
             date: new Date()
         };
-        console.log(postObject);
-        await postApi.createPost(postObject, user.token);
+        await postApi.createPost(postObject);
         setPostData('');
         const res = await postApi.getAll();
         dispatch(setPosts(res));

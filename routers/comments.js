@@ -14,7 +14,7 @@ commentRouter.get(
     }
 );
 
-// Create new post
+// Create new comment
 commentRouter.post(
     '/',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),

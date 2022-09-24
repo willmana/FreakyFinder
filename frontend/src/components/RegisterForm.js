@@ -34,7 +34,6 @@ const RegisterForm = () => {
             };
             await authApi.register(registerData);
             setStep('3');
-            console.log('Im here');
         } catch (error) {}
     };
     return (

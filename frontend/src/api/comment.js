@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let baseUrl;
 if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://localhost:3001/comments';
+    baseUrl = 'http://localhost:3001/api/comments';
 } else if (process.env.NODE_ENV === 'production') {
     baseUrl = '/api/comments';
 }
@@ -20,12 +20,13 @@ const getAll = async () => {
 };
 
 const createComment = async (newComment) => {
+    console.log(newComment);
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.post(baseUrl, newComment, config);
     return res.data;
 };
 
-const getComment = async (commentId) => {
+const getComments = async (commentId) => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(`${baseUrl}/${commentId}`, config);
     return res.data;
@@ -37,5 +38,5 @@ const updateComment = async (commentId, newComment) => {
     return res.data;
 };
 
-const commentApi = { getAll, createComment, getComment, updateComment };
+const commentApi = { getAll, createComment, getComments, updateComment };
 export default commentApi;

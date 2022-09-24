@@ -28,3 +28,12 @@
     padding: $space-s;
     word-break: normal;
 }
+
+.separatorline {
+    width: 95%;
+    background: black;
+    height: 1px;
+    display: flex;
+    align-self: center;
+    margin: $space-s 0;
+}

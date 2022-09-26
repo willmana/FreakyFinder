@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPosts, getUser, setPosts } from '../redux/app';
 import postApi from './../api/post';
+import Button from './Button';
 import styles from './PostForm.module.scss';
 
 const PostForm = () => {
@@ -35,12 +36,11 @@ const PostForm = () => {
                 onChange={onInputChange}
             ></textarea>
             <div className={styles.buttoncontainer}>
-                <button
+                <Button
                     onClick={onClickSubmitPost}
                     className={styles.submitbutton}
-                >
-                    Julkaise
-                </button>
+                    text={'Julkaise'}
+                />
             </div>
         </div>
     );

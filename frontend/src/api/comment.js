@@ -26,7 +26,7 @@ const createComment = async (newComment) => {
     return res.data;
 };
 
-const getComments = async (commentId) => {
+const getComment = async (commentId) => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(`${baseUrl}/${commentId}`, config);
     return res.data;
@@ -38,5 +38,5 @@ const updateComment = async (commentId, newComment) => {
     return res.data;
 };
 
-const commentApi = { getAll, createComment, getComments, updateComment };
+const commentApi = { getAll, createComment, getComment, updateComment };
 export default commentApi;

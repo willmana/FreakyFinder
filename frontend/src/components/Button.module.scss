@@ -1,0 +1,18 @@
+@import '../styles/main.scss';
+
+.button {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    border-radius: $space-l;
+    background-color: $color-6;
+    color: white;
+    padding: $space-xs;
+    border-color: black;
+    &:hover {
+        background-color: $color-7;
+    }
+    cursor: pointer;
+    min-width: 8rem;
+}

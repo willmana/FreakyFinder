@@ -4,10 +4,97 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding: $space-s;
-    background-color: $color-navbar;
+    background-image: linear-gradient(to right, $color-4, $color-6, $color-3);
 }
 
-.margin {
+.header {
     margin: $space-xs;
+    width: 20%;
+}
+
+.middlecontainer {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchcontainer {
+    border-radius: $space-l;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    justify-content: baseline;
+    align-items: center;
+    min-height: 2.5rem;
+    min-width: 32rem;
+}
+
+.searchinput {
+    display: flex;
+    background: none;
+    border: unset;
+    margin-left: $space-s;
+    padding: $space-xxs;
+    width: 90%;
+}
+
+.searchdivider {
+    height: $space-l;
+    background: rgb(47, 47, 47);
+    width: 0.125rem;
+    margin-left: $space-xs;
+    margin-right: $space-xs;
+    align-self: center;
+}
+
+.searchbutton {
+    display: flex;
+    background: none;
+    border: unset;
+    padding: $space-xxs;
+    color: rgb(47, 47, 47);
+    cursor: pointer;
+}
+.rightcontainer {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    justify-content: flex-end;
+}
+
+.localecontainer {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    margin-right: $space-m;
+}
+
+.localedivider {
+    height: $space-l;
+    background: $color-1;
+    width: 0.125rem;
+    margin-left: $space-xs;
+    margin-right: $space-xs;
+    align-self: center;
+}
+
+.localebutton {
+    background: none;
+    border: unset;
+    border-bottom: solid 0.15rem transparent;
+    color: $color-1;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+        border-bottom-color: $color-1;
+    }
+
+    &selected {
+        border-bottom-color: $color-1;
+    }
 }

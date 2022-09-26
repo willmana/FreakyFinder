@@ -2,5 +2,28 @@
 
 .maincontainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.inputfield {
+    margin: $space-s;
+    display: flex;
+    width: 85%;
+    word-break: normal;
+    padding: $space-s;
+    background-color: $color-5;
+    border-radius: $space-xl;
+    border: none;
+    overflow: hidden;
+}
+
+.buttoncontainer {
+    margin: $space-xs;
+    display: flex;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
 }

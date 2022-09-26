@@ -3,6 +3,7 @@ const Post = require('../models/Post');
 const { expressjwt: jwt } = require('express-jwt');
 const config = require('../serverutils/config');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 
 // Get all posts
 postRouter.get(
@@ -76,6 +77,16 @@ postRouter.get(
         } catch (error) {
             response.status(400).json({ error: error.message });
         }
+    }
+);
+
+// Get all comments from specific post
+postRouter.get(
+    '/comments/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        const comments = await Comment.find({ post: request.params.id });
+        response.json(comments.map((c) => c.toJSON()));
     }
 );
 

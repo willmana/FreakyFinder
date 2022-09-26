@@ -4,6 +4,7 @@ import LoginForm from '../components/LoginForm';
 import { useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '../components/Button';
 
 const NavigationBar = ({ onChangeLocale }) => {
     const msg = useMessageGetter('NavigationBar');
@@ -16,30 +17,47 @@ const NavigationBar = ({ onChangeLocale }) => {
 
     return (
         <div className={styles.navbarcontainer}>
-            <header className={styles.margin}>
+            <header className={styles.header}>
                 {msg('header', { parameter: 'Test' })}
             </header>
-            <div>
-                <input placeholder={msg('search.placeHolder')} />
-                <button>
-                    <SearchIcon />
-                </button>
+            <div className={styles.middlecontainer}>
+                <div className={styles.searchcontainer}>
+                    <input
+                        className={styles.searchinput}
+                        placeholder={msg('search.placeHolder')}
+                    />
+                    <div className={styles.searchdivider}></div>
+                    <button className={styles.searchbutton}>
+                        <SearchIcon />
+                    </button>
+                </div>
             </div>
-            <div>
-                <button onClick={() => onChangeLocale('fi')}>
-                    {msg('localeFi')}
-                </button>
-                <button onClick={() => onChangeLocale('en')}>
-                    {msg('localeEn')}
-                </button>
+            <div className={styles.rightcontainer}>
+                <div className={styles.localecontainer}>
+                    <button
+                        onClick={() => onChangeLocale('fi')}
+                        className={styles.localebutton}
+                    >
+                        {msg('localeFi')}
+                    </button>
+                    <div className={styles.localedivider}></div>
+                    <button
+                        onClick={() => onChangeLocale('en')}
+                        className={styles.localebutton}
+                    >
+                        {msg('localeEn')}
+                    </button>
+                </div>
+                {user ? (
+                    <Button
+                        className={styles.margin}
+                        onClick={onClickLogout}
+                        text={'Kirjaudu ulos'}
+                    />
+                ) : (
+                    <LoginForm />
+                )}
             </div>
-            {user ? (
-                <button className={styles.margin} onClick={onClickLogout}>
-                    Kirjaudu ulos
-                </button>
-            ) : (
-                <LoginForm />
-            )}
         </div>
     );
 };

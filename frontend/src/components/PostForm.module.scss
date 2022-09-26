@@ -7,15 +7,22 @@
     justify-content: center;
     align-items: center;
     margin-bottom: $space-m;
+    background-color: $color-3;
+    border-radius: $space-m;
 }
 
 .inputfield {
+    margin-top: $space-s;
     display: flex;
     width: 96%;
     height: 6rem;
     resize: none;
     word-break: normal;
-    padding: $space-xxs;
+    padding: $space-s;
+    background-color: $color-5;
+    border-radius: $space-m;
+    border: none;
+    overflow: hidden;
 }
 
 .buttoncontainer {
@@ -23,9 +30,5 @@
     display: flex;
     justify-content: flex-end;
     margin-top: $space-s;
-}
-
-.submitbutton {
-    width: 8rem;
-    height: 2rem;
+    margin-bottom: $space-s;
 }

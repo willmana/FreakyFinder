@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import styles from './Post.module.scss';
-import commentApi from './../api/comment';
+import postApi from './../api/post';
 
 const Post = ({ postProps }) => {
     const [comments, setComments] = useState([]);
     useEffect(() => {
         async function getComments() {
-            const commentRes = await commentApi.getComments(postProps.id);
+            const commentRes = await postApi.getComments(postProps.id);
             setComments(commentRes);
         }
         getComments();
@@ -24,9 +24,9 @@ const Post = ({ postProps }) => {
             </div>
             <p className={styles.text}>{postProps.description}</p>
             <div className={styles.separatorline}></div>
-            <CommentForm postId={postProps.id} setComments={setComments} />
             {comments &&
                 comments.map((p) => <Comment key={p.id} commentProps={p} />)}
+            <CommentForm postId={postProps.id} setComments={setComments} />
         </div>
     );
 };

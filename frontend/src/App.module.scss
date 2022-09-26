@@ -1,4 +1,15 @@
+@import './styles/main.scss';
+
 .app {
     display: flex;
     flex-direction: column;
+    background-color: $color-6;
+}
+
+.separatorline {
+    width: 100%;
+    background: $color-1;
+    height: 1px;
+    display: flex;
+    align-self: center;
 }

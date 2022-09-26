@@ -21,6 +21,7 @@ const App = ({ onChangeLocale }) => {
     return (
         <div className={styles.app}>
             <NavigationBar onChangeLocale={onChangeLocale} />
+            <div className={styles.separatorline}></div>
             {user ? <FreakyFinder /> : <LandingPage />}
         </div>
     );

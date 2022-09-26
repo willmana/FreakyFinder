@@ -4,13 +4,13 @@ const { expressjwt: jwt } = require('express-jwt');
 const config = require('../serverutils/config');
 const Post = require('../models/Post');
 
-// Get all comments from specific post
+// Get a comment with specific id
 commentRouter.get(
     '/:id',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
-        const comments = await Comment.find({ post: request.params.id });
-        response.json(comments.map((c) => c.toJSON()));
+        const comment = await Comment.findById(request.params.id);
+        response.json(comment);
     }
 );
 

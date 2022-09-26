@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { getUser } from '../redux/app';
 import styles from './CommentForm.module.scss';
 import commentApi from './../api/comment';
+import postApi from '../api/post';
+import Button from './Button';
 
 const CommentForm = ({ postId, setComments }) => {
     const [commentData, setCommentData] = useState('');
@@ -21,7 +23,7 @@ const CommentForm = ({ postId, setComments }) => {
         console.log(commentObject);
         await commentApi.createComment(commentObject);
         setCommentData('');
-        const commentRes = await commentApi.getComments(postId);
+        const commentRes = await postApi.getComments(postId);
         setComments(commentRes);
     };
 
@@ -33,8 +35,8 @@ const CommentForm = ({ postId, setComments }) => {
                 placeholder="kirjoita kommentti"
                 onChange={onInputChange}
             ></input>
-            <div>
-                <button onClick={onClickSubmitComment}>Julkaise</button>
+            <div className={styles.buttoncontainer}>
+                <Button onClick={onClickSubmitComment} text={'Julkaise'} />
             </div>
         </div>
     );

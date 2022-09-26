@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, setUser } from '../redux/app';
 import LoginForm from '../components/LoginForm';
-import { useMessageGetter } from '@messageformat/react';
+import { useLocales, useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '../components/Button';
+import classNames from 'classnames';
 
 const NavigationBar = ({ onChangeLocale }) => {
     const msg = useMessageGetter('NavigationBar');
@@ -14,6 +15,7 @@ const NavigationBar = ({ onChangeLocale }) => {
         window.localStorage.clear();
         dispatch(setUser(null));
     };
+    const locales = useLocales();
 
     return (
         <div className={styles.navbarcontainer}>
@@ -36,14 +38,18 @@ const NavigationBar = ({ onChangeLocale }) => {
                 <div className={styles.localecontainer}>
                     <button
                         onClick={() => onChangeLocale('fi')}
-                        className={styles.localebutton}
+                        className={classNames(styles.localebutton, {
+                            [styles.localebuttonselected]: locales[0] === 'fi'
+                        })}
                     >
                         {msg('localeFi')}
                     </button>
                     <div className={styles.localedivider}></div>
                     <button
                         onClick={() => onChangeLocale('en')}
-                        className={styles.localebutton}
+                        className={classNames(styles.localebutton, {
+                            [styles.localebuttonselected]: locales[0] === 'en'
+                        })}
                     >
                         {msg('localeEn')}
                     </button>

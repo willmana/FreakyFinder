@@ -32,5 +32,6 @@
 | Tried out and played around with 'display: grid' box styling for the application, decided to stick with flexbox for now.                                                                      | 30 minutes | 23.9.2022  |
 | Add styling to post form and further develop post component itself                                                                                                                            |  1.5 hour  | 23.9.2022  |
 | Intagrate functionality to add comments and render comments under specific posts                                                                                                              |   1 hour   | 24.9.2022  |
+| Major improvements on styling. Decided styling pattern, created first common components, applied base color palette to application and started using custom font.                             |  3.5 hour  | 26.9.2022  |
 
-#### Total time spent: 44 hours
+#### Total time spent: 47.5 hours

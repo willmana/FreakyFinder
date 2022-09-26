@@ -76,7 +76,7 @@
 .localedivider {
     height: $space-l;
     background: $color-1;
-    width: 0.125rem;
+    width: 0.15rem;
     margin-left: $space-xs;
     margin-right: $space-xs;
     align-self: center;
@@ -89,7 +89,8 @@
     color: $color-1;
     font-size: 0.9rem;
     cursor: pointer;
-
+    height: fit-content;
+    align-self: center;
     &:hover {
         border-bottom-color: $color-1;
     }

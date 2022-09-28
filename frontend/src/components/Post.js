@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import styles from './Post.module.scss';
-import postApi from './../api/post';
 
 const Post = ({ postProps }) => {
-    const [comments, setComments] = useState([]);
-    useEffect(() => {
-        async function getComments() {
-            const commentRes = await postApi.getComments(postProps.id);
-            setComments(commentRes);
-        }
-        getComments();
-    }, [postProps.id]);
+    const [comments, setComments] = useState(postProps.comments);
     const date = new Date(postProps.createdAt);
 
-    console.log(postProps);
     return (
         <div className={styles.postcontainer}>
             <div className={styles.topbar}>

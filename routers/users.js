@@ -10,7 +10,10 @@ userRouter.get(
     '/',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
-        const users = await User.find({}).populate('posts', { description: 1 });
+        const users = await User.find({})
+            .populate('posts', { description: 1 })
+            .populate('followers', { username: 1 })
+            .populate('following', { username: 1 });
         response.json(users.map((u) => u.toJSON()));
     }
 );
@@ -89,6 +92,9 @@ userRouter.put(
     async (request, response) => {
         try {
             const body = request.body;
+            await User.findByIdAndUpdate(request.params.id, {
+                $push: { test: body.userId }
+            });
             if (request.params.id === body.userId) {
                 return response
                     .status(403)

@@ -20,7 +20,6 @@ const getAll = async () => {
 };
 
 const createComment = async (newComment) => {
-    console.log(newComment);
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.post(baseUrl, newComment, config);
     return res.data;

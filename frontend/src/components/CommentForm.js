@@ -16,11 +16,10 @@ const CommentForm = ({ postId, setComments }) => {
     const onClickSubmitComment = async (e) => {
         e.preventDefault();
         const commentObject = {
-            userId: user.user.id,
+            userId: user.id,
             postId: postId,
             content: commentData
         };
-        console.log(commentObject);
         await commentApi.createComment(commentObject);
         setCommentData('');
         const commentRes = await postApi.getComments(postId);

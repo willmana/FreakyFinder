@@ -17,7 +17,7 @@ const PostForm = () => {
     const onClickSubmitPost = async (e) => {
         e.preventDefault();
         const postObject = {
-            userId: user.user.id,
+            userId: user.id,
             description: postData,
             date: new Date()
         };

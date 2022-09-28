@@ -9,15 +9,17 @@
 
 .leftbar {
     display: flex;
-    width: $container-width-sidebar;
+    width: 20%;
 }
 
 .middlebar {
     display: flex;
-    width: 100%;
+    max-width: 60%;
+    align-items: center;
+    justify-content: center;
 }
 
 .rightbar {
     display: flex;
-    width: $container-width-sidebar;
+    width: 20%;
 }

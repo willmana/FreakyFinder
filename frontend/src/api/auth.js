@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === 'development') {
 
 const register = async (body) => {
     const res = await axios.post(`${baseUrl}/register`, body);
-    console.log(res.data);
     return res.data;
 };
 

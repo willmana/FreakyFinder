@@ -17,8 +17,20 @@ const userSchema = new mongoose.Schema(
                 required: false
             }
         ],
-        following: { type: Array, default: [], required: false },
-        followers: { type: Array, default: [], required: false },
+        following: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: false
+            }
+        ],
+        followers: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: false
+            }
+        ],
         isAdmin: { type: Boolean, default: false, required: false }
     },
     { timestamps: true }

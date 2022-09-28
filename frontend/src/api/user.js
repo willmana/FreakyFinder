@@ -36,5 +36,15 @@ const updateUser = async (userId, newUser) => {
     return res.data;
 };
 
-const userApi = { getAll, createUser, getUser, updateUser };
+const followUser = async (followedId, userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.put(
+        `${baseUrl}/${followedId}/follow`,
+        { userId: userId },
+        config
+    );
+    return res.data;
+};
+
+const userApi = { getAll, createUser, getUser, updateUser, followUser };
 export default userApi;

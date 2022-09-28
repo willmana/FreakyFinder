@@ -15,12 +15,11 @@ const LoginForm = (params) => {
     const onChangePassword = (event) => {
         setPassword(event.target.value);
     };
-    const onClickLogin = async () => {
+    const onClickLogin = async (event) => {
         try {
-            const user = await authApi.login({ username, password });
+            const user = await authApi.login({ username, password }).then();
             window.localStorage.setItem('currentUser', JSON.stringify(user));
-            await userApi.getUser(username);
-            dispatch(setUser(user));
+            dispatch(setUser(user.user));
         } catch (e) {}
     };
 

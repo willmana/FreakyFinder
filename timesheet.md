@@ -34,5 +34,7 @@
 | Intagrate functionality to add comments and render comments under specific posts                                                                                                              |   1 hour   | 24.9.2022  |
 | Major improvements on styling. Decided styling pattern, created first common components, applied base color palette to application and started using custom font.                             | 3.5 hours  | 26.9.2022  |
 | Clean up and refactor code. Add basic functionality to follow user from frontend                                                                                                              |   1 hour   | 28.9.2022  |
+| More styling for main view                                                                                                                                                                    |   1 hour   | 29.9.2022  |
+| Fetch only posts from followed users in main feed, fix backend call related to fetch                                                                                                          | 30 minutes | 29.9.2022  |
 
-#### Total time spent: 48.5 hours
+#### Total time spent: 50 hours

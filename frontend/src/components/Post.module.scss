@@ -1,7 +1,7 @@
 @import './../styles/main.scss';
 
 .postcontainer {
-    background-color: $color-3;
+    background-color: $color-secondary-variant;
     display: flex;
     flex-direction: column;
     margin: $space-m 0;
@@ -13,6 +13,7 @@
     flex-direction: row;
     justify-content: space-between;
     padding: $space-s;
+    color: $color-text;
 }
 
 .username {
@@ -24,6 +25,7 @@
 }
 
 .text {
+    color: $color-text;
     display: flex;
     padding: $space-s;
     word-break: normal;
@@ -31,7 +33,7 @@
 
 .separatorline {
     width: 95%;
-    background: black;
+    background: $color-accent-variant;
     height: 1px;
     display: flex;
     align-self: center;

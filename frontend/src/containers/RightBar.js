@@ -24,8 +24,8 @@ const RightBar = () => {
     return (
         <div>
             <div>
-                {displayedUsers.map((user) => (
-                    <div>
+                {displayedUsers.map((user, i) => (
+                    <div key={i}>
                         <div>{user.username}</div>
                         <button onClick={() => onClickFollowUser(user.id)}>
                             seuraa

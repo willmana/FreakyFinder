@@ -14,7 +14,8 @@
     width: 85%;
     word-break: normal;
     padding: $space-s;
-    background-color: $color-5;
+    background-color: $color-primary;
+    color: $color-text;
     border-radius: $space-xl;
     border: none;
     overflow: hidden;
@@ -26,4 +27,16 @@
     width: 15%;
     align-items: center;
     justify-content: center;
+}
+
+.sendbutton {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-secondary-variant;
+    color: $color-accent;
+    border: none;
+    cursor: pointer;
 }

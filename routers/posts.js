@@ -12,7 +12,7 @@ postRouter.get(
     async (request, response) => {
         const posts = await Post.find({})
             .populate('user', { username: 1 })
-            .populate('comments', { content: 1 });
+            .populate('comments', { content: 1, createdAt: 1 });
         response.json(posts.map((p) => p.toJSON()));
     }
 );
@@ -68,12 +68,22 @@ postRouter.get(
         try {
             const userId = request.params.id;
             const user = await User.findById(userId);
+            const ownPosts = await Post.find({ user: request.params.id })
+                .populate('user', { username: 1 })
+                .populate('comments', { content: 1, createdAt: 1, user: 1 });
             const posts = await Promise.all(
                 user.following.map((friend) => {
-                    return Post.find({ user: friend });
+                    return Post.find({ user: friend })
+                        .populate('user', { username: 1 })
+                        .populate('comments', {
+                            content: 1,
+                            createdAt: 1,
+                            user: 1
+                        });
                 })
             );
-            response.status(200).json(posts);
+            const resObject = ownPosts.concat([].concat.apply([], posts));
+            response.status(200).json(resObject);
         } catch (error) {
             response.status(400).json({ error: error.message });
         }

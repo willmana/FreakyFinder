@@ -3,12 +3,12 @@
 .app {
     display: flex;
     flex-direction: column;
-    background-color: $color-6;
+    background-color: $color-primary;
 }
 
 .separatorline {
     width: 100%;
-    background: $color-1;
+    background: $color-accent-variant;
     height: 1px;
     display: flex;
     align-self: center;

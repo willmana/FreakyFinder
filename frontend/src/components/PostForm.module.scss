@@ -7,19 +7,22 @@
     justify-content: center;
     align-items: center;
     margin-bottom: $space-m;
-    background-color: $color-3;
+    background-color: $color-secondary-variant;
     border-radius: $space-m;
 }
 
 .inputfield {
-    margin-top: $space-s;
+    margin-top: 2%;
     display: flex;
-    width: 96%;
+    width: 92%;
     height: 6rem;
     resize: none;
     word-break: normal;
     padding: $space-s;
-    background-color: $color-5;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: $color-secondary;
+    color: $color-text;
     border-radius: $space-m;
     border: none;
     overflow: hidden;

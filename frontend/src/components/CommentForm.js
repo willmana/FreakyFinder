@@ -4,7 +4,7 @@ import { getUser } from '../redux/app';
 import styles from './CommentForm.module.scss';
 import commentApi from './../api/comment';
 import postApi from '../api/post';
-import Button from './Button';
+import SendIcon from '@mui/icons-material/Send';
 
 const CommentForm = ({ postId, setComments }) => {
     const [commentData, setCommentData] = useState('');
@@ -34,9 +34,12 @@ const CommentForm = ({ postId, setComments }) => {
                 placeholder="kirjoita kommentti"
                 onChange={onInputChange}
             ></input>
-            <div className={styles.buttoncontainer}>
-                <Button onClick={onClickSubmitComment} text={'Julkaise'} />
-            </div>
+            <button
+                onClick={onClickSubmitComment}
+                className={styles.sendbutton}
+            >
+                <SendIcon />
+            </button>
         </div>
     );
 };

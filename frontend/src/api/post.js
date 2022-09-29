@@ -18,6 +18,12 @@ const getAll = async () => {
     return res.data;
 };
 
+const getFeed = async (userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/feed/${userId}`, config);
+    return res.data;
+};
+
 const createPost = async (newPost) => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.post(baseUrl, newPost, config);
@@ -42,5 +48,12 @@ const getComments = async (commentId) => {
     return res.data;
 };
 
-const postApi = { getAll, createPost, getPost, updatePost, getComments };
+const postApi = {
+    getAll,
+    createPost,
+    getPost,
+    updatePost,
+    getComments,
+    getFeed
+};
 export default postApi;

@@ -1,5 +1,9 @@
+import { call, takeEvery } from 'redux-saga/effects';
+import userApi from './../api/user';
+
 const SET_USER = 'freakyFinder/SET_USER';
 const SET_POSTS = 'freakyFinder/SET_POSTS';
+const GET_USERS = 'freakyFinder/GET_USERS';
 
 export const setUser = (user) => ({
     type: SET_USER,
@@ -9,11 +13,21 @@ export const setPosts = (posts) => ({
     type: SET_POSTS,
     posts
 });
+export const fetchUsers = () => ({
+    type: GET_USERS
+});
 const initialState = {
     testMessage: 'testmessage',
     user: null,
     posts: []
 };
+
+function* sagaFetchUsers(action) {
+    try {
+        const user = yield call(userApi.getAll);
+        yield call(console.log(user));
+    } catch (e) {}
+}
 
 export const appReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -33,6 +47,8 @@ export const getUser = (state) => {
     return state.app.user;
 };
 
-export function* appSaga() {}
+export function* appSaga() {
+    yield takeEvery(GET_USERS, sagaFetchUsers);
+}
 
 export default appReducer;

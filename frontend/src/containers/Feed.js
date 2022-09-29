@@ -3,16 +3,17 @@ import postApi from '../api/post';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPosts, setPosts } from '../redux/app';
+import { getPosts, getUser, setPosts } from '../redux/app';
 import styles from './Feed.module.scss';
 
 const Feed = () => {
     const dispatch = useDispatch();
     const posts = useSelector(getPosts);
+    const user = useSelector(getUser);
 
     useEffect(() => {
         async function getPosts() {
-            const postResponse = await postApi.getAll();
+            const postResponse = await postApi.getFeed(user.id);
             postResponse.sort((a, b) => a.date - b.date);
             dispatch(setPosts(postResponse));
         }

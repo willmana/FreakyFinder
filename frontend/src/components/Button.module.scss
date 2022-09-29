@@ -6,13 +6,14 @@
     align-items: center;
     width: 100%;
     border-radius: $space-l;
-    background-color: $color-6;
-    color: white;
+    background-color: $color-primary;
+    color: $color-text;
     padding: $space-xs;
-    border-color: black;
+    border-color: $color-accent;
     &:hover {
-        background-color: $color-7;
+        background-color: $color-primary-variant;
     }
     cursor: pointer;
     min-width: 8rem;
+    border-style: solid;
 }

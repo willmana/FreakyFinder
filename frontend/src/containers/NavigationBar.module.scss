@@ -6,7 +6,8 @@
     justify-content: space-between;
     align-items: center;
     padding: $space-s;
-    background-image: linear-gradient(to right, $color-4, $color-6, $color-3);
+    //    background-image: linear-gradient(to right, $color-4, $color-6, $color-3);
+    background-color: $color-secondary;
     position: sticky;
     top: 0;
 }
@@ -14,18 +15,19 @@
 .header {
     margin: $space-xs;
     width: 20%;
+    color: $color-accent;
 }
 
 .middlecontainer {
     display: flex;
-    width: 50%;
+    width: 60%;
     align-items: center;
     justify-content: center;
 }
 
 .searchcontainer {
     border-radius: $space-l;
-    background-color: white;
+    background-color: $color-accent-variant;
     display: flex;
     flex-direction: row;
     width: fit-content;
@@ -42,11 +44,12 @@
     margin-left: $space-s;
     padding: $space-xxs;
     width: 90%;
+    color: $color-primary;
 }
 
 .searchdivider {
     height: $space-l;
-    background: rgb(47, 47, 47);
+    background: $color-primary;
     width: 0.125rem;
     margin-left: $space-xs;
     margin-right: $space-xs;
@@ -58,13 +61,15 @@
     background: none;
     border: unset;
     padding: $space-xxs;
-    color: rgb(47, 47, 47);
+    margin-right: $space-s;
+    color: $color-primary;
     cursor: pointer;
 }
+
 .rightcontainer {
     display: flex;
     flex-direction: row;
-    width: 30%;
+    width: 20%;
     justify-content: flex-end;
 }
 
@@ -77,7 +82,7 @@
 
 .localedivider {
     height: $space-l;
-    background: $color-1;
+    background: $color-text;
     width: 0.15rem;
     margin-left: $space-xs;
     margin-right: $space-xs;
@@ -88,16 +93,16 @@
     background: none;
     border: unset;
     border-bottom: solid 0.15rem transparent;
-    color: $color-1;
+    color: $color-text;
     font-size: 0.9rem;
     cursor: pointer;
     height: fit-content;
     align-self: center;
     &:hover {
-        border-bottom-color: $color-1;
+        border-bottom-color: $color-text;
     }
 
     &selected {
-        border-bottom-color: $color-1;
+        border-bottom-color: $color-text;
     }
 }

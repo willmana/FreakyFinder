@@ -2,10 +2,14 @@ import React from 'react';
 import styles from './Comment.module.scss';
 
 const Comment = ({ commentProps }) => {
+    const date = new Date(commentProps.createdAt);
     return (
         <div className={styles.commentcontainer}>
-            <h5>{commentProps.id}</h5>
-            <p>{commentProps.content}</p>
+            <div className={styles.topbar}>
+                <div className={styles.username}>{commentProps.id}</div>
+                <div className={styles.date}>{date.toDateString()}</div>
+            </div>
+            <p className={styles.text}>{commentProps.content}</p>
         </div>
     );
 };

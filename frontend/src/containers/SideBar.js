@@ -15,18 +15,23 @@ const SideBar = (props) => {
             <button className={styles.button}>
                 <AccountBoxIcon /> <p>{msg('profile')}</p>
             </button>
+            <div className={styles.divider}></div>
             <button className={styles.button}>
                 <NewspaperIcon /> <p>{msg('feed')}</p>
             </button>
+            <div className={styles.divider}></div>
             <button className={styles.button}>
                 <PeopleIcon /> <p>{msg('friends')}</p>
             </button>
+            <div className={styles.divider}></div>
             <button className={styles.button}>
                 <MessageIcon /> <p>{msg('messages')}</p>
             </button>
+            <div className={styles.divider}></div>
             <button className={styles.button}>
                 <PersonSearchIcon /> <p>{msg('findContacts')}</p>
             </button>
+            <div className={styles.divider}></div>
             <button className={styles.button}>
                 <SettingsIcon /> <p>{msg('settings')}</p>
             </button>

@@ -22,18 +22,20 @@ const NavigationBar = ({ onChangeLocale }) => {
             <header className={styles.header}>
                 {msg('header', { parameter: 'Test' })}
             </header>
-            <div className={styles.middlecontainer}>
-                <div className={styles.searchcontainer}>
-                    <input
-                        className={styles.searchinput}
-                        placeholder={msg('search.placeHolder')}
-                    />
-                    <div className={styles.searchdivider}></div>
-                    <button className={styles.searchbutton}>
-                        <SearchIcon />
-                    </button>
+            {user && (
+                <div className={styles.middlecontainer}>
+                    <div className={styles.searchcontainer}>
+                        <input
+                            className={styles.searchinput}
+                            placeholder={msg('search.placeHolder')}
+                        />
+                        <div className={styles.searchdivider}></div>
+                        <button className={styles.searchbutton}>
+                            <SearchIcon />
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
             <div className={styles.rightcontainer}>
                 <div className={styles.localecontainer}>
                     <button

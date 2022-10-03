@@ -1,13 +1,27 @@
 @import './../styles/main.scss';
 
-.cardcontainer {
+.maincontainer {
+    width: 60%;
+    background-color: $color-secondary-variant;
     display: flex;
     flex-direction: row;
-    padding: $space-xl 10%;
+    margin: $space-xxl 0;
+    border-radius: $space-m;
+    align-self: center;
     justify-content: center;
+    align-items: center;
 }
 
-.textcontainer {
-    width: 37.5rem;
-    padding: $space-l;
+.imgcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.registerformcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
 }

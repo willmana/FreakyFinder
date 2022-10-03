@@ -1,10 +1,18 @@
 @import './../styles/main.scss';
 
+.maincontainer {
+    padding: $space-m;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    min-height: 460px;
+}
+
 .formcontainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 25rem;
 }
 
 .inputrow {
@@ -14,7 +22,41 @@
     justify-content: space-between;
 }
 
+.labeltext {
+    color: $color-text;
+    font-size: small;
+}
+
+.input {
+    height: min-content;
+    padding: $space-xxs;
+    color: $color-primary;
+    background-color: $color-accent-variant;
+    border: none;
+    border-radius: $space-xxs;
+    margin-bottom: $space-xs;
+}
+
 .title {
     display: flex;
     justify-content: center;
+    color: $color-text;
+    margin-bottom: $space-s;
+}
+
+.buttoncontainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $space-xxs;
+    margin-top: $space-xs;
+}
+
+.leftbutton {
+    display: grid;
+    grid-column-start: 1;
+}
+
+.rightbutton {
+    display: grid;
+    grid-column-start: 2;
 }

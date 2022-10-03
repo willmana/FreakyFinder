@@ -4,8 +4,29 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    margin: 0 $space-s;
 }
 
 .margin {
     margin: $space-xs;
+}
+
+.inputcontainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 $space-s;
+}
+
+.labeltext {
+    color: $color-text;
+    font-size: small;
+}
+
+.input {
+    height: min-content;
+    padding: $space-xxs;
+    color: $color-primary;
+    background-color: $color-accent-variant;
+    border: none;
+    border-radius: $space-xxs;
 }

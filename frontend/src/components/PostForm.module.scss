@@ -2,6 +2,7 @@
 
 .maincontainer {
     width: 100%;
+    max-width: 680px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,6 +10,7 @@
     margin-bottom: $space-m;
     background-color: $color-secondary-variant;
     border-radius: $space-m;
+    align-self: center;
 }
 
 .inputfield {

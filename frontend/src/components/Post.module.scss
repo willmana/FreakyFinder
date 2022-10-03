@@ -1,11 +1,14 @@
 @import './../styles/main.scss';
 
 .postcontainer {
+    width: 100%;
     background-color: $color-secondary-variant;
+    max-width: 680px;
     display: flex;
     flex-direction: column;
     margin: $space-m 0;
     border-radius: $space-m;
+    align-self: center;
 }
 
 .topbar {

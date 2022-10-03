@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './RegisterForm.module.scss';
 import { useMessageGetter } from '@messageformat/react';
 import authApi from './../api/auth';
+import Button from './Button';
 
 const RegisterForm = () => {
     const [step, setStep] = useState('1');
@@ -37,74 +38,130 @@ const RegisterForm = () => {
         } catch (error) {}
     };
     return (
-        <div>
-            <p></p>
+        <div className={styles.maincontainer}>
             {step === '1' ? (
-                <div>
-                    <h3 className={styles.title}>{msg('title')}</h3>
-                    <form className={styles.formcontainer}>
-                        <label>{msg('firstName')}</label>
-                        <input
-                            onChange={(e) => setFirstName(e.target.value)}
-                            value={firstName}
-                        ></input>
-                        <label>{msg('lastName')}</label>
-                        <input
-                            onChange={(e) => setLastName(e.target.value)}
-                            value={lastName}
-                        ></input>
-                        <label>{msg('dateOfBirth')}</label>
-                        <input
-                            onChange={(e) => setDateOfBirth(e.target.value)}
-                            value={dateOfBirth}
-                            type={'date'}
-                        ></input>
-                        <label>{msg('gender')}</label>
-                        <input
-                            onChange={(e) => setGender(e.target.value)}
-                            value={gender}
-                        ></input>
-                        <label>{msg('country')}</label>
-                        <input
-                            onChange={(e) => setCountry(e.target.value)}
-                            value={country}
-                        ></input>
-                        <label>{msg('city')}</label>
-                        <input
-                            onChange={(e) => setCity(e.target.value)}
-                            value={city}
-                        ></input>
-                    </form>
-                    <button onClick={() => onButtonClick('2')}>
-                        {msg('continueButton')}
-                    </button>
+                <div className={styles.formcontainer}>
+                    <h2 className={styles.title}>{msg('title')}</h2>
+                    <label className={styles.labeltext} for="firstname">
+                        {msg('firstName')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        value={firstName}
+                        type="text"
+                        id="firstname"
+                    ></input>
+                    <label className={styles.labeltext} for="lastName">
+                        {msg('lastName')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setLastName(e.target.value)}
+                        value={lastName}
+                        type="text"
+                        id="lastName"
+                    ></input>
+                    <label className={styles.labeltext} for="dateOfBirth">
+                        {msg('dateOfBirth')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        value={dateOfBirth}
+                        type="date"
+                        id="dateOfBirth"
+                    ></input>
+                    <label className={styles.labeltext} for="gender">
+                        {msg('gender')}
+                    </label>
+                    <select
+                        className={styles.input}
+                        onChange={(e) => setGender(e.target.value)}
+                        value={gender}
+                        id="gender"
+                    >
+                        <option hidden></option>
+                        <option value={'1'}>Mies</option>
+                        <option value={'2'}>Nainen</option>
+                        <option value={'3'}>Apache Attack Helicopter</option>
+                    </select>
+                    <label className={styles.labeltext} for="country">
+                        {msg('country')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
+                        type="text"
+                        id="country"
+                    ></input>
+                    <label className={styles.labeltext} for="city">
+                        {msg('city')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setCity(e.target.value)}
+                        value={city}
+                        type="text"
+                        id="city"
+                    ></input>
+                    <div className={styles.buttoncontainer}>
+                        <div className={styles.rightbutton}>
+                            <Button
+                                onClick={() => onButtonClick('2')}
+                                text={msg('continueButton')}
+                            ></Button>
+                        </div>
+                    </div>
                 </div>
             ) : step === '2' ? (
-                <div>
-                    <h3 className={styles.title}>{msg('title')}</h3>
-                    <form className={styles.formcontainer}>
-                        <label>{msg('username')}</label>
-                        <input
-                            onChange={(e) => setUsername(e.target.value)}
-                            value={username}
-                        ></input>
-                        <label>{msg('password1')}</label>
-                        <input
-                            onChange={(e) => setPassword1(e.target.value)}
-                            value={password1}
-                        ></input>
-                        <label>{msg('password2')}</label>
-                        <input
-                            onChange={(e) => setPassword2(e.target.value)}
-                            value={password2}
-                        ></input>
-                    </form>
-                    <button onClick={() => onButtonClick('1')}>
-                        {msg('backButton')}
-                    </button>
-                    <button onClick={onClickSubmit}>
-                        {msg('submitButton')}
-                    </button>
+                <div className={styles.formcontainer}>
+                    <h2 className={styles.title}>{msg('title')}</h2>
+                    <label className={styles.labeltext} for="username">
+                        {msg('username')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username}
+                        type="text"
+                        id="username"
+                    ></input>
+                    <label className={styles.labeltext} for="password1">
+                        {msg('password1')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setPassword1(e.target.value)}
+                        value={password1}
+                        type="text"
+                        id="password1"
+                    ></input>
+                    <label className={styles.labeltext} for="password2">
+                        {msg('password2')}
+                    </label>
+                    <input
+                        className={styles.input}
+                        onChange={(e) => setPassword2(e.target.value)}
+                        value={password2}
+                        type="text"
+                        id="password2"
+                    ></input>
+                    <div className={styles.buttoncontainer}>
+                        <div className={styles.leftbutton}>
+                            <Button
+                                onClick={() => onButtonClick('1')}
+                                text={msg('backButton')}
+                            ></Button>
+                        </div>
+                        <div className={styles.rightbutton}>
+                            <Button
+                                onClick={onClickSubmit}
+                                text={msg('submitButton')}
+                            ></Button>
+                        </div>
+                    </div>
                 </div>
             ) : (
                 step === '3' && (

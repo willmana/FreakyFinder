@@ -3,13 +3,32 @@
 .buttoncontainer {
     display: flex;
     flex-direction: column;
+    background-color: $color-secondary-variant;
+    height: fit-content;
+    width: fit-content;
+    padding: $space-s;
+    margin: $space-m;
+    position: sticky;
+    top: $space-xxl;
 }
 
 .button {
+    background: none;
+    border: none;
     display: flex;
-    flex-direction: row;
-    margin-bottom: $space-s;
-    justify-content: left;
+    flex-direction: column;
+    margin: $space-m 0;
+    justify-content: center;
     align-items: center;
     gap: $space-xs;
+    color: $color-accent-variant;
+    cursor: pointer;
+}
+
+.divider {
+    width: 60%;
+    background: $color-accent-variant;
+    height: 1px;
+    display: flex;
+    align-self: center;
 }

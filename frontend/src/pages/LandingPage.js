@@ -1,7 +1,7 @@
 import React from 'react';
 import RegisterForm from '../components/RegisterForm';
 import styles from './LandingPage.module.scss';
-import Logo from './../logo/default.svg';
+import Logo from './../pics/default.svg';
 
 const LandingPage = (params) => {
     return (

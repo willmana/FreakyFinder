@@ -25,7 +25,7 @@ const LoginForm = (params) => {
     };
 
     return (
-        <form className={styles.formcontainer} onSubmit={onClickLogin}>
+        <form className={styles.formcontainer} onSubmit={() => onClickLogin()}>
             <div className={styles.inputcontainer}>
                 <label className={styles.labeltext}>username</label>
                 <input

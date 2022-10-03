@@ -1,0 +1,35 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: $space-m 0;
+}
+
+.img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.infocontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.name {
+    color: $color-text;
+}
+
+.username {
+    margin-top: -$space-xs;
+    color: $color-accent-variant;
+    cursor: pointer;
+}
+
+.button {
+    min-height: fit-content;
+    min-width: fit-content;
+}

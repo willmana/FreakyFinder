@@ -37,5 +37,6 @@
 | More styling for main view                                                                                                                                                                    |   1 hour   | 29.9.2022  |
 | Fetch only posts from followed users in main feed, fix backend call related to fetch                                                                                                          | 30 minutes | 29.9.2022  |
 | Add styling to landing page, create and include logo. Small tweaks in styling over the application                                                                                            |  2 hours   | 3.10.2022  |
+| Improve styling on right bar component, main feed and landing page 'ready' for now.                                                                                                           |   1 hour   | 3.10.2022  |
 
-#### Total time spent: 52 hours
+#### Total time spent: 53 hours

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import userApi from './../api/user';
 import { useSelector } from 'react-redux';
 import { getUser } from './../redux/app';
+import UserDisplay from '../components/UserDisplay';
+import styles from './RightBar.module.scss';
 
 const RightBar = () => {
     const [displayedUsers, setDisplayedUsers] = useState([]);
@@ -17,19 +19,19 @@ const RightBar = () => {
         fetchUsers();
     }, []);
 
-    const onClickFollowUser = async (id) => {
-        await userApi.followUser(id, currentUser.id);
-    };
-
     return (
-        <div>
+        <div className={styles.maincontainer}>
             <div>
-                {displayedUsers.map((user, i) => (
-                    <div key={i}>
-                        <div>{user.username}</div>
-                        <button onClick={() => onClickFollowUser(user.id)}>
-                            seuraa
-                        </button>
+                {displayedUsers.map((user, i, array) => (
+                    <div key={i} className={styles.usercontainer}>
+                        <UserDisplay
+                            firstname={user.first_name}
+                            lastname={user.last_name}
+                            username={user.username}
+                        />
+                        {array.length !== i + 1 && (
+                            <div className={styles.divider}></div>
+                        )}
                     </div>
                 ))}
             </div>

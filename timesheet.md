@@ -36,5 +36,6 @@
 | Clean up and refactor code. Add basic functionality to follow user from frontend                                                                                                              |   1 hour   | 28.9.2022  |
 | More styling for main view                                                                                                                                                                    |   1 hour   | 29.9.2022  |
 | Fetch only posts from followed users in main feed, fix backend call related to fetch                                                                                                          | 30 minutes | 29.9.2022  |
+| Add styling to landing page, create and include logo. Small tweaks in styling over the application                                                                                            |  2 hours   | 3.10.2022  |
 
-#### Total time spent: 50 hours
+#### Total time spent: 52 hours

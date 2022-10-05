@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import configureStore from './utils/configureStore';
 import texts from './texts/textData';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const store = configureStore({});
 const deriveInitialLocale = () => {
@@ -27,9 +28,16 @@ const ProviderWrapper = () => {
 
     return (
         <Provider store={store}>
-            <MessageProvider messages={texts[locale]} locale={locale}>
-                <App onChangeLocale={onChangeLocale} />
-            </MessageProvider>
+            <BrowserRouter>
+                <MessageProvider messages={texts[locale]} locale={locale}>
+                    <Routes>
+                        <Route
+                            path="*"
+                            element={<App onChangeLocale={onChangeLocale} />}
+                        />
+                    </Routes>
+                </MessageProvider>
+            </BrowserRouter>
         </Provider>
     );
 };

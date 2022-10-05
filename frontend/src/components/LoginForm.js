@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authApi from '../api/auth';
-import userApi from '../api/user';
 import { setUser } from '../redux/app';
 import styles from './LoginForm.module.scss';
 import Button from './Button';
-
 const LoginForm = (params) => {
     const dispatch = useDispatch();
     const [username, setUsername] = useState('');
@@ -25,7 +23,7 @@ const LoginForm = (params) => {
     };
 
     return (
-        <form className={styles.formcontainer} onSubmit={() => onClickLogin()}>
+        <div className={styles.formcontainer}>
             <div className={styles.inputcontainer}>
                 <label className={styles.labeltext}>username</label>
                 <input
@@ -48,7 +46,7 @@ const LoginForm = (params) => {
                 onClick={() => onClickLogin()}
                 text={'Log in'}
             ></Button>
-        </form>
+        </div>
     );
 };
 

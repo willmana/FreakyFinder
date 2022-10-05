@@ -6,39 +6,44 @@ import PeopleIcon from '@mui/icons-material/People';
 import MessageIcon from '@mui/icons-material/Message';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import SettingsIcon from '@mui/icons-material/Settings';
-import styles from './SideBar.module.scss';
+import styles from './LeftBar.module.scss';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getUser } from '../redux/app';
+import { Path } from '../constants';
 
-const SideBar = (props) => {
-    const msg = useMessageGetter('SideBar');
+const LeftBar = (props) => {
+    const user = useSelector(getUser);
+    const msg = useMessageGetter('LeftBar');
     return (
         <div className={styles.buttoncontainer}>
-            <button className={styles.button}>
+            <Link className={styles.button} to={`/${user.username}`}>
                 <AccountBoxIcon /> <p>{msg('profile')}</p>
-            </button>
+            </Link>
             <div className={styles.divider}></div>
-            <button className={styles.button}>
+            <Link className={styles.button} to={Path.front}>
                 <NewspaperIcon /> <p>{msg('feed')}</p>
-            </button>
+            </Link>
             <div className={styles.divider}></div>
-            <button className={styles.button}>
+            <Link className={styles.button} to={Path.friends}>
                 <PeopleIcon /> <p>{msg('friends')}</p>
-            </button>
+            </Link>
             <div className={styles.divider}></div>
-            <button className={styles.button}>
+            <Link className={styles.button} to={Path.messages}>
                 <MessageIcon /> <p>{msg('messages')}</p>
-            </button>
+            </Link>
             <div className={styles.divider}></div>
-            <button className={styles.button}>
+            <Link className={styles.button} to={Path.finder}>
                 <PersonSearchIcon /> <p>{msg('findContacts')}</p>
-            </button>
+            </Link>
             <div className={styles.divider}></div>
-            <button className={styles.button}>
+            <Link className={styles.button} to={Path.settings}>
                 <SettingsIcon /> <p>{msg('settings')}</p>
-            </button>
+            </Link>
         </div>
     );
 };
 
-SideBar.propTypes = {};
+LeftBar.propTypes = {};
 
-export default SideBar;
+export default LeftBar;

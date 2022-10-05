@@ -1,17 +1,21 @@
 import React from 'react';
 import Feed from '../containers/Feed';
 import RightBar from '../containers/RightBar';
-import SideBar from '../containers/SideBar';
+import LeftBar from '../containers/LeftBar';
 import styles from './FreakyFinder.module.scss';
+import { Route, Routes } from 'react-router-dom';
+import { Path } from './../constants';
 
 const FreakyFinder = () => {
     return (
         <div className={styles.mainpagecontainer}>
             <div className={styles.leftbar}>
-                <SideBar />
+                <LeftBar />
             </div>
             <div className={styles.middlebar}>
-                <Feed />
+                <Routes>
+                    <Route path={Path.front} element={<Feed />} />
+                </Routes>
             </div>
             <div className={styles.rightbar}>
                 <RightBar />

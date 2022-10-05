@@ -38,5 +38,7 @@
 | Fetch only posts from followed users in main feed, fix backend call related to fetch                                                                                                          | 30 minutes | 29.9.2022  |
 | Add styling to landing page, create and include logo. Small tweaks in styling over the application                                                                                            |  2 hours   | 3.10.2022  |
 | Improve styling on right bar component, main feed and landing page 'ready' for now.                                                                                                           |   1 hour   | 3.10.2022  |
+| Start using React Router in the application. Fixed bug in login form which was propably caused by react router definition.                                                                    |  2 hours   | 5.10.2022  |
+| Create profile page and fix issues over application caused by path routing. Create second redux file where we start orchestrating all API calls                                               |  2 hours   | 5.10.2022  |
 
-#### Total time spent: 53 hours
+#### Total time spent: 57 hours

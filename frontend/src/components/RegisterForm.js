@@ -42,7 +42,7 @@ const RegisterForm = () => {
             {step === '1' ? (
                 <div className={styles.formcontainer}>
                     <h2 className={styles.title}>{msg('title')}</h2>
-                    <label className={styles.labeltext} for="firstname">
+                    <label className={styles.labeltext} htmlFor="firstname">
                         {msg('firstName')}
                     </label>
                     <input
@@ -52,7 +52,7 @@ const RegisterForm = () => {
                         type="text"
                         id="firstname"
                     ></input>
-                    <label className={styles.labeltext} for="lastName">
+                    <label className={styles.labeltext} htmlFor="lastName">
                         {msg('lastName')}
                     </label>
                     <input
@@ -62,7 +62,7 @@ const RegisterForm = () => {
                         type="text"
                         id="lastName"
                     ></input>
-                    <label className={styles.labeltext} for="dateOfBirth">
+                    <label className={styles.labeltext} htmlFor="dateOfBirth">
                         {msg('dateOfBirth')}
                     </label>
                     <input
@@ -72,7 +72,7 @@ const RegisterForm = () => {
                         type="date"
                         id="dateOfBirth"
                     ></input>
-                    <label className={styles.labeltext} for="gender">
+                    <label className={styles.labeltext} htmlFor="gender">
                         {msg('gender')}
                     </label>
                     <select
@@ -86,7 +86,7 @@ const RegisterForm = () => {
                         <option value={'2'}>Nainen</option>
                         <option value={'3'}>Apache Attack Helicopter</option>
                     </select>
-                    <label className={styles.labeltext} for="country">
+                    <label className={styles.labeltext} htmlFor="country">
                         {msg('country')}
                     </label>
                     <input
@@ -96,7 +96,7 @@ const RegisterForm = () => {
                         type="text"
                         id="country"
                     ></input>
-                    <label className={styles.labeltext} for="city">
+                    <label className={styles.labeltext} htmlFor="city">
                         {msg('city')}
                     </label>
                     <input
@@ -118,7 +118,7 @@ const RegisterForm = () => {
             ) : step === '2' ? (
                 <div className={styles.formcontainer}>
                     <h2 className={styles.title}>{msg('title')}</h2>
-                    <label className={styles.labeltext} for="username">
+                    <label className={styles.labeltext} htmlFor="username">
                         {msg('username')}
                     </label>
                     <input
@@ -128,7 +128,7 @@ const RegisterForm = () => {
                         type="text"
                         id="username"
                     ></input>
-                    <label className={styles.labeltext} for="password1">
+                    <label className={styles.labeltext} htmlFor="password1">
                         {msg('password1')}
                     </label>
                     <input
@@ -138,7 +138,7 @@ const RegisterForm = () => {
                         type="text"
                         id="password1"
                     ></input>
-                    <label className={styles.labeltext} for="password2">
+                    <label className={styles.labeltext} htmlFor="password2">
                         {msg('password2')}
                     </label>
                     <input

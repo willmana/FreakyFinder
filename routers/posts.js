@@ -32,7 +32,9 @@ postRouter.get(
     '/user/:id',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
-        const posts = await Post.find({ user: request.params.id });
+        const posts = await Post.find({ user: request.params.id })
+            .populate('user', { username: 1 })
+            .populate('comments', { content: 1, createdAt: 1, user: 1 });
         response.json(posts.map((p) => p.toJSON()));
     }
 );

@@ -17,7 +17,7 @@ const RightBar = () => {
             );
         }
         fetchUsers();
-    }, []);
+    }, [currentUser.username]);
 
     return (
         <div className={styles.maincontainer}>
@@ -28,6 +28,7 @@ const RightBar = () => {
                             firstname={user.first_name}
                             lastname={user.last_name}
                             username={user.username}
+                            id={user.id}
                         />
                         {array.length !== i + 1 && (
                             <div className={styles.divider}></div>

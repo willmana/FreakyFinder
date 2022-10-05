@@ -5,11 +5,14 @@ import userApi from './../api/user';
 import { getUser } from '../redux/app';
 import { useSelector } from 'react-redux';
 import Button from './Button';
+import { Link } from 'react-router-dom';
+import { Path } from './../constants';
 
 const UserDisplay = ({ firstname, lastname, username, id }) => {
     const currentUser = useSelector(getUser);
 
     const onClickFollowUser = async (id) => {
+        console.log(id);
         await userApi.followUser(id, currentUser.id);
     };
     return (
@@ -19,7 +22,12 @@ const UserDisplay = ({ firstname, lastname, username, id }) => {
                 <div className={styles.name}>
                     {firstname} {lastname}
                 </div>
-                <div className={styles.username}>@{username}</div>
+                <Link
+                    className={styles.username}
+                    to={`${Path.profile}/${username}`}
+                >
+                    @{username}
+                </Link>
             </div>
             <Button
                 onClick={() => onClickFollowUser(id)}

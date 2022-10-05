@@ -3,5 +3,6 @@ export const Path = {
     friends: '/friends',
     messages: '/messages',
     finder: '/finder',
-    settings: '/settings'
+    settings: '/settings',
+    profile: '/profile'
 };

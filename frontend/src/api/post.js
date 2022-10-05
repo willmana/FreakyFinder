@@ -48,12 +48,19 @@ const getComments = async (commentId) => {
     return res.data;
 };
 
+const getUserPosts = async (userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/user/${userId}`, config);
+    return res.data;
+};
+
 const postApi = {
     getAll,
     createPost,
     getPost,
     updatePost,
     getComments,
-    getFeed
+    getFeed,
+    getUserPosts
 };
 export default postApi;

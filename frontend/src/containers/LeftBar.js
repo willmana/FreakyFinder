@@ -17,7 +17,10 @@ const LeftBar = (props) => {
     const msg = useMessageGetter('LeftBar');
     return (
         <div className={styles.buttoncontainer}>
-            <Link className={styles.button} to={`/${user.username}`}>
+            <Link
+                className={styles.button}
+                to={`${Path.profile}/${user.username}`}
+            >
                 <AccountBoxIcon /> <p>{msg('profile')}</p>
             </Link>
             <div className={styles.divider}></div>

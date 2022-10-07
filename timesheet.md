@@ -40,5 +40,7 @@
 | Improve styling on right bar component, main feed and landing page 'ready' for now.                                                                                                           |   1 hour   | 3.10.2022  |
 | Start using React Router in the application. Fixed bug in login form which was propably caused by react router definition.                                                                    |  2 hours   | 5.10.2022  |
 | Create profile page and fix issues over application caused by path routing. Create second redux file where we start orchestrating all API calls                                               |  2 hours   | 5.10.2022  |
+| Move a lot of API call functionality to redux to make app more stable and streamlined.                                                                                                        | 1.5 hours  | 7.10.2022  |
+| Continue work on profile page, still missing "followed users/followers" -lists and follow/unfollow functionality                                                                              | 1.5 hours  | 7.10.2022  |
 
-#### Total time spent: 57 hours
+#### Total time spent: 60 hours

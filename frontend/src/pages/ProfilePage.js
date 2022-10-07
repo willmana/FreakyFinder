@@ -7,6 +7,7 @@ import postApi from './../api/post';
 import { setPosts } from '../redux/app';
 import { getPosts } from './../redux/app';
 import Post from './../components/Post';
+import ProfileCard from './../components/ProfileCard';
 
 const ProfilePage = () => {
     const [user, setUser] = useState();
@@ -37,7 +38,7 @@ const ProfilePage = () => {
         <>
             {user && (
                 <div className={styles.maincontainer}>
-                    <div>{user.first_name}</div>
+                    <ProfileCard user={user} />
                     {posts.map((post) => (
                         <Post key={post.id} postProps={post} />
                     ))}

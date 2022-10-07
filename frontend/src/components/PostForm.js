@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getPosts, getUser, setPosts } from '../redux/app';
-import postApi from './../api/post';
+import { useDispatch } from 'react-redux';
+import { postAndUpdate } from '../redux/app';
 import Button from './Button';
 import styles from './PostForm.module.scss';
 
 const PostForm = () => {
     const [postData, setPostData] = useState('');
-    const user = useSelector(getUser);
-    const posts = useSelector(getPosts);
     const dispatch = useDispatch();
 
     const onInputChange = (event) => {
@@ -16,15 +13,8 @@ const PostForm = () => {
     };
     const onClickSubmitPost = async (e) => {
         e.preventDefault();
-        const postObject = {
-            userId: user.id,
-            description: postData,
-            date: new Date()
-        };
-        await postApi.createPost(postObject);
+        dispatch(postAndUpdate(postData));
         setPostData('');
-        const res = await postApi.getAll();
-        dispatch(setPosts(res));
     };
 
     return (

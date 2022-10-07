@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import postApi from '../api/post';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import styles from './Post.module.scss';
+import { dateSorter } from './../utils/index';
 
 const Post = ({ postProps }) => {
-    const [comments, setComments] = useState(postProps.comments);
+    const [comments, setComments] = useState([]);
     const date = new Date(postProps.createdAt);
+
+    useEffect(() => {
+        async function getComments() {
+            const commentRes = await postApi.getComments(postProps.id);
+            setComments(commentRes);
+        }
+        getComments();
+    }, []);
 
     return (
         <div className={styles.postcontainer}>
@@ -16,7 +26,9 @@ const Post = ({ postProps }) => {
             <p className={styles.text}>{postProps.description}</p>
             <div className={styles.separatorline}></div>
             {comments &&
-                comments.map((p) => <Comment key={p.id} commentProps={p} />)}
+                dateSorter(comments).map((p) => (
+                    <Comment key={p.id} commentProps={p} />
+                ))}
             <CommentForm postId={postProps.id} setComments={setComments} />
         </div>
     );

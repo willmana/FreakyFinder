@@ -97,7 +97,9 @@ postRouter.get(
     '/comments/:id',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
-        const comments = await Comment.find({ post: request.params.id });
+        const comments = await Comment.find({
+            post: request.params.id
+        }).populate('user', { username: 1 });
         response.json(comments.map((c) => c.toJSON()));
     }
 );

@@ -1,25 +1,31 @@
-import { all, call, takeEvery } from 'redux-saga/effects';
+import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import userApi from '../api/user';
 import authApi from './../api/auth';
+import { setUser, getUser, setPosts, setUsers } from './app';
+import postApi from './../api/post';
+import { dateSorter } from './../utils/index';
 
 // Actions
 
 // Authentication API calls
-const AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
-const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
-const AUTHENTICATION_LOGIN_REQUEST = 'AUTHENTICATION_LOGIN_REQUEST';
+export const AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+export const AUTHENTICATION_LOGIN_REQUEST = 'AUTHENTICATION_LOGIN_REQUEST';
 
 // User API calls
-const USER_SUCCESS = 'USER_SUCCESS';
-const USER_ERROR = 'USER_ERROR';
+export const USER_SUCCESS = 'USER_SUCCESS';
+export const USER_ERROR = 'USER_ERROR';
+export const GET_ALL_USERS_REQUEST = 'GET_ALL_USERS_REQUEST';
 
 // Post API calls
-const POST_SUCCESS = 'POST_SUCCESS';
-const POST_ERROR = 'POST_ERROR';
+export const POST_SUCCESS = 'POST_SUCCESS';
+export const POST_ERROR = 'POST_ERROR';
+export const GET_FEED_REQUEST = 'GET_FEED_REQUEST';
+export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST';
 
 // Comment API calls
-const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
-const COMMENT_ERROR = 'COMMENT_ERROR';
+export const COMMENT_SUCCESS = 'COMMENT_SUCCESS';
+export const COMMENT_ERROR = 'COMMENT_ERROR';
 
 // Action creators
 
@@ -47,6 +53,9 @@ export const userError = (error) => ({
     type: USER_ERROR,
     error
 });
+export const getAllUsers = () => ({
+    type: GET_ALL_USERS_REQUEST
+});
 
 // Post API calls
 export const postSuccess = (response) => ({
@@ -56,6 +65,13 @@ export const postSuccess = (response) => ({
 export const postError = (error) => ({
     type: POST_ERROR,
     error
+});
+export const requestFeed = () => ({
+    type: GET_FEED_REQUEST
+});
+export const requestCreatePost = (postData) => ({
+    type: CREATE_POST_REQUEST,
+    postData
 });
 
 // Comment API calls
@@ -84,11 +100,15 @@ export const callsReducer = (state = initialState, action) => {
 };
 
 // Sagas
-function* sagaFetchUsers(action) {
+function* sagaGetAllUsers() {
     try {
-        const user = yield call(userApi.getAll);
-        yield call(console.log(user));
-    } catch (e) {}
+        let response = {};
+        response = yield call(userApi.getAll);
+        yield put(setUsers(response));
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
 }
 
 function* sagaRequestLogin(action) {
@@ -99,12 +119,44 @@ function* sagaRequestLogin(action) {
         };
         let response = {};
         response = yield call(authApi.login, request);
-    } catch (error) {}
+        window.localStorage.setItem('currentUser', JSON.stringify(response));
+        yield put(setUser(response.user));
+        yield put(authenticationSuccess(response));
+    } catch (error) {
+        yield put(authenticationError(error));
+    }
+}
+
+function* sagaRequestFeed() {
+    try {
+        const user = yield select(getUser);
+        let response = {};
+        response = yield call(postApi.getFeed, user.id);
+        const sortedResponse = yield call(dateSorter, response);
+        yield put(setPosts(sortedResponse));
+        yield put(postSuccess(response));
+    } catch (error) {
+        yield put(postError(error));
+    }
+}
+
+function* sagaCreatePost(action) {
+    try {
+        const user = yield select(getUser);
+        const request = { userId: user.id, description: action.postData };
+        const response = yield call(postApi.createPost, request);
+        yield put(postSuccess(response));
+    } catch (error) {
+        yield put(postError);
+    }
 }
 
 export function* callsSaga() {
     yield all([
-        yield takeEvery(AUTHENTICATION_LOGIN_REQUEST, sagaRequestLogin)
+        yield takeEvery(AUTHENTICATION_LOGIN_REQUEST, sagaRequestLogin),
+        yield takeEvery(GET_ALL_USERS_REQUEST, sagaGetAllUsers),
+        yield takeEvery(GET_FEED_REQUEST, sagaRequestFeed),
+        yield takeEvery(CREATE_POST_REQUEST, sagaCreatePost)
     ]);
 }
 

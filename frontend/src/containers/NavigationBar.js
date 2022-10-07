@@ -20,7 +20,8 @@ const NavigationBar = ({ onChangeLocale }) => {
     return (
         <div className={styles.navbarcontainer}>
             <header className={styles.header}>
-                {msg('header', { parameter: 'Test' })}
+                {msg('header', { parameter: '' })}
+                {user && <small> Logged in as {user.username}</small>}
             </header>
             {user && (
                 <div className={styles.middlecontainer}>

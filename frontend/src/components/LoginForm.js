@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import styles from './LoginForm.module.scss';
 import Button from './Button';
 import { loginAndGetFeed } from './../redux/app';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = (params) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const onChangeUsername = (event) => {
@@ -16,6 +18,7 @@ const LoginForm = (params) => {
     };
     const onClickLogin = async (event) => {
         dispatch(loginAndGetFeed(username, password));
+        navigate('/');
     };
 
     return (

@@ -20,7 +20,7 @@ const App = ({ onChangeLocale }) => {
         } else {
             navigate('/');
         }
-    }, [dispatch]);
+    }, [dispatch, navigate]);
     return (
         <div className={styles.app}>
             <NavigationBar onChangeLocale={onChangeLocale} />

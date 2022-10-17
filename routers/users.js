@@ -92,9 +92,6 @@ userRouter.put(
     async (request, response) => {
         try {
             const body = request.body;
-            await User.findByIdAndUpdate(request.params.id, {
-                $push: { test: body.userId }
-            });
             if (request.params.id === body.userId) {
                 return response
                     .status(403)
@@ -114,6 +111,39 @@ userRouter.put(
             });
             return response.status(200).json({
                 message: `${body.username} now follows ${followedUser.username}`
+            });
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
+    }
+);
+
+// Unfollow user
+userRouter.put(
+    '/:id/unfollow',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const body = request.body;
+            if (request.params.id === body.userId) {
+                return response
+                    .status(403)
+                    .json({ message: "Can't unfollow yourself" });
+            }
+            const followedUser = await User.findById(request.params.id);
+            if (!followedUser.followers.includes(body.userId)) {
+                return response.status(403).json({
+                    message: 'You are not following this user'
+                });
+            }
+            await User.findByIdAndUpdate(request.params.id, {
+                $pull: { followers: body.userId }
+            });
+            await User.findByIdAndUpdate(body.userId, {
+                $pull: { following: request.params.id }
+            });
+            return response.status(200).json({
+                message: `${body.username} now unfollows ${followedUser.username}`
             });
         } catch (error) {
             response.status(400).json({ error: error.message });

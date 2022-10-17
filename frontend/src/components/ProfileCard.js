@@ -2,8 +2,9 @@ import React from 'react';
 import styles from './ProfileCard.module.scss';
 import Picture from './../pics/profile.svg';
 import Button from './Button';
-import { useSelector } from 'react-redux';
-import { getUser } from './../redux/app';
+import { useSelector, useDispatch } from 'react-redux';
+import { followAndUpdate, getUser, unfollowAndUpdate } from './../redux/app';
+import userApi from './../api/user';
 
 const ProfileCard = ({ user }) => {
     const thisUser = useSelector(getUser);
@@ -15,6 +16,7 @@ const ProfileCard = ({ user }) => {
         thisUser.following.includes(followed)
     );
     const isFollowed = thisUser.following.includes(user.id);
+    const dispatch = useDispatch();
 
     const getAge = (dateString) => {
         var today = new Date();
@@ -27,6 +29,13 @@ const ProfileCard = ({ user }) => {
         return age;
     };
 
+    const onClickFollowButton = async () => {
+        if (isFollowed) {
+            dispatch(unfollowAndUpdate(user.id, thisUser.id));
+        } else {
+            dispatch(followAndUpdate(user.id, thisUser.id));
+        }
+    };
     return (
         <div className={styles.profilecontainer}>
             <div className={styles.backgroundcolor1}></div>
@@ -58,9 +67,12 @@ const ProfileCard = ({ user }) => {
             </ul>
             <div className={styles.followbutton}>
                 {isFollowed ? (
-                    <Button text={'lopeta seuraus'} />
+                    <Button
+                        text={'lopeta seuraus'}
+                        onClick={onClickFollowButton}
+                    />
                 ) : (
-                    <Button text={'seuraa'} />
+                    <Button text={'seuraa'} onClick={onClickFollowButton} />
                 )}
             </div>
             <div className={styles.message}>

@@ -16,6 +16,9 @@ export const AUTHENTICATION_LOGIN_REQUEST = 'AUTHENTICATION_LOGIN_REQUEST';
 export const USER_SUCCESS = 'USER_SUCCESS';
 export const USER_ERROR = 'USER_ERROR';
 export const GET_ALL_USERS_REQUEST = 'GET_ALL_USERS_REQUEST';
+export const GET_AND_UPDATE_CURRENT = 'GET_AND_UPDATE_CURRENT';
+export const FOLLOW_USER = 'FOLLOW_USER';
+export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 
 // Post API calls
 export const POST_SUCCESS = 'POST_SUCCESS';
@@ -56,7 +59,20 @@ export const userError = (error) => ({
 export const getAllUsers = () => ({
     type: GET_ALL_USERS_REQUEST
 });
+export const getAndUpdateCurrentUser = () => ({
+    type: GET_AND_UPDATE_CURRENT
+});
+export const followUser = (targetId, thisId) => ({
+    type: FOLLOW_USER,
+    targetId,
+    thisId
+});
 
+export const unfollowUser = (targetId, thisId) => ({
+    type: UNFOLLOW_USER,
+    targetId,
+    thisId
+});
 // Post API calls
 export const postSuccess = (response) => ({
     type: POST_SUCCESS,
@@ -111,6 +127,46 @@ function* sagaGetAllUsers() {
     }
 }
 
+function* sagaGetAndUpdateUser() {
+    try {
+        let response = {};
+        const user = yield select(getUser);
+        console.log(user);
+        response = yield call(userApi.getUser, user.username);
+        yield put(setUser(response));
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
+}
+
+function* sagaFollowUser(action) {
+    try {
+        let response = {};
+        response = yield call(
+            userApi.followUser,
+            action.targetId,
+            action.thisId
+        );
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
+}
+
+function* sagaUnfollowUser(action) {
+    try {
+        let response = {};
+        response = yield call(
+            userApi.unfollowUser,
+            action.targetId,
+            action.thisId
+        );
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
+}
 function* sagaRequestLogin(action) {
     try {
         let request = {
@@ -155,6 +211,9 @@ export function* callsSaga() {
     yield all([
         yield takeEvery(AUTHENTICATION_LOGIN_REQUEST, sagaRequestLogin),
         yield takeEvery(GET_ALL_USERS_REQUEST, sagaGetAllUsers),
+        yield takeEvery(GET_AND_UPDATE_CURRENT, sagaGetAndUpdateUser),
+        yield takeEvery(FOLLOW_USER, sagaFollowUser),
+        yield takeEvery(UNFOLLOW_USER, sagaUnfollowUser),
         yield takeEvery(GET_FEED_REQUEST, sagaRequestFeed),
         yield takeEvery(CREATE_POST_REQUEST, sagaCreatePost)
     ]);

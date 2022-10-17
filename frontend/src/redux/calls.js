@@ -133,7 +133,7 @@ function* sagaGetAndUpdateUser() {
         const user = yield select(getUser);
         console.log(user);
         response = yield call(userApi.getUserByUserId, user.id);
-        console.log(response);
+        window.localStorage.setItem('currentUser', JSON.stringify(response));
         yield put(setUser(response));
         yield put(userSuccess(response));
     } catch (error) {

@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './ProfileCard.module.scss';
 import Picture from './../pics/profile.svg';
 import Button from './Button';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { followAndUpdate, getUser, unfollowAndUpdate } from './../redux/app';
 import CloseIcon from '@mui/icons-material/Close';
 import UserDisplay from './UserDisplay';
 
 const ProfileCard = ({ user }) => {
-    const thisUser = useSelector(getUser, shallowEqual);
+    const thisUser = useSelector(getUser);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState([]);
     const createdDate = new Date(user.createdAt);
@@ -47,12 +47,13 @@ const ProfileCard = ({ user }) => {
         setModalContent(user.following);
         setModalOpen(true);
     };
+
     // Reset follower/following data when changing user from RightBar
     useEffect(() => {
         setModalContent([]);
         setModalOpen(false);
     }, [user]);
-    console.log(thisUser.following);
+
     const isFollowed = thisUser.following.includes(user.id);
     return (
         <>

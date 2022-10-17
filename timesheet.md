@@ -42,5 +42,6 @@
 | Create profile page and fix issues over application caused by path routing. Create second redux file where we start orchestrating all API calls                                               |  2 hours   | 5.10.2022  |
 | Move a lot of API call functionality to redux to make app more stable and streamlined.                                                                                                        | 1.5 hours  | 7.10.2022  |
 | Continue work on profile page, still missing "followed users/followers" -lists and follow/unfollow functionality                                                                              | 1.5 hours  | 7.10.2022  |
+| Finish up profile page functionality: user can be followed/unfollowed, lists for followers and followed users and fixed bug where follow/unfollow calls weren't updating info in real time    |  3 hours   | 17.10.2022 |
 
-#### Total time spent: 60 hours
+#### Total time spent: 63 hours

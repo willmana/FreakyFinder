@@ -18,12 +18,34 @@ userRouter.get(
     }
 );
 
-// Get user
+// Get user by username
 userRouter.get(
-    '/:username',
+    '/profile/:username',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
-        const user = await User.findOne({ username: request.params.username });
+        const user = await User.findOne({ username: request.params.username })
+            .populate('followers', {
+                username: 1,
+                first_name: 1,
+                last_name: 1,
+                id: 1
+            })
+            .populate('following', {
+                username: 1,
+                first_name: 1,
+                last_name: 1,
+                id: 1
+            });
+        response.json(user);
+    }
+);
+
+// Get user by user id
+userRouter.get(
+    '/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        const user = await User.findById(request.params.id);
         response.json(user);
     }
 );

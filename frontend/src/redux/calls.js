@@ -132,7 +132,8 @@ function* sagaGetAndUpdateUser() {
         let response = {};
         const user = yield select(getUser);
         console.log(user);
-        response = yield call(userApi.getUser, user.username);
+        response = yield call(userApi.getUserByUserId, user.id);
+        console.log(response);
         yield put(setUser(response));
         yield put(userSuccess(response));
     } catch (error) {
@@ -175,7 +176,11 @@ function* sagaRequestLogin(action) {
         };
         let response = {};
         response = yield call(authApi.login, request);
-        window.localStorage.setItem('currentUser', JSON.stringify(response));
+        window.localStorage.setItem('token', JSON.stringify(response.token));
+        window.localStorage.setItem(
+            'currentUser',
+            JSON.stringify(response.user)
+        );
         yield put(setUser(response.user));
         yield put(authenticationSuccess(response));
     } catch (error) {

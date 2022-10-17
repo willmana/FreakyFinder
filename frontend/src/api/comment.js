@@ -8,11 +8,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const tokenBearer = 'Bearer ';
-let user = JSON.parse(window.localStorage.getItem('currentUser')) || null;
-let token;
-if (user !== null && user.token !== null) {
-    token = user.token;
-}
+let token = JSON.parse(window.localStorage.getItem('token')) || null;
+
 const getAll = async () => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(baseUrl, config);

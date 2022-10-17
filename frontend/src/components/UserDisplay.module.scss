@@ -17,14 +17,16 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 0 $space-xs;
 }
 
 .name {
     color: $color-text;
+    line-height: 16px;
 }
 
 .username {
-    margin-top: -$space-xs;
+    line-height: 16px;
     color: $color-accent-variant;
     cursor: pointer;
     text-decoration: none;

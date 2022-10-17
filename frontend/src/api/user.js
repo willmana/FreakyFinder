@@ -8,11 +8,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const tokenBearer = 'Bearer ';
-let user = JSON.parse(window.localStorage.getItem('currentUser')) || null;
-let token;
-if (user !== null && user.token !== null) {
-    token = user.token;
-}
+let token = JSON.parse(window.localStorage.getItem('token')) || null;
+
 const getAll = async () => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(baseUrl, config);
@@ -24,9 +21,15 @@ const createUser = async (newUser) => {
     return res.data;
 };
 
-const getUser = async (username) => {
+const getUserByUsername = async (username) => {
     const config = { headers: { Authorization: tokenBearer + token } };
-    const res = await axios.get(`${baseUrl}/${username}`, config);
+    const res = await axios.get(`${baseUrl}/profile/${username}`, config);
+    return res.data;
+};
+
+const getUserByUserId = async (userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/${userId}`, config);
     return res.data;
 };
 
@@ -59,7 +62,8 @@ const unfollowUser = async (targetId, userId) => {
 const userApi = {
     getAll,
     createUser,
-    getUser,
+    getUserByUsername,
+    getUserByUserId,
     updateUser,
     followUser,
     unfollowUser

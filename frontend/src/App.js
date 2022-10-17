@@ -16,7 +16,7 @@ const App = ({ onChangeLocale }) => {
         const currentUser = window.localStorage.getItem('currentUser');
         if (currentUser) {
             const userJSON = JSON.parse(currentUser);
-            dispatch(setUser(userJSON.user));
+            dispatch(setUser(userJSON));
         } else {
             navigate('/');
         }

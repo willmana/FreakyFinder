@@ -126,35 +126,47 @@ function* sagaPostAndUpdate(action) {
 
 function* sagaFollowAndUpdate(action) {
     try {
-        yield put(followUser(action.targetId, action.thisId));
+        yield put(getAndUpdateCurrentUser());
         const [userErrorCallOne] = yield race([
             take(USER_ERROR),
             take(USER_SUCCESS)
         ]);
         if (userErrorCallOne) return;
-        yield put(getAndUpdateCurrentUser());
+        yield put(followUser(action.targetId, action.thisId));
         const [userErrorCallTwo] = yield race([
             take(USER_ERROR),
             take(USER_SUCCESS)
         ]);
         if (userErrorCallTwo) return;
+        yield put(getAndUpdateCurrentUser());
+        const [userErrorCallThree] = yield race([
+            take(USER_ERROR),
+            take(USER_SUCCESS)
+        ]);
+        if (userErrorCallThree) return;
     } catch (error) {}
 }
 
 function* sagaUnfollowAndUpdate(action) {
     try {
-        yield put(unfollowUser(action.targetId, action.thisId));
+        yield put(getAndUpdateCurrentUser());
         const [userErrorCallOne] = yield race([
             take(USER_ERROR),
             take(USER_SUCCESS)
         ]);
         if (userErrorCallOne) return;
-        yield put(getAndUpdateCurrentUser());
+        yield put(unfollowUser(action.targetId, action.thisId));
         const [userErrorCallTwo] = yield race([
             take(USER_ERROR),
             take(USER_SUCCESS)
         ]);
         if (userErrorCallTwo) return;
+        yield put(getAndUpdateCurrentUser());
+        const [userErrorCallThree] = yield race([
+            take(USER_ERROR),
+            take(USER_SUCCESS)
+        ]);
+        if (userErrorCallThree) return;
     } catch (error) {}
 }
 

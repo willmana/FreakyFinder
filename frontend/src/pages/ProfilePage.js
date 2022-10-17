@@ -15,11 +15,11 @@ const ProfilePage = () => {
     const posts = useSelector(getPosts);
     const dispatch = useDispatch();
 
-    // Derive username from path
+    // Derive username from path, we dont save response to store so not calling via reducer
     useEffect(() => {
         const username = location.pathname.split('/')[2];
         async function getContent() {
-            const userResponse = await userApi.getUser(username);
+            const userResponse = await userApi.getUserByUsername(username);
             setUser(userResponse);
             const postResponse = await postApi.getUserPosts(userResponse.id);
             const sortedresponse = postResponse.sort((a, b) => {

@@ -99,3 +99,63 @@
     color: $color-text;
     cursor: pointer;
 }
+
+.userlist {
+    width: 100%;
+    background-color: $color-secondary-variant;
+    max-width: 680px;
+    max-height: 320px;
+    display: flex;
+    flex-direction: column;
+    margin: $space-m 0;
+    border-radius: $space-m;
+    align-self: center;
+}
+.headerrow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listheader {
+    display: flex;
+    padding: $space-s;
+    color: $color-text;
+}
+.closelist {
+    display: flex;
+    padding: $space-s;
+    cursor: pointer;
+    color: $color-text;
+}
+
+.listcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow-y: auto;
+    margin: $space-m;
+}
+
+.usercontainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+div::-webkit-scrollbar {
+    width: 0.5em;
+    border-radius: $space-m;
+}
+
+div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: $space-m;
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: $space-m;
+}

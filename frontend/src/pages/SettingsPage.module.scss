@@ -1,0 +1,29 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    width: 100%;
+    background-color: $color-secondary-variant;
+    max-width: 680px;
+    margin: $space-m 0;
+    border-radius: $space-m;
+}
+
+.midbox {
+    display: flex;
+    flex-direction: column;
+    padding: $space-m;
+}
+
+.title {
+    color: $color-accent-variant;
+    align-self: center;
+}
+
+.divider {
+    margin: $space-m 0;
+    width: 90%;
+    background: $color-accent-variant;
+    height: 1px;
+    display: flex;
+    align-self: center;
+}

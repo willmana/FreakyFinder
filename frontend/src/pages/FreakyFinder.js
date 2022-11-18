@@ -6,6 +6,7 @@ import styles from './FreakyFinder.module.scss';
 import { Route, Routes } from 'react-router-dom';
 import { Path } from './../constants';
 import ProfilePage from './ProfilePage';
+import SettingsPage from './SettingsPage';
 
 const FreakyFinder = () => {
     return (
@@ -20,6 +21,7 @@ const FreakyFinder = () => {
                         path={`${Path.profile}/*`}
                         element={<ProfilePage />}
                     />
+                    <Route path={Path.settings} element={<SettingsPage />} />
                 </Routes>
             </div>
             <div className={styles.rightbar}>

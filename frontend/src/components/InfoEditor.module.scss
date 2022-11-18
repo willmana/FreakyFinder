@@ -1,0 +1,20 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.fieldname {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.infocontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

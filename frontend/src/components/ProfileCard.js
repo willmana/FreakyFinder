@@ -13,10 +13,10 @@ const ProfileCard = ({ user }) => {
     const [modalContent, setModalContent] = useState([]);
     const createdDate = new Date(user.createdAt);
     const commonFollowers = user.followers.filter((follower) =>
-        thisUser.followers.includes(follower)
+        thisUser.followers.includes(follower.id)
     );
     const commonFollowing = user.following.filter((followed) =>
-        thisUser.following.includes(followed)
+        thisUser.following.includes(followed.id)
     );
 
     const ownPage = thisUser.id === user.id;
@@ -80,8 +80,12 @@ const ProfileCard = ({ user }) => {
                     <li>Käyttäjä {createdDate.toLocaleDateString()} lähtien</li>
                     {ownPage ? (
                         <>
-                            <li>Seuraa: {user.following.length}</li>
-                            <li>Seuraajia: {user.followers.length}</li>
+                            <li onClick={() => onClickFollowed()}>
+                                Seuraa: {user.following.length}
+                            </li>
+                            <li onClick={() => onClickFollower()}>
+                                Seuraajia: {user.followers.length}
+                            </li>
                         </>
                     ) : (
                         <>

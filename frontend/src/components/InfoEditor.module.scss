@@ -3,6 +3,7 @@
 .maincontainer {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .fieldname {
@@ -17,4 +18,32 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.formcontainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.confirmbutton {
+    color: $color-accent;
+    border-color: $color-accent;
+    min-width: 3rem;
+    width: 3rem;
+    border-radius: $space-s;
+    padding: $space-xxs;
+    margin: $space-xs $space-xs;
+}
+
+.declinebutton {
+    color: $color-warning;
+    border-color: $color-warning;
+    min-width: 3rem;
+    width: 3rem;
+    border-radius: $space-s;
+    padding: $space-xxs;
+    margin: $space-xs $space-xs;
 }

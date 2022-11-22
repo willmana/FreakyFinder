@@ -4,15 +4,13 @@ import styles from './Button.module.scss';
 
 const Button = ({ onClick, text, className, ...rest }) => {
     return (
-        <div>
-            <button
-                onClick={onClick}
-                className={classNames(className, styles.button)}
-                {...rest}
-            >
-                {text}
-            </button>
-        </div>
+        <button
+            onClick={onClick}
+            className={classNames(className, styles.button)}
+            {...rest}
+        >
+            {text}
+        </button>
     );
 };
 

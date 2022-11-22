@@ -15,7 +15,7 @@ const Post = ({ postProps }) => {
             setComments(commentRes);
         }
         getComments();
-    }, []);
+    }, [postProps.id]);
 
     return (
         <div className={styles.postcontainer}>

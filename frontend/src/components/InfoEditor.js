@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import styles from './InfoEditor.module.scss';
 import Button from './Button';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 const InfoEditor = ({ fieldName, fieldValue }) => {
     const [modifyOpen, setModifyOpen] = useState(false);
     const [formValue, setFormValue] = useState(fieldValue);
+
     const onClickModify = () => {
         setModifyOpen(true);
+    };
+
+    const onChangeValue = (e) => {
+        setFormValue(e.target.value);
+    };
+    const onClickConfirm = () => {
+        setModifyOpen(false);
+    };
+    const onClickClose = () => {
+        setModifyOpen(false);
+        setFormValue(fieldValue);
     };
 
     return (
@@ -14,10 +28,21 @@ const InfoEditor = ({ fieldName, fieldValue }) => {
             <div className={styles.maincontainer}>
                 <div className={styles.fieldname}>{fieldName}</div>
                 {modifyOpen ? (
-                    <div>
-                        <input value={formValue}></input>
-                        <button></button>
-                        <button></button>
+                    <div className={styles.formcontainer}>
+                        <input
+                            value={formValue}
+                            onChange={onChangeValue}
+                        ></input>
+                        <Button
+                            className={styles.confirmbutton}
+                            onClick={onClickConfirm}
+                            text={<CheckIcon />}
+                        />
+                        <Button
+                            onClick={onClickClose}
+                            text={<CloseIcon />}
+                            className={styles.declinebutton}
+                        />
                     </div>
                 ) : (
                     <div className={styles.infocontainer}>

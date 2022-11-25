@@ -3,6 +3,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body {
+    background-color: #27323e;
+}
+
 body::-webkit-scrollbar {
     width: 1em;
 }

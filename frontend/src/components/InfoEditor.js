@@ -29,10 +29,13 @@ const InfoEditor = ({ fieldName, fieldValue }) => {
                 <div className={styles.fieldname}>{fieldName}</div>
                 {modifyOpen ? (
                     <div className={styles.formcontainer}>
-                        <input
-                            value={formValue}
-                            onChange={onChangeValue}
-                        ></input>
+                        <div className={styles.searchcontainer}>
+                            <input
+                                className={styles.forminput}
+                                value={formValue}
+                                onChange={onChangeValue}
+                            ></input>
+                        </div>
                         <Button
                             className={styles.confirmbutton}
                             onClick={onClickConfirm}
@@ -46,8 +49,16 @@ const InfoEditor = ({ fieldName, fieldValue }) => {
                     </div>
                 ) : (
                     <div className={styles.infocontainer}>
-                        <div>{fieldValue}</div>
-                        <Button text={'Muokkaa'} onClick={onClickModify} />
+                        <div className={styles.searchcontainer}>
+                            <div className={styles.fieldvalue}>
+                                {fieldValue}
+                            </div>
+                        </div>
+                        <Button
+                            text={'Muokkaa'}
+                            onClick={onClickModify}
+                            className={styles.editbutton}
+                        />
                     </div>
                 )}
             </div>

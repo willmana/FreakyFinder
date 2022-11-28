@@ -43,5 +43,10 @@
 | Move a lot of API call functionality to redux to make app more stable and streamlined.                                                                                                        | 1.5 hours  | 7.10.2022  |
 | Continue work on profile page, still missing "followed users/followers" -lists and follow/unfollow functionality                                                                              | 1.5 hours  | 7.10.2022  |
 | Finish up profile page functionality: user can be followed/unfollowed, lists for followers and followed users and fixed bug where follow/unfollow calls weren't updating info in real time    |  3 hours   | 17.10.2022 |
+| Fix bug related with common followers/people followed countings and init settings page                                                                                                        |   1 hour   | 18.11.2022 |
+| Make centralized component for modifying user info                                                                                                                                            | 30 minutes | 22.11.2022 |
+| Continue info editor component and add loader animation when fetching data so we won't prerender empty values when for example logging in to application                                      |   1 hour   | 25.11.2022 |
+| Finish personal info edit functionality and add functionality to change password                                                                                                              |  2 hours   | 28.11.2022 |
+| Add functionality to delete account totally from system including all possible references account might've made to system during its lifetime                                                 |  4 hours   | 28.11.2022 |
 
-#### Total time spent: 63 hours
+#### Total time spent: 71.5 hours

@@ -73,6 +73,13 @@ const unfollowUser = async (targetId, userId) => {
     return res.data;
 };
 
+const deleteUser = async (userId, requestBody) => {
+    await axios.delete(`${baseUrl}/${userId}`, {
+        data: requestBody,
+        headers: { Authorization: tokenBearer + token }
+    });
+};
+
 const userApi = {
     getAll,
     createUser,
@@ -81,6 +88,7 @@ const userApi = {
     updateUser,
     updatePassword,
     followUser,
-    unfollowUser
+    unfollowUser,
+    deleteUser
 };
 export default userApi;

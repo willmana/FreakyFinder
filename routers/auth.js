@@ -56,4 +56,23 @@ authRouter.post('/login', async (request, response) => {
     }
 });
 
+// Verify user
+authRouter.post('/verify', async (request, response) => {
+    try {
+        const body = request.body;
+        const user = await User.findOne({ username: body.username });
+        if (!user)
+            return response.status(400).json({ message: 'Wrong credentials' });
+        const passwordMatch = await bcrypt.compare(
+            body.password,
+            user.passwordHash
+        );
+        if (!passwordMatch)
+            return response.status(400).json({ message: 'Wrong credentials' });
+        return response.status(200).json({ verified: true });
+    } catch (error) {
+        return response.status(500).json(error);
+    }
+});
+
 module.exports = authRouter;

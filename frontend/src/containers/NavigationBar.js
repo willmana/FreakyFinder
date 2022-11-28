@@ -6,14 +6,17 @@ import styles from './NavigationBar.module.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '../components/Button';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 const NavigationBar = ({ onChangeLocale }) => {
     const msg = useMessageGetter('NavigationBar');
     const user = useSelector(getUser);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const onClickLogout = () => {
         window.localStorage.clear();
         dispatch(setUser(null));
+        navigate('/');
     };
     const locales = useLocales();
 

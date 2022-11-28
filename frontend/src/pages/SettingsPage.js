@@ -4,6 +4,7 @@ import styles from './SettingsPage.module.scss';
 import { useSelector } from 'react-redux';
 import { getUser } from './../redux/app';
 import PasswordUpdater from '../components/PasswordUpdater';
+import UserDeletor from './../components/UserDeletor';
 
 const SettingsPage = () => {
     const user = useSelector(getUser);
@@ -45,6 +46,7 @@ const SettingsPage = () => {
                     />
                     <div className={styles.divider}></div>
                     <h3 className={styles.title}>Poista käyttäjä</h3>
+                    <UserDeletor userId={user.id} />
                 </div>
             </div>
         </>

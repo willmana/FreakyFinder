@@ -4,6 +4,8 @@ const config = require('../serverutils/config');
 const bcrypt = require('bcrypt');
 const logger = require('../serverutils/logger');
 var { expressjwt: jwt } = require('express-jwt');
+const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 // Get all users
 userRouter.get(
@@ -36,6 +38,68 @@ userRouter.get(
                 last_name: 1,
                 id: 1
             });
+
+        // Delete all comments the user has created
+        const allComments = await Comment.find({ user: user.id });
+        console.log(allComments);
+
+        // Delete comment references from posts where comment was removed
+        let postReferences = allComments.map((obj) => {
+            const object = { commentid: obj.id, postid: obj.post };
+            return object;
+        });
+        console.log(postReferences);
+        const postReferenceRemovals = await Promise.all(
+            postReferences.map((ref) => {
+                const res = Post.findById(ref.postid);
+                return res;
+            })
+        );
+        console.log(postReferenceRemovals);
+
+        // Delete all posts the user has created
+        const posts = await Promise.all(
+            user.posts.map((post) => {
+                const res = Post.findById(post);
+                return res;
+            })
+        );
+        console.log(posts);
+
+        // Delete comments from removed posts
+        let commentsToRemove = posts.map((obj) => {
+            return obj.comments;
+        });
+        commentsToRemove = [].concat.apply([], commentsToRemove);
+        const comments = await Promise.all(
+            commentsToRemove.map((comment) => {
+                const res = Comment.findById(comment);
+                return res;
+            })
+        );
+        console.log(comments);
+
+        // Remove user references from follower/following lists
+        // (refered field following)
+        const userFollowers = await Promise.all(
+            user.followers.map((follower) => {
+                const res = User.find(follower);
+                return res;
+            })
+        );
+        if (userFollowers.length !== 0) {
+            console.log(userFollowers);
+        }
+        // (refered field followers)
+        const userFollowings = await Promise.all(
+            user.following.map((followed) => {
+                const res = User.find(followed);
+                return res;
+            })
+        );
+        console.log(userFollowings);
+        // Actual deletion of user
+
         response.json(user);
     }
 );
@@ -78,6 +142,7 @@ userRouter.delete(
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
     async (request, response) => {
         try {
+            //First verify user
             const body = request.body;
             if (request.params.id !== body.id)
                 return response
@@ -99,7 +164,74 @@ userRouter.delete(
                     .status(400)
                     .json({ message: 'Wrong credentials' });
 
+            // Actual deletion of user
             const user = await User.findByIdAndRemove(body.id);
+
+            // Delete all comments the user has created
+            const allComments = await Comment.find({ user: user.id });
+            await Comment.deleteMany({ user: user.id });
+
+            // Delete comment references from posts where comment was removed
+            if (allComments && allComments.length !== 0) {
+                let postReferences = allComments.map((obj) => {
+                    const object = { commentid: obj.id, postid: obj.post };
+                    return object;
+                });
+                if (postReferences && postReferences.length !== 0) {
+                    await Promise.all(
+                        postReferences.map((ref) => {
+                            Post.findByIdAndUpdate(ref.postid, {
+                                $pull: { comments: ref.commentid }
+                            });
+                        })
+                    );
+                }
+            }
+
+            // Delete all posts the user has created
+            if (user.posts && user.posts.length !== 0) {
+                const posts = await Promise.all(
+                    user.posts.map((post) => {
+                        const res = Post.findByIdAndRemove(post);
+                        return res;
+                    })
+                );
+                // Delete comments from removed posts
+                let commentsToRemove = posts.map((obj) => {
+                    return obj.comments;
+                });
+                if (commentsToRemove && commentsToRemove.length !== 0) {
+                    commentsToRemove = [].concat.apply([], commentsToRemove);
+                    await Promise.all(
+                        commentsToRemove.map((comment) => {
+                            Comment.findByIdAndRemove(comment);
+                        })
+                    );
+                }
+            }
+
+            // Remove user references from follower/following lists
+            // (refered field following)
+            if (user.followers && user.followers.length !== 0) {
+                await Promise.all(
+                    user.followers.map((follower) => {
+                        User.findByIdAndUpdate(follower, {
+                            $pull: { following: user.id }
+                        });
+                    })
+                );
+            }
+            // (refered field followers)
+            if (user.following && user.following.length !== 0) {
+                await Promise.all(
+                    user.following.map((followed) => {
+                        User.findByIdAndUpdate(followed, {
+                            $pull: { followers: user.id }
+                        });
+                    })
+                );
+            }
+
             return response.status(200).json(user);
         } catch (error) {
             response.status(400).json({ error: error.message });

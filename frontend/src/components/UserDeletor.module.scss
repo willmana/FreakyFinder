@@ -34,7 +34,35 @@
     color: $color-primary;
 }
 
+.confirmtext {
+    color: $color-warning;
+    width: 50%;
+}
+
+.confirmcontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttoncontainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .button {
     margin-top: $space-m;
     width: 8rem;
+}
+
+.widebutton {
+    margin-top: $space-s;
+    width: 14rem;
+}
+
+.widebuttonred {
+    margin-top: $space-s;
+    width: 14rem;
+    border-color: $color-warning;
 }

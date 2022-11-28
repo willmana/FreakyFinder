@@ -6,7 +6,6 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.NODE_ENV === 'production') {
     baseUrl = '/api/auth';
 }
-
 const register = async (body) => {
     const res = await axios.post(`${baseUrl}/register`, body);
     return res.data;
@@ -17,6 +16,11 @@ const login = async (body) => {
     return res.data;
 };
 
-const authApi = { login, register };
+const verify = async (body) => {
+    const res = await axios.post(`${baseUrl}/verify`, body);
+    return res.data;
+};
+
+const authApi = { login, register, verify };
 
 export default authApi;

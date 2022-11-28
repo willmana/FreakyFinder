@@ -42,7 +42,9 @@ app.use(
             }
             return null;
         }
-    }).unless({ path: ['/api/auth/login', '/api/auth/register'] })
+    }).unless({
+        path: ['/api/auth/login', '/api/auth/register', '/api/auth/verify']
+    })
 );
 
 //Routerit

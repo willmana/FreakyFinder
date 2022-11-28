@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './RegisterForm.module.scss';
 import { useMessageGetter } from '@messageformat/react';
-import authApi from './../api/auth';
-import Button from './Button';
+import authApi from '../api/auth';
+import Button from '../components/Button';
 
 const RegisterForm = () => {
     const [step, setStep] = useState('1');

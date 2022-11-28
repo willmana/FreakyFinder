@@ -19,6 +19,7 @@ export const GET_ALL_USERS_REQUEST = 'GET_ALL_USERS_REQUEST';
 export const GET_AND_UPDATE_CURRENT = 'GET_AND_UPDATE_CURRENT';
 export const FOLLOW_USER = 'FOLLOW_USER';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+export const UPDATE_USER = 'UPDATE_USER';
 
 // Post API calls
 export const POST_SUCCESS = 'POST_SUCCESS';
@@ -67,12 +68,17 @@ export const followUser = (targetId, thisId) => ({
     targetId,
     thisId
 });
-
 export const unfollowUser = (targetId, thisId) => ({
     type: UNFOLLOW_USER,
     targetId,
     thisId
 });
+export const updateUser = (userId, requestBody) => ({
+    type: UPDATE_USER,
+    userId,
+    requestBody
+});
+
 // Post API calls
 export const postSuccess = (response) => ({
     type: POST_SUCCESS,
@@ -212,6 +218,20 @@ function* sagaCreatePost(action) {
     }
 }
 
+function* sagaUpdateUser(action) {
+    try {
+        let response = {};
+        response = yield call(
+            userApi.updateUser,
+            action.userId,
+            action.requestBody
+        );
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
+}
+
 export function* callsSaga() {
     yield all([
         yield takeEvery(AUTHENTICATION_LOGIN_REQUEST, sagaRequestLogin),
@@ -220,7 +240,8 @@ export function* callsSaga() {
         yield takeEvery(FOLLOW_USER, sagaFollowUser),
         yield takeEvery(UNFOLLOW_USER, sagaUnfollowUser),
         yield takeEvery(GET_FEED_REQUEST, sagaRequestFeed),
-        yield takeEvery(CREATE_POST_REQUEST, sagaCreatePost)
+        yield takeEvery(CREATE_POST_REQUEST, sagaCreatePost),
+        yield takeEvery(UPDATE_USER, sagaUpdateUser)
     ]);
 }
 

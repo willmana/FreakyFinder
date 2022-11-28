@@ -6,13 +6,10 @@
     justify-content: center;
     align-items: flex-start;
     margin-left: $space-xl;
+    margin-top: $space-s;
 }
 
 .fieldname {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
     color: $color-accent-variant;
 }
 
@@ -38,7 +35,7 @@
     width: fit-content;
     border-radius: $space-s;
     padding: $space-xxs;
-    margin: $space-xs $space-xs;
+    margin: 0 $space-xs;
 }
 
 .formcontainer {
@@ -47,7 +44,6 @@
     justify-content: flex-start;
     align-items: center;
 }
-
 
 .searchcontainer {
     border-radius: $space-l;
@@ -78,7 +74,7 @@
     width: 3rem;
     border-radius: $space-s;
     padding: $space-xxs;
-    margin: $space-xs $space-xs;
+    margin: 0 $space-xs;
 }
 
 .declinebutton {
@@ -88,5 +84,5 @@
     width: 3rem;
     border-radius: $space-s;
     padding: $space-xxs;
-    margin: $space-xs $space-xs;
+    margin: 0 $space-xs;
 }

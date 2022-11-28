@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterForm from '../components/RegisterForm';
+import RegisterForm from '../containers/RegisterForm';
 import styles from './LandingPage.module.scss';
 import Logo from './../pics/default.svg';
 

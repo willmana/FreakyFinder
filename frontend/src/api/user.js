@@ -33,9 +33,23 @@ const getUserByUserId = async (userId) => {
     return res.data;
 };
 
-const updateUser = async (userId, newUser) => {
+const updateUser = async (userId, requestBody) => {
     const config = { headers: { Authorization: tokenBearer + token } };
-    const res = await axios.put(`${baseUrl}/${userId}`, newUser, config);
+    const res = await axios.put(
+        `${baseUrl}/${userId}/modify`,
+        requestBody,
+        config
+    );
+    return res.data;
+};
+
+const updatePassword = async (userId, requestBody) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.put(
+        `${baseUrl}/${userId}/password`,
+        requestBody,
+        config
+    );
     return res.data;
 };
 
@@ -65,6 +79,7 @@ const userApi = {
     getUserByUsername,
     getUserByUserId,
     updateUser,
+    updatePassword,
     followUser,
     unfollowUser
 };

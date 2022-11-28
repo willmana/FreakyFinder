@@ -11,7 +11,8 @@ import {
     USER_ERROR,
     followUser,
     getAndUpdateCurrentUser,
-    unfollowUser
+    unfollowUser,
+    updateUser
 } from './calls';
 
 // Actions
@@ -25,6 +26,7 @@ const LOGIN_TO_APPLICATION = 'LOGIN_TO_APPLICATION';
 const POST_AND_UPDATE = 'POST_AND_UPDATE';
 const FOLLOW_AND_UPDATE = 'FOLLOW_AND_UPDATE';
 const UNFOLLOW_AND_UPDATE = 'UNFOLLOW_AND_UPDATE';
+const UPDATE_AND_FETCH = 'UPDATE_AND_FETCH';
 
 // Action creators
 export const setUser = (user) => ({
@@ -66,6 +68,12 @@ export const unfollowAndUpdate = (targetId, thisId) => ({
     type: UNFOLLOW_AND_UPDATE,
     targetId,
     thisId
+});
+
+export const updateAndFetch = (userId, requestBody) => ({
+    type: UPDATE_AND_FETCH,
+    userId,
+    requestBody
 });
 
 const initialState = {
@@ -170,12 +178,30 @@ function* sagaUnfollowAndUpdate(action) {
     } catch (error) {}
 }
 
+function* sagaUpdateAndFetchUser(action) {
+    try {
+        yield put(updateUser(action.userId, action.requestBody));
+        const [userErrorCallOne] = yield race([
+            take(USER_ERROR),
+            take(USER_SUCCESS)
+        ]);
+        if (userErrorCallOne) return;
+        yield put(getAndUpdateCurrentUser());
+        const [userErrorCallTwo] = yield race([
+            take(USER_ERROR),
+            take(USER_SUCCESS)
+        ]);
+        if (userErrorCallTwo) return;
+    } catch (error) {}
+}
+
 export function* appSaga() {
     yield all([
         yield takeEvery(LOGIN_TO_APPLICATION, sagaLoginAndFetch),
         yield takeEvery(POST_AND_UPDATE, sagaPostAndUpdate),
         yield takeEvery(FOLLOW_AND_UPDATE, sagaFollowAndUpdate),
-        yield takeEvery(UNFOLLOW_AND_UPDATE, sagaUnfollowAndUpdate)
+        yield takeEvery(UNFOLLOW_AND_UPDATE, sagaUnfollowAndUpdate),
+        yield takeEvery(UPDATE_AND_FETCH, sagaUpdateAndFetchUser)
     ]);
 }
 

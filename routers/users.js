@@ -173,4 +173,68 @@ userRouter.put(
     }
 );
 
+userRouter.put(
+    '/:id/modify',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const body = request.body;
+            if (request.params.id !== body.userId) {
+                return response
+                    .status(403)
+                    .json({ message: "Can't modify other users" });
+            }
+            await User.findByIdAndUpdate(request.params.id, {
+                $set: { [body.fieldname]: body.updatedvalue }
+            });
+            return response.status(200).json({
+                message: `${body.fieldname} now updated with value ${body.updatedvalue}`
+            });
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
+    }
+);
+
+userRouter.put(
+    '/:id/password',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const body = request.body;
+            if (request.params.id !== body.userId) {
+                return response
+                    .status(403)
+                    .json({ message: "Can't modify other users" });
+            }
+            const user = await User.findOne({ username: body.username });
+            const passwordMatch = await bcrypt.compare(
+                body.oldPassword,
+                user.passwordHash
+            );
+            if (!passwordMatch)
+                return response
+                    .status(400)
+                    .json({ message: 'Incorrect password' });
+            if (body.newPassword1 !== body.newPassword2)
+                return response
+                    .status(400)
+                    .json({ message: "New passwords don't match}" });
+            const costFactor = 10;
+            const newPasswordHash = await bcrypt.hash(
+                body.newPassword1,
+                costFactor
+            );
+            await User.findByIdAndUpdate(request.params.id, {
+                $set: { passwordHash: newPasswordHash }
+            });
+            return response.status(200).json({
+                message: 'Password successfully updated'
+            });
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
+    }
+);
+
 module.exports = userRouter;

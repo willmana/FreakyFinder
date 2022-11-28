@@ -3,11 +3,13 @@ import styles from './InfoEditor.module.scss';
 import Button from './Button';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from 'react-redux';
+import { updateAndFetch } from '../redux/app';
 
-const InfoEditor = ({ fieldName, fieldValue }) => {
+const InfoEditor = ({ fieldName, fieldValue, userId }) => {
     const [modifyOpen, setModifyOpen] = useState(false);
     const [formValue, setFormValue] = useState(fieldValue);
-
+    const dispatch = useDispatch();
     const onClickModify = () => {
         setModifyOpen(true);
     };
@@ -15,7 +17,13 @@ const InfoEditor = ({ fieldName, fieldValue }) => {
     const onChangeValue = (e) => {
         setFormValue(e.target.value);
     };
-    const onClickConfirm = () => {
+    const onClickConfirm = async () => {
+        const requestBody = {
+            userId: userId,
+            updatedvalue: formValue,
+            fieldname: fieldName
+        };
+        dispatch(updateAndFetch(userId, requestBody));
         setModifyOpen(false);
     };
     const onClickClose = () => {

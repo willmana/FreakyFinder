@@ -323,12 +323,92 @@ userRouter.get(
                     { last_name: { $regex: query, $options: 'i' } }
                 ]
             });
-            console.log(query);
-            console.log(users);
             response.json(users.map((u) => u.toJSON()));
         } catch (error) {
             response.status(400).json({ error: error.message });
         }
+    }
+);
+
+userRouter.get(
+    '/recommendations/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const user = await User.findById(request.params.id);
+            // Get all followers
+            const followers = await Promise.all(
+                user.followers.map((follower) => {
+                    return User.findById(follower);
+                })
+            );
+            // Get all people that your followers also follow as user ids
+            let followsYouFollowAlso = [];
+            followers.map((follower) => {
+                if (follower !== null) {
+                    followsYouFollowAlso.push(...follower.following);
+                }
+            });
+            // Remove recommendations that you already follow
+            const followsYouFollowAlsoNoRec = followsYouFollowAlso.filter(
+                (id) => !user.following.includes(id)
+            );
+
+            // Convert from objectIds to strings and remove duplicates
+            const followsYouFollowAlsoToString = followsYouFollowAlsoNoRec
+                .map((id) => {
+                    if (id.toString() !== user.id) {
+                        return id.toString();
+                    }
+                })
+                .filter((id) => id !== undefined);
+            const followsYouFollowAlsoNoDuplicates = [
+                ...new Set(followsYouFollowAlsoToString)
+            ];
+
+            // Get all people who follow you
+            const followedPeople = await Promise.all(
+                user.following.map((followed) => {
+                    return User.findById(followed);
+                })
+            );
+            // Get all people they also follow as user ids
+            let youFollowFollowAlso = [];
+            followedPeople.map((followed) => {
+                if (followed !== null) {
+                    youFollowFollowAlso.push(...followed.following);
+                }
+            });
+            // Remove recommendations that you already follow
+            const youFollowFollowAlsoNoRec = youFollowFollowAlso.filter(
+                (id) => !user.following.includes(id)
+            );
+            // Convert from objectIds to strings and remove duplicates
+            const youFollowFollowAlsoToString = youFollowFollowAlsoNoRec
+                .map((id) => {
+                    if (id.toString() !== user.id) {
+                        return id.toString();
+                    }
+                })
+                .filter((id) => id !== undefined);
+            const youFollowFollowAlsoNoDuplicates = [
+                ...new Set(youFollowFollowAlsoToString)
+            ];
+            const followerResObj = await Promise.all(
+                followsYouFollowAlsoNoDuplicates.map((id) => {
+                    return User.findById(id);
+                })
+            );
+            const followingResObj = await Promise.all(
+                youFollowFollowAlsoNoDuplicates.map((id) => {
+                    return User.findById(id);
+                })
+            );
+            response.status(200).json({
+                followYouFollowAlso: followerResObj,
+                youFollowFollowAlso: followingResObj
+            });
+        } catch (error) {}
     }
 );
 

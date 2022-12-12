@@ -7,3 +7,15 @@
     margin: $space-m 0;
     border-radius: $space-m;
 }
+
+.title {
+    color: $color-accent-variant;
+    align-self: center;
+    justify-self: center;
+}
+
+.midbox {
+    display: flex;
+    flex-direction: column;
+    padding: $space-m;
+}

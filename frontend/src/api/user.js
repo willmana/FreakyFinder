@@ -83,7 +83,12 @@ const deleteUser = async (userId, requestBody) => {
 const searchUsers = async (query) => {
     const config = { headers: { Authorization: tokenBearer + token } };
     const res = await axios.get(`${baseUrl}/search/${query}`, config);
-    console.log(res.data);
+    return res.data;
+};
+
+const getRecommendations = async (userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/recommendations/${userId}`, config);
     return res.data;
 };
 
@@ -97,6 +102,7 @@ const userApi = {
     followUser,
     unfollowUser,
     deleteUser,
-    searchUsers
+    searchUsers,
+    getRecommendations
 };
 export default userApi;

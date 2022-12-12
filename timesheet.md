@@ -50,5 +50,6 @@
 | Add functionality to delete account totally from system including all possible references account might've made to system during its lifetime                                                 |  4 hours   | 28.11.2022 |
 | Add REST call to search users, init page for friend recommendations                                                                                                                           |   1 hour   | 12.12.2022 |
 | Move user search to redux, create page to render search results                                                                                                                               | 2.5 hours  | 12.12.2022 |
+| Add REST call to get user recommendations. Took some time to come up with somewhat efficient solution.                                                                                        |  2 hours   | 12.12.2022 |
 
-#### Total time spent: 74 hours
+#### Total time spent: 76 hours

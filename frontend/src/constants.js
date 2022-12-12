@@ -4,5 +4,6 @@ export const Path = {
     messages: '/messages',
     finder: '/finder',
     settings: '/settings',
-    profile: '/profile'
+    profile: '/profile',
+    results: '/results'
 };

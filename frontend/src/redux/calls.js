@@ -1,7 +1,7 @@
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import userApi from '../api/user';
 import authApi from './../api/auth';
-import { setUser, getUser, setPosts, setUsers } from './app';
+import { setUser, getUser, setPosts, setUsers, setSearchResult } from './app';
 import postApi from './../api/post';
 import { dateSorter } from './../utils/index';
 
@@ -20,6 +20,7 @@ export const GET_AND_UPDATE_CURRENT = 'GET_AND_UPDATE_CURRENT';
 export const FOLLOW_USER = 'FOLLOW_USER';
 export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const SEARCH_USERS = 'SEARCH_USERS';
 
 // Post API calls
 export const POST_SUCCESS = 'POST_SUCCESS';
@@ -77,6 +78,10 @@ export const updateUser = (userId, requestBody) => ({
     type: UPDATE_USER,
     userId,
     requestBody
+});
+export const searchUsers = (searchQuery) => ({
+    type: SEARCH_USERS,
+    searchQuery
 });
 
 // Post API calls
@@ -232,6 +237,17 @@ function* sagaUpdateUser(action) {
     }
 }
 
+function* sagaSearchUsers(action) {
+    try {
+        let response = {};
+        response = yield call(userApi.searchUsers, action.searchQuery);
+        yield put(setSearchResult(response));
+        yield put(userSuccess(response));
+    } catch (error) {
+        yield put(userError(error));
+    }
+}
+
 export function* callsSaga() {
     yield all([
         yield takeEvery(AUTHENTICATION_LOGIN_REQUEST, sagaRequestLogin),
@@ -241,7 +257,8 @@ export function* callsSaga() {
         yield takeEvery(UNFOLLOW_USER, sagaUnfollowUser),
         yield takeEvery(GET_FEED_REQUEST, sagaRequestFeed),
         yield takeEvery(CREATE_POST_REQUEST, sagaCreatePost),
-        yield takeEvery(UPDATE_USER, sagaUpdateUser)
+        yield takeEvery(UPDATE_USER, sagaUpdateUser),
+        yield takeEvery(SEARCH_USERS, sagaSearchUsers)
     ]);
 }
 

@@ -1,0 +1,36 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    width: fit-content;
+    background-color: $color-secondary-variant;
+    max-width: 680px;
+    min-width: 600px;
+    margin: $space-m 0;
+    border-radius: $space-m;
+    height: fit-content;
+    min-height: 320px;
+}
+
+.midbox {
+    display: flex;
+    flex-direction: column;
+    padding: $space-m;
+}
+
+.title {
+    color: $color-accent-variant;
+    align-self: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-self: center;
+    gap: $space-m;
+}
+
+.text {
+    margin-top: $space-m;
+    align-self: center;
+    color: $color-text;
+}

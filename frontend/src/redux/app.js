@@ -12,7 +12,8 @@ import {
     followUser,
     getAndUpdateCurrentUser,
     unfollowUser,
-    updateUser
+    updateUser,
+    searchUsers
 } from './calls';
 
 // Actions
@@ -22,11 +23,13 @@ const SET_USERS = 'SET_USERS';
 const SET_POSTS = 'SET_POSTS';
 const RIGHT_BAR_DATA = 'RIGHT_BAR_DATA';
 const SET_LOADING = 'SET_LOADING';
+const SET_RESULT = 'SET_RESULT';
 const LOGIN_TO_APPLICATION = 'LOGIN_TO_APPLICATION';
 const POST_AND_UPDATE = 'POST_AND_UPDATE';
 const FOLLOW_AND_UPDATE = 'FOLLOW_AND_UPDATE';
 const UNFOLLOW_AND_UPDATE = 'UNFOLLOW_AND_UPDATE';
 const UPDATE_AND_FETCH = 'UPDATE_AND_FETCH';
+const SEARCH_AND_UPDATE = 'SEARCH_AND_UPDATE';
 
 // Action creators
 export const setUser = (user) => ({
@@ -49,6 +52,10 @@ export const setLoading = (loading) => ({
     type: SET_LOADING,
     loading
 });
+export const setSearchResult = (searchResult) => ({
+    type: SET_RESULT,
+    searchResult
+});
 export const postAndUpdate = (postData) => ({
     type: POST_AND_UPDATE,
     postData
@@ -70,6 +77,11 @@ export const unfollowAndUpdate = (targetId, thisId) => ({
     thisId
 });
 
+export const searchAndUpdate = (searchQuery) => ({
+    type: SEARCH_AND_UPDATE,
+    searchQuery
+});
+
 export const updateAndFetch = (userId, requestBody) => ({
     type: UPDATE_AND_FETCH,
     userId,
@@ -81,7 +93,8 @@ const initialState = {
     loading: false,
     posts: [],
     users: [],
-    rightBarData: []
+    rightBarData: [],
+    searchResult: []
 };
 
 // Reducer
@@ -97,6 +110,8 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, posts: action.posts };
         case SET_LOADING:
             return { ...state, loading: action.loading };
+        case SET_RESULT:
+            return { ...state, searchResult: action.searchResult };
         default:
             return state;
     }
@@ -195,13 +210,24 @@ function* sagaUpdateAndFetchUser(action) {
     } catch (error) {}
 }
 
+function* sagaSearchUsersAndUpdate(action) {
+    try {
+        yield put(setLoading(true));
+        yield put(searchUsers(action.searchQuery));
+        const [userError] = yield race([take(USER_ERROR), take(USER_SUCCESS)]);
+        if (userError) return;
+        yield put(setLoading(false));
+    } catch (error) {}
+}
+
 export function* appSaga() {
     yield all([
         yield takeEvery(LOGIN_TO_APPLICATION, sagaLoginAndFetch),
         yield takeEvery(POST_AND_UPDATE, sagaPostAndUpdate),
         yield takeEvery(FOLLOW_AND_UPDATE, sagaFollowAndUpdate),
         yield takeEvery(UNFOLLOW_AND_UPDATE, sagaUnfollowAndUpdate),
-        yield takeEvery(UPDATE_AND_FETCH, sagaUpdateAndFetchUser)
+        yield takeEvery(UPDATE_AND_FETCH, sagaUpdateAndFetchUser),
+        yield takeEvery(SEARCH_AND_UPDATE, sagaSearchUsersAndUpdate)
     ]);
 }
 
@@ -221,6 +247,10 @@ export const isLoading = (state) => {
 
 export const getRightBarData = (state) => {
     return state.app.rightBarData;
+};
+
+export const getSearchResult = (state) => {
+    return state.app.searchResult;
 };
 
 export default appReducer;

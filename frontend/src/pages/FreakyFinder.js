@@ -8,6 +8,7 @@ import { Path } from './../constants';
 import ProfilePage from './ProfilePage';
 import SettingsPage from './SettingsPage';
 import FriendSearchPage from './FriendSearchPage';
+import SearchResultPage from './SearchResultPage';
 
 const FreakyFinder = () => {
     return (
@@ -24,6 +25,7 @@ const FreakyFinder = () => {
                     />
                     <Route path={Path.settings} element={<SettingsPage />} />
                     <Route path={Path.finder} element={<FriendSearchPage />} />
+                    <Route path={Path.results} element={<SearchResultPage />} />
                 </Routes>
             </div>
             <div className={styles.rightbar}>

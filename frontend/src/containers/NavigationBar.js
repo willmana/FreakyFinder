@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, setUser } from '../redux/app';
+import { getUser, searchAndUpdate, setUser } from '../redux/app';
 import LoginForm from '../components/LoginForm';
 import { useLocales, useMessageGetter } from '@messageformat/react';
 import styles from './NavigationBar.module.scss';
@@ -8,7 +8,7 @@ import Button from '../components/Button';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import userApi from '../api/user';
+import { Path } from '../constants';
 
 const NavigationBar = ({ onChangeLocale }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -25,9 +25,11 @@ const NavigationBar = ({ onChangeLocale }) => {
     const onChangeSearchQuery = (e) => {
         setSearchQuery(e.target.value);
     };
-    const onClickSearch = async () => {
-        await userApi.searchUsers(searchQuery);
+    const onClickSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchAndUpdate(searchQuery));
         setSearchQuery('');
+        navigate(Path.results);
     };
     return (
         <div className={styles.navbarcontainer}>

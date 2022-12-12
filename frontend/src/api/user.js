@@ -80,6 +80,13 @@ const deleteUser = async (userId, requestBody) => {
     });
 };
 
+const searchUsers = async (query) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/search/${query}`, config);
+    console.log(res.data);
+    return res.data;
+};
+
 const userApi = {
     getAll,
     createUser,
@@ -89,6 +96,7 @@ const userApi = {
     updatePassword,
     followUser,
     unfollowUser,
-    deleteUser
+    deleteUser,
+    searchUsers
 };
 export default userApi;

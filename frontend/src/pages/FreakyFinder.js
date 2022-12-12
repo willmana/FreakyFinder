@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Path } from './../constants';
 import ProfilePage from './ProfilePage';
 import SettingsPage from './SettingsPage';
+import FriendSearchPage from './FriendSearchPage';
 
 const FreakyFinder = () => {
     return (
@@ -22,6 +23,7 @@ const FreakyFinder = () => {
                         element={<ProfilePage />}
                     />
                     <Route path={Path.settings} element={<SettingsPage />} />
+                    <Route path={Path.finder} element={<FriendSearchPage />} />
                 </Routes>
             </div>
             <div className={styles.rightbar}>

@@ -7,8 +7,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import Button from '../components/Button';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import userApi from '../api/user';
 
 const NavigationBar = ({ onChangeLocale }) => {
+    const [searchQuery, setSearchQuery] = useState('');
     const msg = useMessageGetter('NavigationBar');
     const user = useSelector(getUser);
     const dispatch = useDispatch();
@@ -19,7 +22,13 @@ const NavigationBar = ({ onChangeLocale }) => {
         navigate('/');
     };
     const locales = useLocales();
-
+    const onChangeSearchQuery = (e) => {
+        setSearchQuery(e.target.value);
+    };
+    const onClickSearch = async () => {
+        await userApi.searchUsers(searchQuery);
+        setSearchQuery('');
+    };
     return (
         <div className={styles.navbarcontainer}>
             <header className={styles.header}>
@@ -32,9 +41,14 @@ const NavigationBar = ({ onChangeLocale }) => {
                         <input
                             className={styles.searchinput}
                             placeholder={msg('search.placeHolder')}
+                            value={searchQuery}
+                            onChange={onChangeSearchQuery}
                         />
                         <div className={styles.searchdivider}></div>
-                        <button className={styles.searchbutton}>
+                        <button
+                            className={styles.searchbutton}
+                            onClick={onClickSearch}
+                        >
                             <SearchIcon />
                         </button>
                     </div>

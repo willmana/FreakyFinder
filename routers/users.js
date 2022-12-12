@@ -38,68 +38,6 @@ userRouter.get(
                 last_name: 1,
                 id: 1
             });
-
-        // Delete all comments the user has created
-        const allComments = await Comment.find({ user: user.id });
-        console.log(allComments);
-
-        // Delete comment references from posts where comment was removed
-        let postReferences = allComments.map((obj) => {
-            const object = { commentid: obj.id, postid: obj.post };
-            return object;
-        });
-        console.log(postReferences);
-        const postReferenceRemovals = await Promise.all(
-            postReferences.map((ref) => {
-                const res = Post.findById(ref.postid);
-                return res;
-            })
-        );
-        console.log(postReferenceRemovals);
-
-        // Delete all posts the user has created
-        const posts = await Promise.all(
-            user.posts.map((post) => {
-                const res = Post.findById(post);
-                return res;
-            })
-        );
-        console.log(posts);
-
-        // Delete comments from removed posts
-        let commentsToRemove = posts.map((obj) => {
-            return obj.comments;
-        });
-        commentsToRemove = [].concat.apply([], commentsToRemove);
-        const comments = await Promise.all(
-            commentsToRemove.map((comment) => {
-                const res = Comment.findById(comment);
-                return res;
-            })
-        );
-        console.log(comments);
-
-        // Remove user references from follower/following lists
-        // (refered field following)
-        const userFollowers = await Promise.all(
-            user.followers.map((follower) => {
-                const res = User.find(follower);
-                return res;
-            })
-        );
-        if (userFollowers.length !== 0) {
-            console.log(userFollowers);
-        }
-        // (refered field followers)
-        const userFollowings = await Promise.all(
-            user.following.map((followed) => {
-                const res = User.find(followed);
-                return res;
-            })
-        );
-        console.log(userFollowings);
-        // Actual deletion of user
-
         response.json(user);
     }
 );
@@ -305,6 +243,7 @@ userRouter.put(
     }
 );
 
+// Update user info via settings
 userRouter.put(
     '/:id/modify',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
@@ -328,6 +267,7 @@ userRouter.put(
     }
 );
 
+// Change password from settings
 userRouter.put(
     '/:id/password',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
@@ -363,6 +303,29 @@ userRouter.put(
             return response.status(200).json({
                 message: 'Password successfully updated'
             });
+        } catch (error) {
+            response.status(400).json({ error: error.message });
+        }
+    }
+);
+
+// Search for users
+userRouter.get(
+    '/search/:query',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const query = request.params.query;
+            const users = await User.find({
+                $or: [
+                    { username: { $regex: query, $options: 'i' } },
+                    { first_name: { $regex: query, $options: 'i' } },
+                    { last_name: { $regex: query, $options: 'i' } }
+                ]
+            });
+            console.log(query);
+            console.log(users);
+            response.json(users.map((u) => u.toJSON()));
         } catch (error) {
             response.status(400).json({ error: error.message });
         }

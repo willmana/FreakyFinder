@@ -1,0 +1,9 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    width: 100%;
+    background-color: $color-secondary-variant;
+    max-width: 680px;
+    margin: $space-m 0;
+    border-radius: $space-m;
+}

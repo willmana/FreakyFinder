@@ -118,7 +118,7 @@ userRouter.delete(
                 if (postReferences && postReferences.length !== 0) {
                     await Promise.all(
                         postReferences.map((ref) => {
-                            Post.findByIdAndUpdate(ref.postid, {
+                            return Post.findByIdAndUpdate(ref.postid, {
                                 $pull: { comments: ref.commentid }
                             });
                         })
@@ -153,7 +153,7 @@ userRouter.delete(
             if (user.followers && user.followers.length !== 0) {
                 await Promise.all(
                     user.followers.map((follower) => {
-                        User.findByIdAndUpdate(follower, {
+                        return User.findByIdAndUpdate(follower, {
                             $pull: { following: user.id }
                         });
                     })
@@ -163,7 +163,7 @@ userRouter.delete(
             if (user.following && user.following.length !== 0) {
                 await Promise.all(
                     user.following.map((followed) => {
-                        User.findByIdAndUpdate(followed, {
+                        return User.findByIdAndUpdate(followed, {
                             $pull: { followers: user.id }
                         });
                     })

@@ -51,5 +51,6 @@
 | Add REST call to search users, init page for friend recommendations                                                                                                                           |   1 hour   | 12.12.2022 |
 | Move user search to redux, create page to render search results                                                                                                                               | 2.5 hours  | 12.12.2022 |
 | Add REST call to get user recommendations. Took some time to come up with somewhat efficient solution.                                                                                        |  2 hours   | 12.12.2022 |
+| Make test customers and implement the page that renders friends recommendations in cool container.                                                                                            |  3 hours   | 20.1.2023  |
 
-#### Total time spent: 76 hours
+#### Total time spent: 79 hours

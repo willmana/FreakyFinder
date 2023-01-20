@@ -1,0 +1,56 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    border-radius: $space-s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: $space-m $space-m;
+    border-color: $color-accent;
+    background-color: $color-secondary-variant;
+    border-style: solid;
+    cursor: pointer;
+    gap: $space-s;
+    min-width: 8rem;
+}
+
+.img {
+    width: 5rem;
+    height: 5rem;
+    margin-top: $space-xs;
+}
+
+.infocontainer {
+    gap: $space-xxs;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $space-xs;
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $color-text;
+    line-height: 16px;
+    gap: $space-xxs;
+}
+
+.username {
+    line-height: 16px;
+    color: $color-accent-variant;
+    text-decoration: none;
+    margin-bottom: $space-xxs;
+}
+
+.commonfollowers {
+    line-height: 16px;
+    color: $color-text;
+    text-decoration: none;
+    margin-bottom: $space-xxs;
+    text-align: center;
+}

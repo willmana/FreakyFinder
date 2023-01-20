@@ -12,10 +12,29 @@
     color: $color-accent-variant;
     align-self: center;
     justify-self: center;
+    margin-top: $space-s;
 }
 
 .midbox {
     display: flex;
     flex-direction: column;
     padding: $space-m;
+}
+.uppercontainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: $color-secondary;
+    border-radius: $space-m;
+}
+
+.scrollercontainer {
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: $color-secondary;
+    border-radius: $space-m;
+    align-self: center;
+    overflow-x: auto;
 }

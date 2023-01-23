@@ -33,6 +33,7 @@ const CommentForm = ({ postId, setComments }) => {
                 value={commentData}
                 placeholder="kirjoita kommentti"
                 onChange={onInputChange}
+                autoComplete="off"
             ></input>
             <button
                 onClick={onClickSubmitComment}

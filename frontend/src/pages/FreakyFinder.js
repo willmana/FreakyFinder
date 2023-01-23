@@ -9,6 +9,7 @@ import ProfilePage from './ProfilePage';
 import SettingsPage from './SettingsPage';
 import FriendSearchPage from './FriendSearchPage';
 import SearchResultPage from './SearchResultPage';
+import FriendsPage from './FriendsPage';
 
 const FreakyFinder = () => {
     return (
@@ -23,6 +24,7 @@ const FreakyFinder = () => {
                         path={`${Path.profile}/*`}
                         element={<ProfilePage />}
                     />
+                    <Route path={Path.friends} element={<FriendsPage />} />
                     <Route path={Path.settings} element={<SettingsPage />} />
                     <Route path={Path.finder} element={<FriendSearchPage />} />
                     <Route path={Path.results} element={<SearchResultPage />} />

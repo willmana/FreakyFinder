@@ -26,3 +26,10 @@
     display: flex;
     align-self: center;
 }
+
+.title {
+    color: $color-text;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}

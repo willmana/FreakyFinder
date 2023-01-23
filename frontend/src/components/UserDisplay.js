@@ -25,24 +25,34 @@ const UserDisplay = ({ firstname, lastname, username, id }) => {
 
     return (
         <div className={styles.maincontainer}>
-            <img src={Picture} alt="profile-pic" className={styles.img} />
-            <div className={styles.infocontainer}>
-                <div className={styles.name}>
-                    {firstname} {lastname}
+            <div className={styles.midcontainer}>
+                <img src={Picture} alt="profile-pic" className={styles.img} />
+                <div className={styles.infocontainer}>
+                    <div className={styles.name}>
+                        {firstname} {lastname}
+                    </div>
+                    <Link
+                        className={styles.username}
+                        to={`${Path.profile}/${username}`}
+                    >
+                        @{username}
+                    </Link>
                 </div>
-                <Link
-                    className={styles.username}
-                    to={`${Path.profile}/${username}`}
-                >
-                    @{username}
-                </Link>
             </div>
             {isMe ? (
                 <></>
             ) : isFollowed ? (
-                <Button text={'lopeta seuraus'} onClick={onClickFollowButton} />
+                <Button
+                    text={'lopeta seuraus'}
+                    onClick={onClickFollowButton}
+                    className={styles.button}
+                />
             ) : (
-                <Button text={'seuraa'} onClick={onClickFollowButton} />
+                <Button
+                    text={'seuraa'}
+                    onClick={onClickFollowButton}
+                    className={styles.button}
+                />
             )}
         </div>
     );

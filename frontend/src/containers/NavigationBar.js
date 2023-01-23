@@ -45,6 +45,7 @@ const NavigationBar = ({ onChangeLocale }) => {
                             placeholder={msg('search.placeHolder')}
                             value={searchQuery}
                             onChange={onChangeSearchQuery}
+                            autoComplete="off"
                         />
                         <div className={styles.searchdivider}></div>
                         <button

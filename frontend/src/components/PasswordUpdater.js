@@ -43,6 +43,7 @@ const PasswordUpdater = ({ userId, username }) => {
                     type="password"
                     value={oldPassword}
                     onChange={onChangeOldPassword}
+                    autoComplete="off"
                 ></input>
             </div>
             <p className={styles.fieldname}>Uusi salasana</p>
@@ -52,6 +53,7 @@ const PasswordUpdater = ({ userId, username }) => {
                     type="password"
                     value={newPassword1}
                     onChange={onChangeNewPassword1}
+                    autoComplete="off"
                 ></input>
             </div>
             <p className={styles.fieldname}>Toista uusi salasana</p>
@@ -61,6 +63,7 @@ const PasswordUpdater = ({ userId, username }) => {
                     type="password"
                     value={newPassword2}
                     onChange={onChangeNewPassword2}
+                    autoComplete="off"
                 ></input>
             </div>
             <Button

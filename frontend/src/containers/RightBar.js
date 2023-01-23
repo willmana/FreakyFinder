@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { getUser } from './../redux/app';
 import UserDisplay from '../components/UserDisplay';
 import styles from './RightBar.module.scss';
+import { shuffle } from '../utils';
 
 const RightBar = () => {
     const [displayedUsers, setDisplayedUsers] = useState([]);
@@ -12,16 +13,18 @@ const RightBar = () => {
     useEffect(() => {
         async function fetchUsers() {
             const res = await userApi.getAll();
-            setDisplayedUsers(
-                res.filter((user) => user.username !== currentUser.username)
-            );
+            const filtered = res
+                .filter((user) => user.username !== currentUser.username)
+                .filter((user) => !currentUser.following.includes(user.id));
+            setDisplayedUsers(shuffle(filtered));
         }
         fetchUsers();
-    }, [currentUser.username]);
+    }, [currentUser.following, currentUser.username]);
 
     return (
         <div className={styles.maincontainer}>
             <div>
+                <h2 className={styles.title}>Ehdotuksia</h2>
                 {displayedUsers.map((user, i, array) => (
                     <div key={i} className={styles.usercontainer}>
                         <UserDisplay

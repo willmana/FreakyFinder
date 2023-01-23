@@ -330,6 +330,7 @@ userRouter.get(
     }
 );
 
+// Get recommendation for users that your friends are connected with
 userRouter.get(
     '/recommendations/:id',
     jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
@@ -366,7 +367,7 @@ userRouter.get(
                 ...new Set(followsYouFollowAlsoToString)
             ];
 
-            // Get all people who follow you
+            // Get all people you follow
             const followedPeople = await Promise.all(
                 user.following.map((followed) => {
                     return User.findById(followed);
@@ -407,6 +408,33 @@ userRouter.get(
             response.status(200).json({
                 followYouFollowAlso: followerResObj,
                 youFollowFollowAlso: followingResObj
+            });
+        } catch (error) {}
+    }
+);
+
+// Return users connections
+userRouter.get(
+    '/friends/:id',
+    jwt({ secret: config.SECRET, algorithms: ['HS256'] }),
+    async (request, response) => {
+        try {
+            const user = await User.findById(request.params.id);
+            // Get all followers
+            const followers = await Promise.all(
+                user.followers.map((follower) => {
+                    return User.findById(follower);
+                })
+            );
+            // Get all people you follow
+            const youFollow = await Promise.all(
+                user.following.map((followed) => {
+                    return User.findById(followed);
+                })
+            );
+            response.status(200).json({
+                followers: followers,
+                youFollow: youFollow
             });
         } catch (error) {}
     }

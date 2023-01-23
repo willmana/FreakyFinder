@@ -1,0 +1,69 @@
+@import './../styles/main.scss';
+
+.maincontainer {
+    width: fit-content;
+    background-color: $color-secondary-variant;
+    max-width: 680px;
+    min-width: 600px;
+    margin: $space-m 0;
+    border-radius: $space-m;
+    height: fit-content;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: $color-accent-variant;
+    align-self: center;
+    margin: $space-s;
+}
+
+.uppercontainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    height: 100%;
+    background-color: $color-secondary;
+    border-radius: $space-m;
+    gap: $space-s;
+    margin-bottom: $space-m;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttoncontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+}
+
+.button {
+    width: 10rem;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border-radius: $space-m $space-m 0 0;
+    background-color: $color-primary;
+    color: $color-text;
+    padding: $space-xs;
+    &:hover {
+        background-color: $color-primary-variant;
+    }
+    cursor: pointer;
+    border-style: none;
+    &selected {
+        background-color: $color-secondary;
+        &:hover {
+            background-color: $color-secondary;
+        }
+        cursor: auto;
+    }
+    font-size: medium;
+}

@@ -92,6 +92,12 @@ const getRecommendations = async (userId) => {
     return res.data;
 };
 
+const getFriends = async (userId) => {
+    const config = { headers: { Authorization: tokenBearer + token } };
+    const res = await axios.get(`${baseUrl}/friends/${userId}`, config);
+    return res.data;
+};
+
 const userApi = {
     getAll,
     createUser,
@@ -103,6 +109,7 @@ const userApi = {
     unfollowUser,
     deleteUser,
     searchUsers,
-    getRecommendations
+    getRecommendations,
+    getFriends
 };
 export default userApi;

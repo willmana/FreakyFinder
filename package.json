@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon index.js",
         "build:ui": "rm -rf build && cd frontend && npm run build && cp -r build ..",
-        "deploy:heroku": "npm run build:ui && git add . & git commit -m \"Production deployment\" && git push && git push heroku master"
+        "deploy:fly": "npm run build:ui && git add . & git commit -m \"Production deployment\" && git push && flyctl deploy"
     },
     "author": "Aleksi Willman",
     "license": "ISC",

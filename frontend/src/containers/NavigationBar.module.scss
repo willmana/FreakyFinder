@@ -3,13 +3,14 @@
 .navbarcontainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: $space-s;
+    padding: $space-s 0;
     //    background-image: linear-gradient(to right, $color-4, $color-6, $color-3);
     background-color: $color-secondary;
     position: sticky;
     top: 0;
+    width: 100%;
 }
 
 .header {
@@ -20,13 +21,30 @@
     justify-content: space-between;
     align-items: center;
     color: $color-accent;
+    text-align: center;
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: $space-s;
+    }
 }
 
 .middlecontainer {
     display: flex;
-    width: 60%;
     align-items: center;
     justify-content: center;
+}
+
+.rightcontainer {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    justify-content: flex-end;
+    @media only screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: $space-s;
+    }
 }
 
 .searchcontainer {
@@ -39,6 +57,12 @@
     align-items: center;
     min-height: 2.5rem;
     min-width: 32rem;
+    @media only screen and (max-width: 1024px) {
+        min-width: 22rem;
+    }
+    @media only screen and (max-width: 768px) {
+        min-width: 18rem;
+    }
 }
 
 .searchinput {
@@ -70,18 +94,14 @@
     cursor: pointer;
 }
 
-.rightcontainer {
-    display: flex;
-    flex-direction: row;
-    width: 20%;
-    justify-content: flex-end;
-}
-
 .localecontainer {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
     margin-right: $space-m;
+    @media only screen and (max-width: 768px) {
+        margin-right: 0;
+    }
 }
 
 .localedivider {

@@ -5,20 +5,29 @@
     flex-direction: row;
     padding-top: $space-xl;
     gap: $space-s;
+    justify-content: space-between;
+    @media only screen and (max-width: 1024px) {
+        justify-content: flex-start;
+    }
 }
 
 .leftbar {
     display: flex;
-    width: 22%;
 }
 
 .middlebar {
     display: flex;
-    width: 56%;
     justify-content: center;
+    margin: 0 auto;
+    width: 600px;
+    @media only screen and (max-width: 800px) {
+        width: 440px;
+    }
 }
 
 .rightbar {
     display: flex;
-    width: 22%;
+    @media only screen and (max-width: 1024px) {
+        display: none;
+    }
 }

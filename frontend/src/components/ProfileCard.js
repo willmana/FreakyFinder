@@ -70,21 +70,32 @@ const ProfileCard = ({ user }) => {
                 </h2>
                 <h3 className={styles.username}>@{user.username} </h3>
                 <ul className={styles.firstlist}>
-                    <li>Ikä: {getAge(user.date_of_birth)} vuotta</li>
-                    <li>Sukupuoli: {user.gender}</li>
                     <li>
-                        Kotoisin: {user.city}, {user.country}
+                        <span className={styles.bold}>Ikä:</span>{' '}
+                        {getAge(user.date_of_birth)} vuotta
+                    </li>
+                    <li>
+                        <span className={styles.bold}>Sukupuoli:</span>{' '}
+                        {user.gender}
+                    </li>
+                    <li>
+                        <span className={styles.bold}>Kotoisin:</span>{' '}
+                        {user.city}, {user.country}
                     </li>
                 </ul>
                 <ul className={styles.secondlist}>
-                    <li>Käyttäjä {createdDate.toLocaleDateString()} lähtien</li>
+                    <li className={styles.bold}>
+                        Käyttäjä {createdDate.toLocaleDateString()} lähtien
+                    </li>
                     {ownPage ? (
                         <>
                             <li onClick={() => onClickFollowed()}>
-                                Seuraa: {user.following.length}
+                                <span className={styles.bold}>Seuraa:</span>{' '}
+                                {user.following.length}
                             </li>
                             <li onClick={() => onClickFollower()}>
-                                Seuraajia: {user.followers.length}
+                                <span className={styles.bold}>Seuraajia:</span>{' '}
+                                {user.followers.length}
                             </li>
                         </>
                     ) : (
@@ -110,9 +121,6 @@ const ProfileCard = ({ user }) => {
                                     onClick={onClickFollowButton}
                                 />
                             )}
-                        </div>
-                        <div className={styles.message}>
-                            <Button text={'lähetä viesti'} />
                         </div>
                         <div
                             className={styles.follows}

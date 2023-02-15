@@ -3,8 +3,7 @@
 .maincontainer {
     width: fit-content;
     background-color: $color-secondary-variant;
-    max-width: 680px;
-    min-width: 600px;
+    max-width: 600px;
     margin: $space-m 0;
     border-radius: $space-m;
     height: fit-content;
@@ -24,9 +23,12 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     align-self: center;
     gap: $space-m;
+    @media only screen and (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .text {

@@ -54,5 +54,6 @@
 | Make test customers and implement the page that renders friends recommendations in cool container.                                                                                            |  3 hours   | 20.1.2023  |
 | Move production environment from Heroku to Fly                                                                                                                                                | 30 minutes | 23.1.2023  |
 | Add page to display your current connections                                                                                                                                                  |  3 hours   | 23.1.2023  |
+| Make application responsive for different screen widths and layouts, excluding mobile view because that would require large overhaul for certain views                                        |  2 hours   | 15.2.2023  |
 
 #### Total time spent: 82.5 hours

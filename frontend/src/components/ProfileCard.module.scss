@@ -3,7 +3,7 @@
 .profilecontainer {
     width: 100%;
     background-color: $color-secondary-variant;
-    max-width: 680px;
+    max-width: 600px;
     min-height: 320px;
     display: grid;
     margin: $space-m 0;
@@ -11,6 +11,9 @@
     align-self: center;
     grid-template-rows: 30% 30% 20% 20%;
     grid-template-columns: 25% 25% 25% 25%;
+    @media only screen and (max-width: 800px) {
+        grid-template-rows: repeat(4, 1fr);
+    }
 }
 
 .profilepicture {
@@ -70,14 +73,7 @@
 
 .followbutton {
     display: grid;
-    grid-area: 4 / 1 / 5 / 2;
-    justify-self: center;
-    align-self: center;
-}
-
-.message {
-    display: grid;
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 4 / 1 / 5 / 3;
     justify-self: center;
     align-self: center;
 }
@@ -89,6 +85,11 @@
     align-self: center;
     color: $color-text;
     cursor: pointer;
+    @media only screen and (max-width: 800px) {
+        grid-area: 4 / 3 / 5 / 5;
+        align-self: flex-start;
+        margin-top: $space-l;
+    }
 }
 
 .followers {
@@ -98,12 +99,17 @@
     align-self: center;
     color: $color-text;
     cursor: pointer;
+    @media only screen and (max-width: 800px) {
+        grid-area: 4 / 3 / 5 / 5;
+        align-self: flex-end;
+        margin-bottom: $space-l;
+    }
 }
 
 .userlist {
     width: 100%;
     background-color: $color-secondary-variant;
-    max-width: 680px;
+    max-width: 600px;
     max-height: 320px;
     display: flex;
     flex-direction: column;
@@ -129,19 +135,21 @@
 }
 
 .listcontainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    display: grid;
     overflow-y: auto;
     margin: $space-m;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-s;
+    @media only screen and (max-width: 800px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .usercontainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
-    width: 50%;
+    margin-right: $space-xs;
 }
 
 div::-webkit-scrollbar {
@@ -158,4 +166,8 @@ div::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
     border-radius: $space-m;
+}
+
+.bold {
+    font-weight: bold;
 }

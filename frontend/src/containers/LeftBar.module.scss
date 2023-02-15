@@ -10,6 +10,10 @@
     margin: $space-m;
     position: sticky;
     top: $space-xxl;
+    text-align: center;
+    @media only screen and (max-width: 768px) {
+        top: $space-xxxl;
+    }
 }
 
 .button {

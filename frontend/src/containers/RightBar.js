@@ -5,10 +5,12 @@ import { getUser } from './../redux/app';
 import UserDisplay from '../components/UserDisplay';
 import styles from './RightBar.module.scss';
 import { shuffle } from '../utils';
+import { useMessageGetter } from '@messageformat/react';
 
 const RightBar = () => {
     const [displayedUsers, setDisplayedUsers] = useState([]);
     const currentUser = useSelector(getUser);
+    const msg = useMessageGetter('RightBar');
 
     useEffect(() => {
         async function fetchUsers() {
@@ -24,7 +26,7 @@ const RightBar = () => {
     return (
         <div className={styles.maincontainer}>
             <div>
-                <h2 className={styles.title}>Ehdotuksia</h2>
+                <h2 className={styles.title}>{msg('title')}</h2>
                 {displayedUsers.map((user, i, array) => (
                     <div key={i} className={styles.usercontainer}>
                         <UserDisplay

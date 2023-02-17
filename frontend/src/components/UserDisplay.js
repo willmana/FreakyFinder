@@ -6,9 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { Path } from './../constants';
+import { useMessageGetter } from '@messageformat/react';
 
 const UserDisplay = ({ firstname, lastname, username, id }) => {
     const [isFollowed, setFollowed] = useState(false);
+    const msg = useMessageGetter('RightBar');
     const thisUser = useSelector(getUser);
     const isMe = thisUser.id === id;
     const dispatch = useDispatch();
@@ -43,13 +45,13 @@ const UserDisplay = ({ firstname, lastname, username, id }) => {
                 <></>
             ) : isFollowed ? (
                 <Button
-                    text={'lopeta seuraus'}
+                    text={msg('unfollow')}
                     onClick={onClickFollowButton}
                     className={styles.button}
                 />
             ) : (
                 <Button
-                    text={'seuraa'}
+                    text={msg('button')}
                     onClick={onClickFollowButton}
                     className={styles.button}
                 />

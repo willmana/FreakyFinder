@@ -192,10 +192,6 @@ function* sagaRequestLogin(action) {
             'currentUser',
             JSON.stringify(response.user)
         );
-        while (window.localStorage.getItem('token') === null) {
-            // wait until token has been added to local storage since it was sometimes
-            // null when starting next fetches and application was stuck on loading
-        }
         yield put(setUser(response.user));
         yield put(authenticationSuccess(response));
     } catch (error) {
@@ -207,7 +203,8 @@ function* sagaRequestFeed() {
     try {
         const user = yield select(getUser);
         let response = {};
-        response = yield call(postApi.getFeed, user.id);
+        const token = window.localStorage.getItem('token');
+        response = yield call(postApi.getFeed, user.id, token);
         const sortedResponse = yield call(dateSorter, response);
         yield put(setPosts(sortedResponse));
         yield put(postSuccess(response));

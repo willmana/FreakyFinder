@@ -15,8 +15,11 @@ const getAll = async () => {
     return res.data;
 };
 
-const getFeed = async (userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+const getFeed = async (userId, givenToken) => {
+    // Token given separately here since it didn't seem to update on time
+    const config = {
+        headers: { Authorization: tokenBearer + JSON.parse(givenToken) }
+    };
     const res = await axios.get(`${baseUrl}/feed/${userId}`, config);
     return res.data;
 };

@@ -127,10 +127,16 @@ function* sagaLoginAndFetch(action) {
             take(AUTHENTICATION_SUCCESS)
         ]);
         if (loginError) return;
-        //
         yield put(requestFeed());
-        const [feedError] = yield race([take(POST_ERROR), take(POST_SUCCESS)]);
-        if (feedError) return;
+        const [feedError1] = yield race([take(POST_ERROR), take(POST_SUCCESS)]);
+        if (feedError1) {
+            yield put(requestFeed());
+            const [feedError2] = yield race([
+                take(POST_ERROR),
+                take(POST_SUCCESS)
+            ]);
+            if (feedError2) return;
+        }
         yield put(setLoading(false));
     } catch (error) {
         yield put(setLoading(false));

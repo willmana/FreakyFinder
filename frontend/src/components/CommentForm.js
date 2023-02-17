@@ -5,9 +5,11 @@ import styles from './CommentForm.module.scss';
 import commentApi from './../api/comment';
 import postApi from '../api/post';
 import SendIcon from '@mui/icons-material/Send';
+import { useMessageGetter } from '@messageformat/react';
 
 const CommentForm = ({ postId, setComments }) => {
     const [commentData, setCommentData] = useState('');
+    const msg = useMessageGetter('CommentForm');
     const user = useSelector(getUser);
     const onInputChange = (event) => {
         setCommentData(event.target.value);
@@ -31,7 +33,7 @@ const CommentForm = ({ postId, setComments }) => {
             <input
                 className={styles.inputfield}
                 value={commentData}
-                placeholder="kirjoita kommentti"
+                placeholder={msg('placeHolder')}
                 onChange={onInputChange}
                 autoComplete="off"
             ></input>

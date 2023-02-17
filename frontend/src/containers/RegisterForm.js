@@ -22,6 +22,10 @@ const RegisterForm = () => {
     };
     const onClickSubmit = async (event) => {
         event.preventDefault();
+        if (password1 !== password2) {
+            window.alert(msg('errorMessagePW'));
+            return;
+        }
         try {
             const registerData = {
                 first_name: firstName,
@@ -35,7 +39,17 @@ const RegisterForm = () => {
             };
             await authApi.register(registerData);
             setStep('3');
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+            if (error.response.data) {
+                const data = error.response.data;
+                if (data.name === 'ValidationError') {
+                    window.alert(msg('errorMessageValidation'));
+                } else {
+                    window.alert(data.message);
+                }
+            }
+        }
     };
     return (
         <div className={styles.maincontainer}>
@@ -82,9 +96,9 @@ const RegisterForm = () => {
                         id="gender"
                     >
                         <option hidden></option>
-                        <option value={'1'}>Mies</option>
-                        <option value={'2'}>Nainen</option>
-                        <option value={'3'}>Apache Attack Helicopter</option>
+                        <option value={'1'}>{msg('gender1')}</option>
+                        <option value={'2'}>{msg('gender2')}</option>
+                        <option value={'3'}>{msg('gender3')}</option>
                     </select>
                     <label className={styles.labeltext} htmlFor="country">
                         {msg('country')}
@@ -136,7 +150,7 @@ const RegisterForm = () => {
                         className={styles.input}
                         onChange={(e) => setPassword1(e.target.value)}
                         value={password1}
-                        type="text"
+                        type="password"
                         id="password1"
                     ></input>
                     <label className={styles.labeltext} htmlFor="password2">
@@ -146,7 +160,7 @@ const RegisterForm = () => {
                         className={styles.input}
                         onChange={(e) => setPassword2(e.target.value)}
                         value={password2}
-                        type="text"
+                        type="password"
                         id="password2"
                     ></input>
                     <div className={styles.buttoncontainer}>
@@ -168,11 +182,11 @@ const RegisterForm = () => {
                 step === '3' && (
                     <div>
                         <h3 className={styles.title}>
-                            {msg('successTitle', { firstname: 'jäbä' })}
+                            {msg('successTitle', { firstname: firstName })}
                         </h3>
-                        <p>
+                        <p className={styles.text}>
                             {msg('successDescription', {
-                                username: 'käyttäjä'
+                                username: username
                             })}
                         </p>
                     </div>

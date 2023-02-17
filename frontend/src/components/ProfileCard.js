@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { followAndUpdate, getUser, unfollowAndUpdate } from './../redux/app';
 import CloseIcon from '@mui/icons-material/Close';
 import UserDisplay from './UserDisplay';
+import { useMessageGetter } from '@messageformat/react';
 
 const ProfileCard = ({ user }) => {
     const thisUser = useSelector(getUser);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState([]);
+    const [modalTitle, setModalTitle] = useState('');
     const createdDate = new Date(user.createdAt);
     const commonFollowers = user.followers.filter((follower) =>
         thisUser.followers.includes(follower.id)
@@ -18,6 +20,8 @@ const ProfileCard = ({ user }) => {
     const commonFollowing = user.following.filter((followed) =>
         thisUser.following.includes(followed.id)
     );
+    const msg = useMessageGetter('Profile');
+    const msgButton = useMessageGetter('RightBar');
 
     const ownPage = thisUser.id === user.id;
     const dispatch = useDispatch();
@@ -41,10 +45,12 @@ const ProfileCard = ({ user }) => {
     };
     const onClickFollower = () => {
         setModalContent(user.followers);
+        setModalTitle(msg('followersTitle'));
         setModalOpen(true);
     };
     const onClickFollowed = () => {
         setModalContent(user.following);
+        setModalTitle(msg('followsTitle'));
         setModalOpen(true);
     };
 
@@ -71,38 +77,47 @@ const ProfileCard = ({ user }) => {
                 <h3 className={styles.username}>@{user.username} </h3>
                 <ul className={styles.firstlist}>
                     <li>
-                        <span className={styles.bold}>Ikä:</span>{' '}
-                        {getAge(user.date_of_birth)} vuotta
+                        <span className={styles.bold}>{msg('age1')}</span>{' '}
+                        {getAge(user.date_of_birth)} {msg('age2')}
                     </li>
                     <li>
-                        <span className={styles.bold}>Sukupuoli:</span>{' '}
-                        {user.gender}
+                        <span className={styles.bold}>{msg('gender')}</span>{' '}
+                        {msg(`genderMap.${user.gender}`)}
                     </li>
                     <li>
-                        <span className={styles.bold}>Kotoisin:</span>{' '}
+                        <span className={styles.bold}>{msg('location')}</span>{' '}
                         {user.city}, {user.country}
                     </li>
                 </ul>
                 <ul className={styles.secondlist}>
                     <li className={styles.bold}>
-                        Käyttäjä {createdDate.toLocaleDateString()} lähtien
+                        {msg('since', {
+                            date: createdDate.toLocaleDateString()
+                        })}
                     </li>
                     {ownPage ? (
                         <>
                             <li onClick={() => onClickFollowed()}>
-                                <span className={styles.bold}>Seuraa:</span>{' '}
+                                <span className={styles.bold}>
+                                    {msg('follows')}
+                                </span>{' '}
                                 {user.following.length}
                             </li>
                             <li onClick={() => onClickFollower()}>
-                                <span className={styles.bold}>Seuraajia:</span>{' '}
+                                <span className={styles.bold}>
+                                    {msg('followers')}
+                                </span>{' '}
                                 {user.followers.length}
                             </li>
                         </>
                     ) : (
                         <>
-                            <li>{commonFollowers.length} yhteistä seuraajaa</li>
                             <li>
-                                {commonFollowing.length} yhteistä seurattavaa
+                                {commonFollowers.length}{' '}
+                                {msg('commonFollowers')}
+                            </li>
+                            <li>
+                                {commonFollowing.length} {msg('commonFollowed')}
                             </li>
                         </>
                     )}
@@ -112,12 +127,12 @@ const ProfileCard = ({ user }) => {
                         <div className={styles.followbutton}>
                             {isFollowed ? (
                                 <Button
-                                    text={'lopeta seuraus'}
+                                    text={msgButton('unfollow')}
                                     onClick={onClickFollowButton}
                                 />
                             ) : (
                                 <Button
-                                    text={'seuraa'}
+                                    text={msgButton('button')}
                                     onClick={onClickFollowButton}
                                 />
                             )}
@@ -126,13 +141,14 @@ const ProfileCard = ({ user }) => {
                             className={styles.follows}
                             onClick={() => onClickFollowed()}
                         >
-                            Seuraa: {user.following.length}
+                            {msg('follows')}
+                            {user.following.length}
                         </div>
                         <div
                             className={styles.followers}
                             onClick={() => onClickFollower()}
                         >
-                            Seuraajia: {user.followers.length}
+                            {msg('followers')} {user.followers.length}
                         </div>
                     </>
                 )}
@@ -141,7 +157,7 @@ const ProfileCard = ({ user }) => {
                 <>
                     <div className={styles.userlist}>
                         <div className={styles.headerrow}>
-                            <h4 className={styles.listheader}>Seuraajat</h4>
+                            <h4 className={styles.listheader}>{modalTitle}</h4>
                             <CloseIcon
                                 className={styles.closelist}
                                 onClick={() => setModalOpen(false)}

@@ -35,7 +35,7 @@ const NavigationBar = ({ onChangeLocale }) => {
         <div className={styles.navbarcontainer}>
             <header className={styles.header}>
                 {msg('header', { parameter: '' })}
-                {user && <small> Logged in as {user.username}</small>}
+                {user && <small>{msg('user') + ' ' + user.username}</small>}
             </header>
             {user ? (
                 <div className={styles.middlecontainer}>
@@ -83,7 +83,7 @@ const NavigationBar = ({ onChangeLocale }) => {
                     <Button
                         className={styles.margin}
                         onClick={onClickLogout}
-                        text={'Kirjaudu ulos'}
+                        text={msg('logOut')}
                     />
                 )}
             </div>

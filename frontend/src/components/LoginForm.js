@@ -4,12 +4,14 @@ import styles from './LoginForm.module.scss';
 import Button from './Button';
 import { loginAndGetFeed } from './../redux/app';
 import { useNavigate } from 'react-router-dom';
+import { useMessageGetter } from '@messageformat/react';
 
 const LoginForm = (params) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const msg = useMessageGetter('NavigationBar');
     const onChangeUsername = (event) => {
         setUsername(event.target.value);
     };
@@ -24,7 +26,9 @@ const LoginForm = (params) => {
     return (
         <div className={styles.formcontainer}>
             <div className={styles.inputcontainer}>
-                <label className={styles.labeltext}>username</label>
+                <label className={styles.labeltext}>
+                    {msg('loginUsername')}
+                </label>
                 <input
                     onChange={onChangeUsername}
                     value={username}
@@ -32,7 +36,9 @@ const LoginForm = (params) => {
                 ></input>
             </div>
             <div className={styles.inputcontainer}>
-                <label className={styles.labeltext}>password</label>
+                <label className={styles.labeltext}>
+                    {msg('loginPassword')}
+                </label>
                 <input
                     onChange={onChangePassword}
                     value={password}
@@ -43,7 +49,7 @@ const LoginForm = (params) => {
             <Button
                 className={styles.margin}
                 onClick={() => onClickLogin()}
-                text={'Log in'}
+                text={msg('loginButton')}
             ></Button>
         </div>
     );

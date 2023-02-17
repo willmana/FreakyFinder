@@ -22,6 +22,7 @@
     align-items: center;
     color: $color-accent;
     text-align: center;
+    gap: $space-s;
     @media only screen and (max-width: 768px) {
         flex-direction: column;
         align-items: center;

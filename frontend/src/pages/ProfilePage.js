@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import userApi from './../api/user';
 import styles from './ProfilePage.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,18 +8,24 @@ import { setPosts } from '../redux/app';
 import { getPosts } from './../redux/app';
 import Post from './../components/Post';
 import ProfileCard from './../components/ProfileCard';
+import { useMessageGetter } from '@messageformat/react';
 
 const ProfilePage = () => {
     const [user, setUser] = useState();
+    const msg = useMessageGetter('Profile');
     const location = useLocation();
     const posts = useSelector(getPosts);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     // Derive username from path, we dont save response to store so not calling via reducer
     const username = location.pathname.split('/')[2];
     useEffect(() => {
         async function getContent() {
             const userResponse = await userApi.getUserByUsername(username);
+            if (userResponse === null) {
+                navigate('/');
+                window.alert(msg('notFound', { username: username }));
+            }
             setUser(userResponse);
             const postResponse = await postApi.getUserPosts(userResponse.id);
             const sortedresponse = postResponse.sort((a, b) => {

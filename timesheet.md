@@ -56,4 +56,4 @@
 | Add page to display your current connections                                                                                                                                                  |  3 hours   | 23.1.2023  |
 | Make application responsive for different screen widths and layouts, excluding mobile view because that would require large overhaul for certain views                                        |  2 hours   | 15.2.2023  |
 
-#### Total time spent: 82.5 hours
+#### Total time spent: 84.5 hours

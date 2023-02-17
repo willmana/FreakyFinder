@@ -3,6 +3,7 @@
 .button {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: center;
     align-items: center;
     width: 100%;
     border-radius: $space-l;
@@ -12,6 +13,12 @@
     border-color: $color-accent;
     &:hover {
         background-color: $color-primary-variant;
+    }
+    &:disabled {
+        background-color: $color-primary;
+        border-color: $color-primary-variant;
+        cursor: default;
+        color: $color-secondary-variant;
     }
     cursor: pointer;
     min-width: 8rem;

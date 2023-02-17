@@ -192,6 +192,10 @@ function* sagaRequestLogin(action) {
             'currentUser',
             JSON.stringify(response.user)
         );
+        while (window.localStorage.getItem('token') === null) {
+            // wait until token has been added to local storage since it was sometimes
+            // null when starting next fetches and application was stuck on loading
+        }
         yield put(setUser(response.user));
         yield put(authenticationSuccess(response));
     } catch (error) {

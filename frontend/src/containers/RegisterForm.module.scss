@@ -49,14 +49,22 @@
     grid-template-columns: 1fr 1fr;
     gap: $space-xxs;
     margin-top: $space-xs;
+    @media only screen and (max-width: 1200px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
 }
 
 .leftbutton {
     display: grid;
-    grid-column-start: 1;
 }
 
 .rightbutton {
     display: grid;
-    grid-column-start: 2;
+}
+
+.emptydiv {
+    @media only screen and (max-width: 1200px) {
+        display: none;
+    }
 }

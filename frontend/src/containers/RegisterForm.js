@@ -107,6 +107,7 @@ const RegisterForm = () => {
                         id="city"
                     ></input>
                     <div className={styles.buttoncontainer}>
+                        <div className={styles.emptydiv} />
                         <div className={styles.rightbutton}>
                             <Button
                                 onClick={() => onButtonClick('2')}

@@ -1,4 +1,4 @@
-import { all, takeEvery, put, race, take } from 'redux-saga/effects';
+import { all, takeEvery, put, race, take, delay } from 'redux-saga/effects';
 import {
     requestLogin,
     AUTHENTICATION_SUCCESS,
@@ -127,6 +127,7 @@ function* sagaLoginAndFetch(action) {
             take(AUTHENTICATION_SUCCESS)
         ]);
         if (loginError) return;
+        //
         yield put(requestFeed());
         const [feedError] = yield race([take(POST_ERROR), take(POST_SUCCESS)]);
         if (feedError) return;

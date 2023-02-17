@@ -5,12 +5,14 @@ import AltUserDisplay from '../components/AltUserDisplay';
 import { getUser } from '../redux/app';
 import userApi from './../api/user';
 import styles from './FriendsPage.module.scss';
+import { useMessageGetter } from '@messageformat/react';
 
 const FriendsPage = () => {
     const currentUser = useSelector(getUser);
     const [section, setSection] = useState('1');
     const [followers, setFollowers] = useState([]);
     const [youFollow, setYouFollow] = useState([]);
+    const msg = useMessageGetter('Friends');
 
     useEffect(() => {
         async function fetchFriends() {
@@ -23,7 +25,7 @@ const FriendsPage = () => {
 
     return (
         <div className={styles.maincontainer}>
-            <h3 className={styles.title}>Kaikki yhteytesi</h3>
+            <h3 className={styles.title}>{msg('title')}</h3>
             <div className={styles.buttoncontainer}>
                 <button
                     className={classNames(styles.button, {
@@ -32,7 +34,7 @@ const FriendsPage = () => {
                     disabled={section.match('1')}
                     onClick={() => setSection('1')}
                 >
-                    Seuraat
+                    {msg('follow')}
                 </button>
                 <button
                     className={classNames(styles.button, {
@@ -41,13 +43,13 @@ const FriendsPage = () => {
                     disabled={section.match('2')}
                     onClick={() => setSection('2')}
                 >
-                    Seuraajat
+                    {msg('followers')}
                 </button>
             </div>
             <div className={styles.uppercontainer}>
                 {section.match('1')
                     ? youFollow.map((follower, i) => (
-                          <div className={styles.card}>
+                          <div className={styles.card} key={i}>
                               <AltUserDisplay
                                   firstname={follower.first_name}
                                   lastname={follower.last_name}
@@ -57,7 +59,7 @@ const FriendsPage = () => {
                           </div>
                       ))
                     : followers.map((follower, i) => (
-                          <div className={styles.card}>
+                          <div className={styles.card} key={i}>
                               <AltUserDisplay
                                   firstname={follower.first_name}
                                   lastname={follower.last_name}

@@ -6,6 +6,7 @@ import userApi from './../api/user';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/app';
+import { useMessageGetter } from '@messageformat/react';
 
 const UserDeletor = ({ userId }) => {
     const [userVerified, setUserVerified] = useState(false);
@@ -13,6 +14,7 @@ const UserDeletor = ({ userId }) => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const msg = useMessageGetter('Settings.delete');
 
     const onChangeUsername = (e) => {
         setUsername(e.target.value);
@@ -23,6 +25,7 @@ const UserDeletor = ({ userId }) => {
     const onClickVerify = async () => {
         try {
             const requestBody = {
+                id: userId,
                 username: username,
                 password: password
             };
@@ -33,7 +36,10 @@ const UserDeletor = ({ userId }) => {
                 setUserVerified(false);
             }
         } catch (error) {
-            console.log(error);
+            if (error.response.data) {
+                const data = error.response.data;
+                window.alert(data.message);
+            }
         }
     };
     const onClickConfirmDelete = async () => {
@@ -50,7 +56,10 @@ const UserDeletor = ({ userId }) => {
                 navigate('/');
             }
         } catch (error) {
-            console.log(error);
+            if (error.response.data) {
+                const data = error.response.data;
+                window.alert(data.message);
+            }
         }
     };
     const onClickCancel = () => {
@@ -61,18 +70,15 @@ const UserDeletor = ({ userId }) => {
         <div className={styles.maincontainer}>
             {userVerified ? (
                 <div className={styles.confirmcontainer}>
-                    <p className={styles.confirmtext}>
-                        Oletko varma? Vahvistamisen jälkeen käyttäjäsi
-                        poistetaan järjestelmästä.
-                    </p>
+                    <p className={styles.confirmtext}>{msg('confirmText')}</p>
                     <div className={styles.buttoncontainer}>
                         <Button
-                            text={'Kyllä, poista käyttäjä'}
+                            text={msg('confirm')}
                             onClick={onClickConfirmDelete}
                             className={styles.widebuttonred}
                         />
                         <Button
-                            text={'En, peruuta'}
+                            text={msg('cancel')}
                             onClick={onClickCancel}
                             className={styles.widebutton}
                         />
@@ -80,7 +86,7 @@ const UserDeletor = ({ userId }) => {
                 </div>
             ) : (
                 <div>
-                    <p className={styles.fieldname}>Käyttäjätunnus</p>
+                    <p className={styles.fieldname}>{msg('username')}</p>
                     <div className={styles.searchcontainer}>
                         <input
                             className={styles.forminput}
@@ -89,7 +95,7 @@ const UserDeletor = ({ userId }) => {
                             onChange={onChangeUsername}
                         ></input>
                     </div>
-                    <p className={styles.fieldname}>Salasana</p>
+                    <p className={styles.fieldname}>{msg('password')}</p>
                     <div className={styles.searchcontainer}>
                         <input
                             className={styles.forminput}
@@ -99,7 +105,7 @@ const UserDeletor = ({ userId }) => {
                         ></input>
                     </div>
                     <Button
-                        text={'Tunnistaudu'}
+                        text={msg('authenticate')}
                         className={styles.button}
                         onClick={onClickVerify}
                     />

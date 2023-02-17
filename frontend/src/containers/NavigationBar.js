@@ -27,6 +27,9 @@ const NavigationBar = ({ onChangeLocale }) => {
     };
     const onClickSearch = (e) => {
         e.preventDefault();
+        if (searchQuery.length === 0) {
+            return;
+        }
         dispatch(searchAndUpdate(searchQuery));
         setSearchQuery('');
         navigate(Path.results);
@@ -39,7 +42,7 @@ const NavigationBar = ({ onChangeLocale }) => {
             </header>
             {user ? (
                 <div className={styles.middlecontainer}>
-                    <div className={styles.searchcontainer}>
+                    <form className={styles.searchcontainer}>
                         <input
                             className={styles.searchinput}
                             placeholder={msg('search.placeHolder')}
@@ -54,7 +57,7 @@ const NavigationBar = ({ onChangeLocale }) => {
                         >
                             <SearchIcon />
                         </button>
-                    </div>
+                    </form>
                 </div>
             ) : (
                 <LoginForm />

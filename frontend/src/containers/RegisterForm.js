@@ -40,7 +40,6 @@ const RegisterForm = () => {
             await authApi.register(registerData);
             setStep('3');
         } catch (error) {
-            console.log(error);
             if (error.response.data) {
                 const data = error.response.data;
                 if (data.name === 'ValidationError') {

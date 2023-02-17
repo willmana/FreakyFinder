@@ -6,9 +6,11 @@ import Picture from './../pics/profile.svg';
 import { useSelector } from 'react-redux';
 import { getUser } from '../redux/app';
 import { commonFollowers } from '../utils';
+import { useMessageGetter } from '@messageformat/react';
 
 const SuggestionCard = ({ user }) => {
     const currentUser = useSelector(getUser);
+    const msg = useMessageGetter('Finder');
     return (
         <Link
             to={`${Path.profile}/${user.username}`}
@@ -22,7 +24,8 @@ const SuggestionCard = ({ user }) => {
                 </div>
                 <div className={styles.username}>@{user.username}</div>
                 <div className={styles.commonfollowers}>
-                    {commonFollowers(currentUser, user)} yhteistä seuraajaa
+                    {commonFollowers(currentUser, user)}{' '}
+                    {msg('commonFollowers')}
                 </div>
             </div>
         </Link>

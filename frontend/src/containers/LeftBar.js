@@ -3,7 +3,6 @@ import React from 'react';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import PeopleIcon from '@mui/icons-material/People';
-import MessageIcon from '@mui/icons-material/Message';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import SettingsIcon from '@mui/icons-material/Settings';
 import styles from './LeftBar.module.scss';
@@ -30,10 +29,6 @@ const LeftBar = (props) => {
             <div className={styles.divider}></div>
             <Link className={styles.button} to={Path.friends}>
                 <PeopleIcon /> <p>{msg('friends')}</p>
-            </Link>
-            <div className={styles.divider}></div>
-            <Link className={styles.button} to={Path.messages}>
-                <MessageIcon /> <p>{msg('messages')}</p>
             </Link>
             <div className={styles.divider}></div>
             <Link className={styles.button} to={Path.finder}>

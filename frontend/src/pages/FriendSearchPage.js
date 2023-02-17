@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux';
 import { getUser } from '../redux/app';
 import SuggestionCard from '../components/SuggestionCard';
 import { useHorizontalScroll } from './../utils/useHorizontalScroll';
+import { useMessageGetter } from '@messageformat/react';
 
 const FriendSearchPage = () => {
     const [firstRecommendations, setFirstRecommendations] = useState([]);
     const [secondRecommendations, setSecondRecommendations] = useState([]);
     const user = useSelector(getUser);
+    const msg = useMessageGetter('Finder');
     useEffect(() => {
         async function fetchRecommendations() {
             const response = await userApi.getRecommendations(user.id);
@@ -23,9 +25,7 @@ const FriendSearchPage = () => {
     return (
         <div className={styles.maincontainer}>
             <div className={styles.midbox}>
-                <h3 className={styles.title}>
-                    Ihmiset joita seuraat, seuraavat myös:
-                </h3>
+                <h3 className={styles.title}>{msg('firstTitle')}</h3>
                 <div className={styles.uppercontainer}>
                     <div className={styles.scrollercontainer} ref={scrollRef1}>
                         {firstRecommendations &&
@@ -37,9 +37,7 @@ const FriendSearchPage = () => {
                             ))}
                     </div>
                 </div>
-                <h3 className={styles.title}>
-                    Ihmiset jotka seuraavat sinua, seuraavat myös:
-                </h3>
+                <h3 className={styles.title}>{msg('secondTitle')}</h3>
                 <div className={styles.uppercontainer}>
                     <div className={styles.scrollercontainer} ref={scrollRef2}>
                         {secondRecommendations &&

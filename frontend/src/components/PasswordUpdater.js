@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import styles from './PasswordUpdater.module.scss';
 import Button from './Button';
 import userApi from '../api/user';
+import { useMessageGetter } from '@messageformat/react';
 
 const PasswordUpdater = ({ userId, username }) => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword1, setNewPassword1] = useState('');
     const [newPassword2, setNewPassword2] = useState('');
+    const msg = useMessageGetter('Settings.password');
 
     const onChangeOldPassword = (e) => {
         setOldPassword(e.target.value);
@@ -21,6 +23,10 @@ const PasswordUpdater = ({ userId, username }) => {
     };
 
     const onClickSubmit = async () => {
+        if (newPassword1 !== newPassword2) {
+            window.alert(msg('noMatchError'));
+            return;
+        }
         try {
             const requestBody = {
                 oldPassword: oldPassword,
@@ -31,12 +37,15 @@ const PasswordUpdater = ({ userId, username }) => {
             };
             await userApi.updatePassword(userId, requestBody);
         } catch (error) {
-            console.log(error);
+            if (error.response.data) {
+                const data = error.response.data;
+                window.alert(data.message);
+            }
         }
     };
     return (
         <div className={styles.maincontainer}>
-            <p className={styles.fieldname}>Vanha salasana</p>
+            <p className={styles.fieldname}>{msg('old')}</p>
             <div className={styles.searchcontainer}>
                 <input
                     className={styles.forminput}
@@ -46,7 +55,7 @@ const PasswordUpdater = ({ userId, username }) => {
                     autoComplete="off"
                 ></input>
             </div>
-            <p className={styles.fieldname}>Uusi salasana</p>
+            <p className={styles.fieldname}>{msg('new1')}</p>
             <div className={styles.searchcontainer}>
                 <input
                     className={styles.forminput}
@@ -56,7 +65,7 @@ const PasswordUpdater = ({ userId, username }) => {
                     autoComplete="off"
                 ></input>
             </div>
-            <p className={styles.fieldname}>Toista uusi salasana</p>
+            <p className={styles.fieldname}>{msg('new2')}</p>
             <div className={styles.searchcontainer}>
                 <input
                     className={styles.forminput}
@@ -67,7 +76,7 @@ const PasswordUpdater = ({ userId, username }) => {
                 ></input>
             </div>
             <Button
-                text={'Lähetä'}
+                text={msg('send')}
                 className={styles.button}
                 onClick={onClickSubmit}
             />

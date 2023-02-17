@@ -5,10 +5,12 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import { updateAndFetch } from '../redux/app';
+import { useMessageGetter } from '@messageformat/react';
 
-const InfoEditor = ({ fieldName, fieldValue, userId }) => {
+const InfoEditor = ({ fieldName, fieldValue, userId, fieldText }) => {
     const [modifyOpen, setModifyOpen] = useState(false);
     const [formValue, setFormValue] = useState(fieldValue);
+    const msg = useMessageGetter('Settings.personal');
     const dispatch = useDispatch();
     const onClickModify = () => {
         setModifyOpen(true);
@@ -18,6 +20,10 @@ const InfoEditor = ({ fieldName, fieldValue, userId }) => {
         setFormValue(e.target.value);
     };
     const onClickConfirm = async () => {
+        if (formValue.length > 20 || formValue.length < 3) {
+            window.alert(msg('error'));
+            return;
+        }
         const requestBody = {
             userId: userId,
             updatedvalue: formValue,
@@ -34,7 +40,7 @@ const InfoEditor = ({ fieldName, fieldValue, userId }) => {
     return (
         <>
             <div className={styles.maincontainer}>
-                <div className={styles.fieldname}>{fieldName}</div>
+                <div className={styles.fieldname}>{fieldText}</div>
                 {modifyOpen ? (
                     <div className={styles.formcontainer}>
                         <div className={styles.searchcontainer}>
@@ -63,7 +69,7 @@ const InfoEditor = ({ fieldName, fieldValue, userId }) => {
                             </div>
                         </div>
                         <Button
-                            text={'Muokkaa'}
+                            text={msg('edit')}
                             onClick={onClickModify}
                             className={styles.editbutton}
                         />

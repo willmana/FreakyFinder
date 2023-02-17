@@ -3,11 +3,13 @@ import styles from './SearchResultPage.module.scss';
 import { useSelector } from 'react-redux';
 import { getSearchResult, getUser } from '../redux/app';
 import AltUserDisplay from '../components/AltUserDisplay';
+import { useMessageGetter } from '@messageformat/react';
 
 const SearchResultPage = () => {
     const [displayedUsers, setDisplayedUsers] = useState([]);
     const searchResults = useSelector(getSearchResult);
     const currentUser = useSelector(getUser);
+    const msg = useMessageGetter('Results');
     useEffect(() => {
         setDisplayedUsers(
             searchResults.filter(
@@ -18,7 +20,7 @@ const SearchResultPage = () => {
     return (
         <div className={styles.maincontainer}>
             <div className={styles.midbox}>
-                <h3 className={styles.title}>Tulokset haulle</h3>
+                <h3 className={styles.title}>{msg('title')}</h3>
                 {displayedUsers && displayedUsers.length !== 0 ? (
                     <div className={styles.grid}>
                         {displayedUsers.map((user) => (
@@ -30,9 +32,7 @@ const SearchResultPage = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className={styles.text}>
-                        Ei hakutuloksia, yritä laajentaa hakua.
-                    </div>
+                    <div className={styles.text}>{msg('noFindings')}</div>
                 )}
             </div>
         </div>

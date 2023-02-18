@@ -55,5 +55,6 @@
 | Move production environment from Heroku to Fly                                                                                                                                                | 30 minutes | 23.1.2023  |
 | Add page to display your current connections                                                                                                                                                  |  3 hours   | 23.1.2023  |
 | Make application responsive for different screen widths and layouts, excluding mobile view because that would require large overhaul for certain views                                        |  2 hours   | 15.2.2023  |
+| Go through the entire application and apply texts for english and finnish language support. On the side fixed bugs that were found during traversing different views and added few error/validation messages for user.                |  5 hours   | 17.2.2023  |
 
-#### Total time spent: 84.5 hours
+#### Total time spent: 89.5 hours

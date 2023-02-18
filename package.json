@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon index.js",
         "build:ui": "rm -rf build && cd frontend && npm run build && cp -r build ..",
-        "deploy:fly": "npm run build:ui && flyctl deploy && rm -rf build"
+        "deploy:fly": "npm run build:ui && flyctl deploy"
     },
     "author": "Aleksi Willman",
     "license": "ISC",

@@ -10,6 +10,8 @@ const middleware = require('./serverutils/middleware');
 const config = require('./serverutils/config');
 const logger = require('./serverutils/logger');
 const mongoose = require('mongoose');
+const path = require('path');
+const pathToRegexp = require('path');
 
 logger.info('Connecting to ', config.MONGODB_URI);
 
@@ -43,7 +45,17 @@ app.use(
             return null;
         }
     }).unless({
-        path: ['/api/auth/login', '/api/auth/register', '/api/auth/verify']
+        path: [
+            '/api/auth/login',
+            '/api/auth/register',
+            '/api/auth/verify',
+            // All paths from frontend
+            /\/profile\//i,
+            '/finder',
+            '/friends',
+            '/settings',
+            '/results'
+        ]
     })
 );
 
@@ -52,7 +64,14 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
-
+console.log('perkele');
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build/index.html'), function (err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
+});
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

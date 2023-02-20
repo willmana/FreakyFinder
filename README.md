@@ -2,7 +2,7 @@
 <div align="center"><img src="https://user-images.githubusercontent.com/32764933/220119594-8e9ba24f-164b-4285-b925-19fdad5063c9.png" /></div>
 
 
-Freaky Finder is simplified social platform that resembles mostly Twitter with its current functionality. Latest "production build" of the application is running in [Fly.io server](https://freakyfinder.fly.dev/). Software was created for the [Full Stack Web Development Project](https://studies.helsinki.fi/courses/cur/otm-67e986ac-78ad-4e2b-aef7-e01cc7f4ec3c/CSM141093/Full_Stack_Web_Development_Project) -course hosted by University of Helsinki. Work time accounting can be found from the root of the repository. ([Työaikakirjanpito](https://github.com/willmana/FreakyFinder/blob/master/timesheet.md))
+Freaky Finder is simplified social platform that resembles mostly Twitter with its current functionality. Latest "production build" of the application is running in [freakyfinder.fly.dev](https://freakyfinder.fly.dev/). Software was created for the [Full Stack Web Development Project](https://studies.helsinki.fi/courses/cur/otm-67e986ac-78ad-4e2b-aef7-e01cc7f4ec3c/CSM141093/Full_Stack_Web_Development_Project) -course hosted by University of Helsinki. Work time accounting can be found from the root of the repository. ([Työaikakirjanpito](https://github.com/willmana/FreakyFinder/blob/master/timesheet.md))
 
 ## Core functionalities
 Application implements each CRUD-functionality in some way. In Freaky Finder the user is able to:

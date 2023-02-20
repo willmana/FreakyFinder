@@ -27,6 +27,6 @@ Routing is done with react-router. Application first used useHistory() hook to d
 
 Application has localization support in Finnish and English, and can easily adapt more languages. This has been implemented with messageformat and messageformat-cli packages. Translations are maintained in .properties -files found in frontend/src/texts folder. Messageformat-cli provides a script that generates common .json -file from these .properties -files and messageformat allows the application to import these texts into its components.
 
-Styling for the application is done from scratch utilizing sass -css extension without the help of any "ready made" components (e.g. react-bootstrap).
+Styling for the application is done from scratch utilizing sass -css extension without the help of any "ready made" components (e.g. react-bootstrap). Application supports browser width all the way from widescreen to around 700px, leaving out mobile device support.
 
 Backend uses centralized express-jwt -implementation to handle JWT based authentication for API calls. JWT token is stored in browsers localStorage.

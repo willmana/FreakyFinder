@@ -1,4 +1,6 @@
-# FreakyFinder
+
+<div align="center"><img src="https://user-images.githubusercontent.com/32764933/220119594-8e9ba24f-164b-4285-b925-19fdad5063c9.png" /></div>
+
 
 Freaky Finder is simplified social platform that resembles mostly Twitter with its current functionality. Latest "production build" of the application is running in [Fly.io server](https://freakyfinder.fly.dev/). Software was created for the [Full Stack Web Development Project](https://studies.helsinki.fi/courses/cur/otm-67e986ac-78ad-4e2b-aef7-e01cc7f4ec3c/CSM141093/Full_Stack_Web_Development_Project) -course hosted by University of Helsinki. Work time accounting can be found from the root of the repository. ([Työaikakirjanpito](https://github.com/willmana/FreakyFinder/blob/master/timesheet.md))
 
@@ -30,3 +32,7 @@ Application has localization support in Finnish and English, and can easily adap
 Styling for the application is done from scratch utilizing sass -css extension without the help of any "ready made" components (e.g. react-bootstrap). Application supports browser width all the way from widescreen to around 700px, leaving out mobile device support.
 
 Backend uses centralized express-jwt -implementation to handle JWT based authentication for API calls. JWT token is stored in browsers localStorage.
+
+## Example life cycle flow for an user (aka. user guide)
+
+User goes to [freakyfinder.fly.dev](https://freakyfinder.fly.dev/) to open the application.

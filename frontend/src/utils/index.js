@@ -10,8 +10,6 @@ export const dateSorter = (data) => {
 };
 
 export const commonFollowers = (user1, user2) => {
-    console.log(user1);
-    console.log(user2);
     const followers1 = user1.followers;
     const followers2 = user2.followers;
     let commonFollowers = 0;
@@ -38,4 +36,8 @@ export const shuffle = (array) => {
     }
 
     return array;
+};
+
+export const getToken = () => {
+    return JSON.parse(window.localStorage.getItem('token')) || null;
 };

@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import userApi from './../api/user';
-import { useSelector } from 'react-redux';
-import { getUser } from './../redux/app';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUser, getUsers } from './../redux/app';
 import UserDisplay from '../components/UserDisplay';
 import styles from './RightBar.module.scss';
 import { shuffle } from '../utils';
 import { useMessageGetter } from '@messageformat/react';
+import { getAllUsers } from './../redux/calls';
 
 const RightBar = () => {
     const [displayedUsers, setDisplayedUsers] = useState([]);
     const currentUser = useSelector(getUser);
     const msg = useMessageGetter('RightBar');
-
+    const users = useSelector(getUsers);
+    const dispatch = useDispatch();
     useEffect(() => {
-        async function fetchUsers() {
-            const res = await userApi.getAll();
-            const filtered = res
-                .filter((user) => user.username !== currentUser.username)
-                .filter((user) => !currentUser.following.includes(user.id));
-            setDisplayedUsers(shuffle(filtered));
+        if (users.length === 0) {
+            dispatch(getAllUsers());
         }
-        fetchUsers();
-    }, [currentUser.following, currentUser.username]);
+        const filtered = users
+            .filter((user) => user.username !== currentUser.username)
+            .filter((user) => !currentUser.following.includes(user.id));
+        setDisplayedUsers(shuffle(filtered));
+    }, [currentUser.following, currentUser.username, dispatch, users]);
 
     return (
         <div className={styles.maincontainer}>

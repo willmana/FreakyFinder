@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../utils';
 
 let baseUrl;
 if (process.env.NODE_ENV === 'development') {
@@ -7,10 +8,9 @@ if (process.env.NODE_ENV === 'development') {
     baseUrl = '/api/posts';
 }
 const tokenBearer = 'Bearer ';
-let token = JSON.parse(window.localStorage.getItem('token')) || null;
 
 const getAll = async () => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(baseUrl, config);
     return res.data;
 };
@@ -25,31 +25,31 @@ const getFeed = async (userId, givenToken) => {
 };
 
 const createPost = async (newPost) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.post(baseUrl, newPost, config);
     return res.data;
 };
 
 const getPost = async (postId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/${postId}`, config);
     return res.data;
 };
 
 const updatePost = async (postId, newPost) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(`${baseUrl}/${postId}`, newPost, config);
     return res.data;
 };
 
 const getComments = async (commentId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/comments/${commentId}`, config);
     return res.data;
 };
 
 const getUserPosts = async (userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/user/${userId}`, config);
     return res.data;
 };

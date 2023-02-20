@@ -64,7 +64,7 @@ authRouter.post('/verify', async (request, response) => {
         if (!user)
             return response.status(400).json({ message: 'Wrong credentials' });
         const username = await User.findById(body.id);
-        if (username !== body.username)
+        if (username.username !== body.username)
             return response.status(400).json({ message: 'Wrong credentials' });
         const passwordMatch = await bcrypt.compare(
             body.password,

@@ -1,7 +1,14 @@
 import { all, call, put, select, takeEvery } from 'redux-saga/effects';
 import userApi from '../api/user';
 import authApi from './../api/auth';
-import { setUser, getUser, setPosts, setUsers, setSearchResult } from './app';
+import {
+    setUser,
+    getUser,
+    setPosts,
+    setUsers,
+    setSearchResult,
+    setToken
+} from './app';
 import postApi from './../api/post';
 import { dateSorter } from './../utils/index';
 
@@ -130,7 +137,8 @@ export const callsReducer = (state = initialState, action) => {
 function* sagaGetAllUsers() {
     try {
         let response = {};
-        response = yield call(userApi.getAll);
+        const token = window.localStorage.getItem('token');
+        response = yield call(userApi.getAll, token);
         yield put(setUsers(response));
         yield put(userSuccess(response));
     } catch (error) {
@@ -142,7 +150,6 @@ function* sagaGetAndUpdateUser() {
     try {
         let response = {};
         const user = yield select(getUser);
-        console.log(user);
         response = yield call(userApi.getUserByUserId, user.id);
         window.localStorage.setItem('currentUser', JSON.stringify(response));
         yield put(setUser(response));
@@ -192,6 +199,7 @@ function* sagaRequestLogin(action) {
             'currentUser',
             JSON.stringify(response.user)
         );
+        yield put(setToken(response.token));
         yield put(setUser(response.user));
         yield put(authenticationSuccess(response));
     } catch (error) {

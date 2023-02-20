@@ -19,7 +19,9 @@ const configureStore = (preloadedState) => {
     middlewares.push(sagaMiddleware);
 
     const loggerMiddleware = createLogger({ duration: true });
-    middlewares.push(loggerMiddleware);
+    if (process.env.NODE_ENV === 'development') {
+        middlewares.push(loggerMiddleware);
+    }
 
     const composeEnhancers = compose;
 

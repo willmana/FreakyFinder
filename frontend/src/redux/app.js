@@ -1,4 +1,4 @@
-import { all, takeEvery, put, race, take, delay } from 'redux-saga/effects';
+import { all, takeEvery, put, race, take } from 'redux-saga/effects';
 import {
     requestLogin,
     AUTHENTICATION_SUCCESS,
@@ -13,7 +13,8 @@ import {
     getAndUpdateCurrentUser,
     unfollowUser,
     updateUser,
-    searchUsers
+    searchUsers,
+    getAllUsers
 } from './calls';
 
 // Actions
@@ -30,6 +31,7 @@ const FOLLOW_AND_UPDATE = 'FOLLOW_AND_UPDATE';
 const UNFOLLOW_AND_UPDATE = 'UNFOLLOW_AND_UPDATE';
 const UPDATE_AND_FETCH = 'UPDATE_AND_FETCH';
 const SEARCH_AND_UPDATE = 'SEARCH_AND_UPDATE';
+const SET_TOKEN = 'SET_TOKEN';
 
 // Action creators
 export const setUser = (user) => ({
@@ -88,13 +90,19 @@ export const updateAndFetch = (userId, requestBody) => ({
     requestBody
 });
 
+export const setToken = (token) => ({
+    type: SET_TOKEN,
+    token
+});
+
 const initialState = {
     user: null,
     loading: false,
     posts: [],
     users: [],
     rightBarData: [],
-    searchResult: []
+    searchResult: [],
+    token: ''
 };
 
 // Reducer
@@ -112,6 +120,8 @@ export const appReducer = (state = initialState, action) => {
             return { ...state, loading: action.loading };
         case SET_RESULT:
             return { ...state, searchResult: action.searchResult };
+        case SET_TOKEN:
+            return { ...state, token: action.token };
         default:
             return state;
     }
@@ -137,6 +147,9 @@ function* sagaLoginAndFetch(action) {
             ]);
             if (feedError2) return;
         }
+        yield put(getAllUsers());
+        const [userError] = yield race([take(USER_ERROR), take(USER_SUCCESS)]);
+        if (userError) return;
         yield put(setLoading(false));
     } catch (error) {
         yield put(setLoading(false));
@@ -258,6 +271,10 @@ export const getRightBarData = (state) => {
 
 export const getSearchResult = (state) => {
     return state.app.searchResult;
+};
+
+export const getToken = (state) => {
+    return state.app.token;
 };
 
 export default appReducer;

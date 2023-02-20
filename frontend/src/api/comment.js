@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../utils';
 
 let baseUrl;
 if (process.env.NODE_ENV === 'development') {
@@ -8,28 +9,27 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const tokenBearer = 'Bearer ';
-let token = JSON.parse(window.localStorage.getItem('token')) || null;
 
 const getAll = async () => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(baseUrl, config);
     return res.data;
 };
 
 const createComment = async (newComment) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.post(baseUrl, newComment, config);
     return res.data;
 };
 
 const getComment = async (commentId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/${commentId}`, config);
     return res.data;
 };
 
 const updateComment = async (commentId, newComment) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(`${baseUrl}/${commentId}`, newComment, config);
     return res.data;
 };

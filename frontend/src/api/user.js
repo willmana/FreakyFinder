@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../utils';
 
 let baseUrl;
 if (process.env.NODE_ENV === 'development') {
@@ -8,10 +9,11 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const tokenBearer = 'Bearer ';
-let token = JSON.parse(window.localStorage.getItem('token')) || null;
-
-const getAll = async () => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+const getAll = async (givenToken) => {
+    // Token given separately here since it didn't seem to update on time
+    const config = {
+        headers: { Authorization: tokenBearer + JSON.parse(givenToken) }
+    };
     const res = await axios.get(baseUrl, config);
     return res.data;
 };
@@ -22,19 +24,19 @@ const createUser = async (newUser) => {
 };
 
 const getUserByUsername = async (username) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/profile/${username}`, config);
     return res.data;
 };
 
 const getUserByUserId = async (userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/${userId}`, config);
     return res.data;
 };
 
 const updateUser = async (userId, requestBody) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(
         `${baseUrl}/${userId}/modify`,
         requestBody,
@@ -44,7 +46,7 @@ const updateUser = async (userId, requestBody) => {
 };
 
 const updatePassword = async (userId, requestBody) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(
         `${baseUrl}/${userId}/password`,
         requestBody,
@@ -54,7 +56,7 @@ const updatePassword = async (userId, requestBody) => {
 };
 
 const followUser = async (followedId, userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(
         `${baseUrl}/${followedId}/follow`,
         { userId: userId },
@@ -64,7 +66,7 @@ const followUser = async (followedId, userId) => {
 };
 
 const unfollowUser = async (targetId, userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.put(
         `${baseUrl}/${targetId}/unfollow`,
         { userId: userId },
@@ -76,24 +78,24 @@ const unfollowUser = async (targetId, userId) => {
 const deleteUser = async (userId, requestBody) => {
     await axios.delete(`${baseUrl}/${userId}`, {
         data: requestBody,
-        headers: { Authorization: tokenBearer + token }
+        headers: { Authorization: tokenBearer + getToken() }
     });
 };
 
 const searchUsers = async (query) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/search/${query}`, config);
     return res.data;
 };
 
 const getRecommendations = async (userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/recommendations/${userId}`, config);
     return res.data;
 };
 
 const getFriends = async (userId) => {
-    const config = { headers: { Authorization: tokenBearer + token } };
+    const config = { headers: { Authorization: tokenBearer + getToken() } };
     const res = await axios.get(`${baseUrl}/friends/${userId}`, config);
     return res.data;
 };

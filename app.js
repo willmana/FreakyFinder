@@ -64,7 +64,6 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentRouter);
-console.log('perkele');
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build/index.html'), function (err) {
         if (err) {

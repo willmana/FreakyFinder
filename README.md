@@ -19,6 +19,7 @@ Application implements each CRUD-functionality in some way. In Freaky Finder the
 * Update own user info
 * Delete own user
 
+
 ## Technical info
 
 This application uses React + Node.js stack. It is connected to MongoDB document-oriented database and is hosted in free Fly.io server. 
@@ -33,6 +34,36 @@ Styling for the application is done from scratch utilizing sass -css extension w
 
 Backend uses centralized express-jwt -implementation to handle JWT based authentication for API calls. JWT token is stored in browsers localStorage.
 
-## Example life cycle flow for an user (aka. user guide)
+## Future improvement ideas
 
-User goes to [freakyfinder.fly.dev](https://freakyfinder.fly.dev/) to open the application.
+* Add ability to change own user profile image and post images in addition to text with multer etc.
+* Private messaging between users
+* Increase validations, currently very minor checks and browser alert is popped instead of custom component
+* Improve backend request handlers and error responses
+* Mobile UI
+* Add settings to modify application related stuff
+* Delivery pipeline for future changes
+* Unit testing/RPA testing
+
+
+## User guide for different pages
+### Landing page
+![1](https://user-images.githubusercontent.com/32764933/220179266-e38b341b-8f85-4fff-b5b7-bd8c9ef5ee56.jpeg)
+
+### Home screen/User feed
+![2](https://user-images.githubusercontent.com/32764933/220179319-b137ad98-525d-4c41-80a2-9f28e55ceba9.jpeg)
+
+### Own profile
+![3](https://user-images.githubusercontent.com/32764933/220179458-71630b18-5a77-4098-945f-b36eb9d6ca33.jpeg)
+
+### Profile of other user
+![4](https://user-images.githubusercontent.com/32764933/220179480-53b9bc09-ced0-452e-8943-bf4c124821d8.jpeg)
+
+### "Friend" list
+![5](https://user-images.githubusercontent.com/32764933/220179497-fb5f7efe-dd26-4120-bbc5-4dfc36385e38.jpeg)
+
+### User recommendator
+![6](https://user-images.githubusercontent.com/32764933/220179603-795c1fa8-d1cd-4f13-8916-f59724893cbd.jpeg)
+
+### User settings page
+![7](https://user-images.githubusercontent.com/32764933/220179655-bd2b25cb-4136-4f50-af41-bb54a309af66.jpeg)
